@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 397523360}
   - component: {fileID: 397523359}
   - component: {fileID: 397523361}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,12 +582,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 727035429}
   m_collider: {fileID: 727035430}
+  m_offset: 1
   m_health: 0
   m_power: 0
   m_player: {fileID: 1429013130}
   m_targetDirection: {x: 0, y: 0, z: 0}
   m_shiledRotation: {fileID: 462979324}
-  m_chargeLayer: 0
   m_turnSpeed: 0.002
   m_moveDis: 1
   m_canMove: 1
@@ -821,7 +821,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -858,7 +858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1217473819
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -910,6 +910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 1217473820}
   m_collider: {fileID: 1217473819}
+  m_offset: 0
   m_health: 0
   m_power: 0
   m_player: {fileID: 1429013130}

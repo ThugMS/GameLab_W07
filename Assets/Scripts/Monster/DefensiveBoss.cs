@@ -6,8 +6,7 @@ using UnityEngine;
 public class DefensiveBoss : MonsterBase
 {
     #region PublicVariables
-    public Transform m_shiledRotation;
-    public int m_chargeLayer;
+    public Transform m_shiledRotation;    
     #endregion
 
     #region PrivateVariables
@@ -24,9 +23,17 @@ public class DefensiveBoss : MonsterBase
     [Header("Charge")]
     [SerializeField] private float dis;
     [SerializeField] private AnimationCurve m_chargeEase;
+    private int m_chargeLayer;
     #endregion
 
     #region PublicMethod
+    protected virtual void Start()
+    {
+        base.Start();
+
+        m_chargeLayer = LayerMask.GetMask("Wall");
+    }
+
     private void Update()
     {
         RotateShiled();
@@ -90,11 +97,12 @@ public class DefensiveBoss : MonsterBase
     {
         GetTargetDirection();
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, m_targetDirection, 2000f/*, m_chargeLayer*/);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, m_targetDirection, 2000f, m_chargeLayer);
 
         if(hit == true)
         {
-            transform.DOMove(hit.point, 1f).SetEase(m_chargeEase);
+            Vector3 pos = hit.point - new Vector2((m_targetDirection * m_offset).x, (m_targetDirection * m_offset).y);
+            transform.DOMove(pos, 0.2f).SetEase(m_chargeEase);
         }
     }
     #endregion
