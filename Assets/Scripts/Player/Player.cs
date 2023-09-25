@@ -13,9 +13,26 @@ public class Player : MonoBehaviour
 	private PlayerInput input;
 	private PlayerMove move;
 	private PlayerAim aim;
+	private PlayerDash dash;
+
+	private bool canAct = true;
+	private bool isInvincible = false;
 	#endregion
 
 	#region PublicMethod
+	public void SetActive(bool b)
+	{
+		canAct = b;
+	}
+	public void SetInvincibility(bool b)
+	{
+		isInvincible = b;
+	}
+	public void Hit()
+	{
+		if (isInvincible == true)
+			return;
+	}
 	#endregion
 
 	#region PrivateMethod
@@ -30,6 +47,8 @@ public class Player : MonoBehaviour
 		aim.Initialize();
 		TryGetComponent(out move);
 		move.Initialize();
+		TryGetComponent(out dash);
+		dash.Initialize();
 	}
 	private void OnEnable()
 	{
@@ -38,6 +57,7 @@ public class Player : MonoBehaviour
 		input.Player.Move.canceled += OnMoveCanceled;
 		input.Player.Attack.performed += OnAttackPerformed;
 		input.Player.Attack.canceled += OnAttackCanceled;
+		input.Player.Dash.performed += OnDashPerformed;
 	}
 	private void OnDisable()
 	{
@@ -45,15 +65,21 @@ public class Player : MonoBehaviour
 		input.Player.Move.canceled -= OnMoveCanceled;
 		input.Player.Attack.performed -= OnAttackPerformed;
 		input.Player.Attack.canceled -= OnAttackCanceled;
+		input.Player.Dash.performed -= OnDashPerformed;
 		input.Disable();
 	}
 	private void Update()
 	{
-		aim.HandleInput();
-		move.HandleInput();
+		if (canAct == true)
+		{
+			aim.HandleInput();
+			move.HandleInput();
+		}
 	}
 	private void OnMovePerformed(InputAction.CallbackContext _context)
 	{
+		if (canAct == false)
+			return;
 		move.Move(_context.ReadValue<Vector2>());
 	}
 	private void OnMoveCanceled(InputAction.CallbackContext _context)
@@ -62,11 +88,19 @@ public class Player : MonoBehaviour
 	}
 	private void OnAttackPerformed(InputAction.CallbackContext _context)
 	{
+		if (canAct == false)
+			return;
 		aim.OpenFire();
 	}
 	private void OnAttackCanceled(InputAction.CallbackContext _context)
 	{
 		aim.HoldFire();
+	}
+	private void OnDashPerformed(InputAction.CallbackContext _context)
+	{
+		if (canAct == false)
+			return;
+		dash.Dash();
 	}
 	#endregion
 }

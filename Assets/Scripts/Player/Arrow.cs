@@ -15,12 +15,11 @@ public class Arrow : MonoBehaviour
 	#endregion
 
 	#region PublicMethod
-	[Button]
 	public void SetDirection(Vector3 _rotation)
 	{
 		transform.eulerAngles = _rotation;
 		//TEMP
-		Invoke(nameof(Deactive), 3f);
+		Invoke(nameof(Deactive), 5f);
 		//TEMPEND
 	}
 	public void SetSpeed(float _speed)
@@ -37,6 +36,14 @@ public class Arrow : MonoBehaviour
 	private void Update()
 	{
 		transform.position += transform.up * speed * Time.deltaTime;
+	}
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		// if stuck stop this.
+	}
+	private void Stop()
+	{
+		speed = 0f;
 	}
 	#endregion
 }

@@ -39,6 +39,10 @@ public class Bow : MonoBehaviour
 		current.SetDirection(transform.eulerAngles);
 		current.SetSpeed(shotSpeed);
 	}
+	public void SetRendererVisibility(bool b)
+	{
+		sr.enabled = b;
+	}
 	#endregion
 
 	#region PrivateMethod
