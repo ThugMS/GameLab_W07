@@ -11,10 +11,12 @@ public abstract class MonsterBase : MonoBehaviour
 
     #region PrivateVariables
     [Header("Stat")]
-    [SerializeField] private float m_health;
-    [SerializeField] private float m_power;
+    [SerializeField] protected float m_health;
+    [SerializeField] protected float m_power;
 
-
+    [Header("Target")]
+    [SerializeField] protected GameObject m_player;
+    [SerializeField] protected Vector3 m_targetDirection;
     #endregion
 
     #region PublicMethod
@@ -22,9 +24,16 @@ public abstract class MonsterBase : MonoBehaviour
     {
         TryGetComponent<Rigidbody2D>(out m_rigidbody);
         TryGetComponent<Collider2D>(out m_collider);
+
+        // TO_DO : Player 오브젝트 얻어오기
     }
 
     protected abstract void Move();
+
+    protected void GetTargetDirection()
+    {
+        m_targetDirection = (m_player.transform.position - transform.position).normalized;
+    }
 
     /// <summary>
     /// 데미지를 줄 때 인자로 데미지를 넘겨서 사용
