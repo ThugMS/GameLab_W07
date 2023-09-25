@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class MonsterBase : MonoBehaviour
@@ -7,6 +8,7 @@ public abstract class MonsterBase : MonoBehaviour
     #region PublicVariables
     public Rigidbody2D m_rigidbody;
     public Collider2D m_collider;
+    public float m_offset;
     #endregion
 
     #region PrivateVariables
