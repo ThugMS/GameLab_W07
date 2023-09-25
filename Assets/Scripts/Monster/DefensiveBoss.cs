@@ -7,6 +7,7 @@ public class DefensiveBoss : MonsterBase
 {
     #region PublicVariables
     public Transform m_shiledRotation;
+    public int m_chargeLayer;
     #endregion
 
     #region PrivateVariables
@@ -19,13 +20,21 @@ public class DefensiveBoss : MonsterBase
     [SerializeField] private float m_moveTime = 1.0f;
     [SerializeField] private float m_moveCooldown;
     [SerializeField] private AnimationCurve m_moveEase;
+
+    [Header("Charge")]
+    [SerializeField] private float dis;
+    [SerializeField] private AnimationCurve m_chargeEase;
     #endregion
 
     #region PublicMethod
     private void Update()
     {
         RotateShiled();
-        CheckMove();
+        //CheckMove();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            Charge();
+            
     }
 
     protected override void Move()
@@ -79,7 +88,14 @@ public class DefensiveBoss : MonsterBase
 
     private void Charge()
     {
+        GetTargetDirection();
 
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, m_targetDirection, 2000f/*, m_chargeLayer*/);
+
+        if(hit == true)
+        {
+            transform.DOMove(hit.point, 1f).SetEase(m_chargeEase);
+        }
     }
     #endregion
 }
