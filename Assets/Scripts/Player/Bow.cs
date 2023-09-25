@@ -35,6 +35,7 @@ public class Bow : MonoBehaviour
 	{
 		anim.SetTrigger("shot");
 		Arrow current = InstantiateNormalArrow().GetComponent<Arrow>();
+		current.transform.position = transform.position;
 		current.SetDirection(transform.eulerAngles);
 		current.SetSpeed(shotSpeed);
 	}
@@ -54,7 +55,7 @@ public class Bow : MonoBehaviour
 		GameObject current = GetSurplusArrow();
 		if (current == null)
 		{
-			current = Instantiate(normalArrowPrefab, transform.position, Quaternion.identity);
+			current = Instantiate(normalArrowPrefab);
 			arrowList.Add(current);
 		}
 		else

@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ba4f5b94c89bd4a907165c0a3cfa12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotCooldown: 0.5
+  shotCooldown: 0.3
 --- !u!114 &964480064
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,16 +23,15 @@ public class PlayerAim : MonoBehaviour
 		bow.Initialize();
 		transform.Find("Renderer").TryGetComponent(out body);
 		body.Initialize();
+		cooldownTimer = shotCooldown;
 	}
 	public void OpenFire()
 	{
 		isCalled = true;
-		cooldownTimer = 0.5f;
 	}
 	public void HoldFire()
 	{
 		isCalled = false;
-		cooldownTimer = 0f;
 	}
 	public void HandleInput()
 	{
@@ -45,9 +44,9 @@ public class PlayerAim : MonoBehaviour
 	#region PrivateMethod
 	private void Fire()
 	{
-		if(isCalled == true)
+		cooldownTimer += Time.deltaTime;
+		if (isCalled == true)
 		{
-			cooldownTimer += Time.deltaTime;
 			if(cooldownTimer > shotCooldown)
 			{
 				cooldownTimer = 0f;

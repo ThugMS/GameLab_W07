@@ -19,6 +19,9 @@ public class Arrow : MonoBehaviour
 	public void SetDirection(Vector3 _rotation)
 	{
 		transform.eulerAngles = _rotation;
+		//TEMP
+		Invoke(nameof(Deactive), 3f);
+		//TEMPEND
 	}
 	public void SetSpeed(float _speed)
 	{
