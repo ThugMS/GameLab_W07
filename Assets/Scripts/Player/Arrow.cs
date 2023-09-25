@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Arrow : MonoBehaviour
 {
@@ -15,21 +16,24 @@ public class Arrow : MonoBehaviour
 
 	#region PublicMethod
 	[Button]
-	public void SetDirection(Vector2 _direction)
+	public void SetDirection(Vector3 _rotation)
 	{
-		direction = _direction;
-		Quaternion.LookRotation(_direction, Vector2.up);
+		transform.eulerAngles = _rotation;
 	}
 	public void SetSpeed(float _speed)
 	{
 		speed = _speed;
+	}
+	public void Deactive()
+	{
+		gameObject.SetActive(false);
 	}
 	#endregion
 
 	#region PrivateMethod
 	private void Update()
 	{
-		//transform.position +=
+		transform.position += transform.up * speed * Time.deltaTime;
 	}
 	#endregion
 }

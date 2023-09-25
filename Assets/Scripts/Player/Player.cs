@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 	#region PrivateVariables
 	private PlayerInput input;
 	private PlayerMove move;
-	private PlayerAim attack;
+	private PlayerAim aim;
 	#endregion
 
 	#region PublicMethod
@@ -26,8 +26,8 @@ public class Player : MonoBehaviour
 			instance = this;
 		}
 		input = new PlayerInput();
-		TryGetComponent(out attack);
-		attack.Initialize();
+		TryGetComponent(out aim);
+		aim.Initialize();
 		TryGetComponent(out move);
 		move.Initialize();
 	}
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 	}
 	private void Update()
 	{
-		attack.HandleInput();
+		aim.HandleInput();
 		move.HandleInput();
 	}
 	private void OnMovePerformed(InputAction.CallbackContext _context)
@@ -62,11 +62,11 @@ public class Player : MonoBehaviour
 	}
 	private void OnAttackPerformed(InputAction.CallbackContext _context)
 	{
-		attack.OpenFire();
+		aim.OpenFire();
 	}
 	private void OnAttackCanceled(InputAction.CallbackContext _context)
 	{
-		attack.HoldFire();
+		aim.HoldFire();
 	}
 	#endregion
 }

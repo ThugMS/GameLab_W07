@@ -9,6 +9,7 @@ public class Bow : MonoBehaviour
 
 	#region PrivateVariables
 	private SpriteRenderer sr;
+	private Animator anim;
 	[SerializeField] private GameObject normalArrowPrefab;
 	private List<GameObject> arrowList = new List<GameObject>();
 	[SerializeField] private GameObject warpArrowPrefab;
@@ -20,6 +21,7 @@ public class Bow : MonoBehaviour
 	public void Initialize()
 	{
 		transform.Find("Renderer").TryGetComponent(out sr);
+		transform.Find("Renderer").TryGetComponent(out anim);
 	}
 	public void Look(Vector2 mousePosition)
 	{
@@ -29,10 +31,12 @@ public class Bow : MonoBehaviour
 		sr.sortingOrder = GetSortingOrderByAngle();
 		sr.flipX = GetFlipXByAngle();
 	}
-	public void FireNormalArrow()
+	public void Fire()
 	{
-		GameObject current = InstantiateArrow();
-		// 화살 방향과 벡터 결정
+		anim.SetTrigger("shot");
+		Arrow current = InstantiateNormalArrow().GetComponent<Arrow>();
+		current.SetDirection(transform.eulerAngles);
+		current.SetSpeed(shotSpeed);
 	}
 	#endregion
 
@@ -45,12 +49,12 @@ public class Bow : MonoBehaviour
 	{
 		return transform.rotation.eulerAngles.z > 180 && transform.rotation.eulerAngles.z < 360 ? true : false;
 	}
-	private GameObject InstantiateArrow()
+	private GameObject InstantiateNormalArrow()
 	{
 		GameObject current = GetSurplusArrow();
 		if (current == null)
 		{
-			current = Instantiate(current, transform);
+			current = Instantiate(normalArrowPrefab, transform.position, Quaternion.identity);
 			arrowList.Add(current);
 		}
 		else
