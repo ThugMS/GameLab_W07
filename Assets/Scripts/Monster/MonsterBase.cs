@@ -51,6 +51,10 @@ public abstract class MonsterBase : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    #endregion
+
+    #region PublicMethod
     #endregion
 
     #region PrivateMethod

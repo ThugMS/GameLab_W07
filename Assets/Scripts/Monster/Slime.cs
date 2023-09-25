@@ -7,6 +7,7 @@ using UnityEngine;
 public class Slime : MonsterBase
 {
     #region PublicVariables
+    private int m_moveLayerMask;
     #endregion
 
     #region PrivateVariables
@@ -16,10 +17,17 @@ public class Slime : MonsterBase
     [SerializeField] private float m_moveTime = 1.0f;
     [SerializeField] private float m_moveCooldown;
     [SerializeField] private AnimationCurve m_moveEase;
+    [SerializeField] private Tween m_moveTween;
 
     #endregion
-
     #region PublicMethod
+    protected virtual void Start()
+    {
+        base.Start();
+
+        m_moveLayerMask = LayerMask.GetMask("Player", "Wall");
+    }
+
     private void Update()
     {
         CheckMove();
@@ -36,7 +44,7 @@ public class Slime : MonsterBase
         else
             movePos = transform.position + m_targetDirection * m_moveDis;
 
-        transform.DOMove(movePos, m_moveTime).SetEase(m_moveEase);
+        m_moveTween  = transform.DOMove(movePos, m_moveTime).SetEase(m_moveEase);
     }
     #endregion
 
@@ -60,5 +68,20 @@ public class Slime : MonsterBase
                 m_canMove = true;
         }
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        GetTargetDirection();
+        float dis = (m_player.transform.position - transform.position).magnitude;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, m_targetDirection, dis, m_moveLayerMask);
+        Debug.DrawRay(transform.position, m_targetDirection, Color.green);
+
+        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            m_moveTween.Kill();
+        }
+    }
+
     #endregion
 }
