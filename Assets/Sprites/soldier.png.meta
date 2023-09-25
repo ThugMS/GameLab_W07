@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cfb8581d144865f4f8d78a21bc4e75d6
+guid: f2823ae4c599c5a419d73f70829a677f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: robin_0
+      name: soldier_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9d61ff87eaa74341a99f2b614937079
-      internalID: 1042382266
+      spriteID: 228beff2b30a70e4dad2aaf137321419
+      internalID: -1120489901
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_1
+      name: soldier_1
       rect:
         serializedVersion: 2
         x: 16
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b12ed568431d5c40aceb4bca709a36e
-      internalID: 668632034
+      spriteID: 9b3ff3191d037f8478d9139ebf0bbc55
+      internalID: 2074649276
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_2
+      name: soldier_2
       rect:
         serializedVersion: 2
         x: 32
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e33c318475f8bd4aa7ddb3914ade24b
-      internalID: -1902706257
+      spriteID: 16d18202643b78f4d9d5a2c7486687c6
+      internalID: 1291756046
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_3
+      name: soldier_3
       rect:
         serializedVersion: 2
         x: 48
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 59dddc9e095c4c54083156044963b7e2
-      internalID: -585549251
+      spriteID: b1a1b139a672f4949a5e421805c94a4d
+      internalID: 1443810920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_4
+      name: soldier_4
       rect:
         serializedVersion: 2
         x: 64
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e96e9fe2d8534344bf3ffcf79ab4834
-      internalID: 876841012
+      spriteID: 6a580b0ec3a38964283b89f4ceceba47
+      internalID: -752208796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_5
+      name: soldier_5
       rect:
         serializedVersion: 2
         x: 80
@@ -224,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3587094ab68ec374c9999d9c044cfc8b
-      internalID: -1428604752
+      spriteID: cdda8cd27fea97c4097e38451c125639
+      internalID: -537998718
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_6
+      name: soldier_6
       rect:
         serializedVersion: 2
         x: 96
@@ -245,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d402dcda0272f2d42b650f2b9d40fff3
-      internalID: -262301566
+      spriteID: ee08165145a153045ba51cd54d4f8c75
+      internalID: 1434435959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_7
+      name: soldier_7
       rect:
         serializedVersion: 2
         x: 112
@@ -266,14 +266,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 224d0aa018bbfb548ae824bebf3cec01
-      internalID: -1965790576
+      spriteID: 3bce5ee376d386e49b984704fb78f4e3
+      internalID: -1809727798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_8
+      name: soldier_8
       rect:
         serializedVersion: 2
         x: 128
@@ -287,14 +287,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9431ee6dc5da9354fb0455c64cd5dfa9
-      internalID: -314181978
+      spriteID: 88cd58d03cd7f254b928456296f5dcc9
+      internalID: 1976426701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_9
+      name: soldier_9
       rect:
         serializedVersion: 2
         x: 144
@@ -308,14 +308,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 055adf15c2f3868498182d936fc7724f
-      internalID: -96415561
+      spriteID: 6686b131836add2499e3ebcfe7f40c6c
+      internalID: -494325211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_10
+      name: soldier_10
       rect:
         serializedVersion: 2
         x: 160
@@ -329,14 +329,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9724b2114cbb4144abb7309e5f20863d
-      internalID: -1396966754
+      spriteID: 36ce7ddf24e16f2429ad96506f867d93
+      internalID: 1359284097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: robin_11
+      name: soldier_11
       rect:
         serializedVersion: 2
         x: 176
@@ -350,8 +350,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc62a29d67fea4b4ab161898bc0ab78a
-      internalID: -262532493
+      spriteID: 38985aa3dca2afb4fab68415f3104f7f
+      internalID: 1296855894
       vertices: []
       indices: 
       edges: []
@@ -367,18 +367,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      robin_0: 1042382266
-      robin_1: 668632034
-      robin_10: -1396966754
-      robin_11: -262532493
-      robin_2: -1902706257
-      robin_3: -585549251
-      robin_4: 876841012
-      robin_5: -1428604752
-      robin_6: -262301566
-      robin_7: -1965790576
-      robin_8: -314181978
-      robin_9: -96415561
+      soldier_0: -1120489901
+      soldier_1: 2074649276
+      soldier_10: 1359284097
+      soldier_11: 1296855894
+      soldier_2: 1291756046
+      soldier_3: 1443810920
+      soldier_4: -752208796
+      soldier_5: -537998718
+      soldier_6: 1434435959
+      soldier_7: -1809727798
+      soldier_8: 1976426701
+      soldier_9: -494325211
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
