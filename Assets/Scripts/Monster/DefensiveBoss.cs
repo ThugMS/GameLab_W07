@@ -6,14 +6,18 @@ using UnityEngine;
 public class DefensiveBoss : MonsterBase
 {
     #region PublicVariables
-    public Transform m_shiledRotation;    
+    public Transform m_shiledRotation;
+    public bool m_isShieldOpen = false;
     #endregion
 
     #region PrivateVariables
     [Header("Shiled")]
     [SerializeField] private float m_turnSpeed;
     [SerializeField] private Transform m_shieldRotate;
-    [SerializeField] private SpriteRenderer m_sr;
+    [SerializeField] private SpriteRenderer m_sr1;
+    [SerializeField] private SpriteRenderer m_sr2;
+    [SerializeField] private float m_shieldOpenOffset = 0.5f;
+    [SerializeField] private float m_shieldOpenTime = 0.2f;
 
     [Header("Move")]
     [SerializeField] private float m_moveDis;
@@ -26,10 +30,20 @@ public class DefensiveBoss : MonsterBase
     [SerializeField] private float dis;
     [SerializeField] private AnimationCurve m_chargeEase;
     private int m_chargeLayer;
+
+    [Header("Fire")]
+    [SerializeField] GameObject m_fire;
+    [SerializeField] private float m_fireTime = 5.0f;
+
+    [Header("Shadow")]
+    [SerializeField] private GameObject m_shadow;
+    [SerializeField] private Vector3 m_returnPos;
+    [SerializeField] private float m_shadowTime;
+    [SerializeField] private float m_shadowCooldown;
     #endregion
 
     #region PublicMethod
-    protected virtual void Start()
+    protected override void Start()
     {
         base.Start();
 
@@ -40,11 +54,18 @@ public class DefensiveBoss : MonsterBase
     {
         RotateShiled();
         //CheckMove();
-        m_sr.sortingOrder = GetSortingOrderByAngle();
+        m_sr1.sortingOrder = GetSortingOrderByAngle();
+        m_sr2.sortingOrder = GetSortingOrderByAngle();
 
+        //Test
         if (Input.GetKeyDown(KeyCode.Space))
             Charge();
-            
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            Fire();
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            MakeShadow();
     }
 
     protected override void Move()
@@ -95,7 +116,19 @@ public class DefensiveBoss : MonsterBase
                 m_canMove = true;
         }
     }
-
+    /// <summary>
+    /// 방패를 열고 불을 쏨. 불을 쏜 후 방패를 닫음.
+    /// </summary>
+    private void Fire()
+    {
+        ChangeShieldPosition();
+        StartCoroutine(IE_SetActiveFireByTime(true, m_shieldOpenTime));
+        StartCoroutine(IE_SetActiveFireByTime(false, m_fireTime));
+        Invoke(nameof(ChangeShieldPosition), m_fireTime);
+    }
+    /// <summary>
+    /// 돌진형 기믹
+    /// </summary>
     private void Charge()
     {
         GetTargetDirection();
@@ -109,9 +142,42 @@ public class DefensiveBoss : MonsterBase
         }
     }
 
+    private void MakeShadow()
+    {
+        GameObject shadow = Instantiate(m_shadow, Player.instance.transform.position, Quaternion.identity);
+        shadow.GetComponent<Shadow>().InitSetting(m_shadowTime);
+    }
+    /// <summary>
+    /// 각도에 따라서 방패의 layer 변경
+    /// </summary>
+    /// <returns></returns>
     private int GetSortingOrderByAngle()
     {
         return m_shieldRotate.rotation.eulerAngles.z > 90 && m_shieldRotate.rotation.eulerAngles.z < 270 ? 1 : -1;
+    }
+    /// <summary>
+    /// 방패 열고 닫는 과정
+    /// </summary>
+    private void ChangeShieldPosition()
+    {
+        int moveSign = 1;
+
+        if (m_isShieldOpen == true)
+        {
+            moveSign *= -1;
+        }
+
+        m_isShieldOpen = !m_isShieldOpen;
+
+        m_sr1.transform.DOLocalMoveX(m_sr1.transform.localPosition.x - moveSign * m_shieldOpenOffset, m_shieldOpenTime).SetEase(Ease.Linear);
+        m_sr2.transform.DOLocalMoveX(m_sr2.transform.localPosition.x + moveSign * m_shieldOpenOffset, m_shieldOpenTime).SetEase(Ease.Linear);
+    }
+
+    private IEnumerator IE_SetActiveFireByTime(bool _value, float _time)
+    {
+        yield return new WaitForSeconds(_time);
+
+        m_fire.SetActive(_value);
     }
     #endregion
 }

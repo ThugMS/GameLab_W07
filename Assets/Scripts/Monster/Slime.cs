@@ -21,7 +21,7 @@ public class Slime : MonsterBase
 
     #endregion
     #region PublicMethod
-    protected virtual void Start()
+    protected override void Start()
     {
         base.Start();
 
