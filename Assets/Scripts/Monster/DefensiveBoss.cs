@@ -6,14 +6,17 @@ using UnityEngine;
 public class DefensiveBoss : MonsterBase
 {
     #region PublicVariables
-    public Transform m_shiledRotation;    
+    public Transform m_shiledRotation;
+    public bool m_isShieldOpen = false;
     #endregion
 
     #region PrivateVariables
     [Header("Shiled")]
     [SerializeField] private float m_turnSpeed;
     [SerializeField] private Transform m_shieldRotate;
-    [SerializeField] private SpriteRenderer m_sr;
+    [SerializeField] private SpriteRenderer m_sr1;
+    [SerializeField] private SpriteRenderer m_sr2;
+    [SerializeField] private float m_shieldOpenOffset = 0.5f;
 
     [Header("Move")]
     [SerializeField] private float m_moveDis;
@@ -29,7 +32,7 @@ public class DefensiveBoss : MonsterBase
     #endregion
 
     #region PublicMethod
-    protected virtual void Start()
+    protected override void Start()
     {
         base.Start();
 
@@ -40,11 +43,15 @@ public class DefensiveBoss : MonsterBase
     {
         RotateShiled();
         //CheckMove();
-        m_sr.sortingOrder = GetSortingOrderByAngle();
+        m_sr1.sortingOrder = GetSortingOrderByAngle();
+        m_sr2.sortingOrder = GetSortingOrderByAngle();
 
+        //Test
         if (Input.GetKeyDown(KeyCode.Space))
             Charge();
-            
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            ChangeShieldPosition();
     }
 
     protected override void Move()
@@ -112,6 +119,21 @@ public class DefensiveBoss : MonsterBase
     private int GetSortingOrderByAngle()
     {
         return m_shieldRotate.rotation.eulerAngles.z > 90 && m_shieldRotate.rotation.eulerAngles.z < 270 ? 1 : -1;
+    }
+
+    private void ChangeShieldPosition()
+    {
+        int moveSign = 1;
+
+        if (m_isShieldOpen == true)
+        {
+            moveSign *= -1;
+        }
+
+        m_isShieldOpen = !m_isShieldOpen;
+
+        m_sr1.transform.DOLocalMoveX(m_sr1.transform.localPosition.x - moveSign * m_shieldOpenOffset, 0.2f).SetEase(Ease.Linear);
+        m_sr2.transform.DOLocalMoveX(m_sr2.transform.localPosition.x + moveSign * m_shieldOpenOffset, 0.2f).SetEase(Ease.Linear);
     }
     #endregion
 }
