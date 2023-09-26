@@ -12,6 +12,8 @@ public class DefensiveBoss : MonsterBase
     #region PrivateVariables
     [Header("Shiled")]
     [SerializeField] private float m_turnSpeed;
+    [SerializeField] private Transform m_shieldRotate;
+    [SerializeField] private SpriteRenderer m_sr;
 
     [Header("Move")]
     [SerializeField] private float m_moveDis;
@@ -38,6 +40,7 @@ public class DefensiveBoss : MonsterBase
     {
         RotateShiled();
         //CheckMove();
+        m_sr.sortingOrder = GetSortingOrderByAngle();
 
         if (Input.GetKeyDown(KeyCode.Space))
             Charge();
@@ -104,6 +107,11 @@ public class DefensiveBoss : MonsterBase
             Vector3 pos = hit.point - new Vector2((m_targetDirection * m_offset).x, (m_targetDirection * m_offset).y);
             transform.DOMove(pos, 0.2f).SetEase(m_chargeEase);
         }
+    }
+
+    private int GetSortingOrderByAngle()
+    {
+        return m_shieldRotate.rotation.eulerAngles.z > 90 && m_shieldRotate.rotation.eulerAngles.z < 270 ? 1 : -1;
     }
     #endregion
 }

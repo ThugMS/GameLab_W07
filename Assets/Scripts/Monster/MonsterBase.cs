@@ -27,7 +27,7 @@ public abstract class MonsterBase : MonoBehaviour
         TryGetComponent<Rigidbody2D>(out m_rigidbody);
         TryGetComponent<Collider2D>(out m_collider);
 
-        // TO_DO : Player 오브젝트 얻어오기
+        m_player = Player.instance.gameObject;
     }
 
     protected abstract void Move();
