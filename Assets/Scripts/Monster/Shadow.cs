@@ -31,13 +31,19 @@ public class Shadow : MonoBehaviour
     private void Start()
     {   
         TryGetComponent<LineRenderer>(out m_line);
-        m_line.positionCount = 2;    
+        m_line.positionCount = 11;    
     }
 
     private void Update()
     {
-        m_line.SetPosition(0, transform.position);
-        m_line.SetPosition(1, Player.instance.transform.position);
+        float dis = Vector3.Distance(transform.position, Player.instance.transform.position) / 10;
+        Vector3 dir = (Player.instance.transform.position - transform.position).normalized;
+        for(int i = 0; i < 11; i++)
+        {
+            m_line.SetPosition(i, transform.position + dir * dis * i);
+            //m_line.SetPosition(1, Player.instance.transform.position);
+        }
+        
     }
     #endregion
 

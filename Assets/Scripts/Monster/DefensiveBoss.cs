@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 using UnityEngine.SceneManagement;
 
 public class DefensiveBoss : MonsterBase
@@ -41,6 +42,7 @@ public class DefensiveBoss : MonsterBase
     [SerializeField] private AnimationCurve m_chargeEase;
     [SerializeField] private float m_chargeTime = 0.5f;
     private int m_chargeLayer;
+    private Tweener m_tweener;
 
     [Header("Fire")]
     [SerializeField] GameObject m_fire;
@@ -75,6 +77,11 @@ public class DefensiveBoss : MonsterBase
         Invoke(nameof(ReadyAct), 5.0f);
         m_isAct = false;
         m_canMove = true;
+        transform.rotation = Quaternion.Euler(0, 0, 180);
+        StopAllCoroutines();
+        m_fire.SetActive(false);
+        m_sr1.transform.localPosition = new Vector3(-0.5f, 1.29f, 0);
+        m_sr2.transform.localPosition = new Vector3(0.5f, 1.29f, 0);
 
         m_phase = 1;
 
@@ -109,6 +116,8 @@ public class DefensiveBoss : MonsterBase
         SetHPGUI();
 
         m_spawnPos = transform.position;
+
+        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -123,16 +132,15 @@ public class DefensiveBoss : MonsterBase
 
 
 
-        ////Test
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //    Charge();
+        //Test
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            Charge();
 
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //    Fire();
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            Fire();
 
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //    MakeShadow();
-
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            MakeShadow();
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
             ReflectProjectile();
@@ -168,6 +176,17 @@ public class DefensiveBoss : MonsterBase
         base.GetDamage();
 
         SetHPGUI();
+    }
+
+    private void OnEnable()
+    {
+        
+        BossHpGUI.instance?.ShowGUI();
+    }
+
+    private void OnDisable()
+    {
+        BossHpGUI.instance?.HideGUI();
     }
     #endregion
 
@@ -239,8 +258,10 @@ public class DefensiveBoss : MonsterBase
 
         if(hit == true)
         {
+
             Vector3 pos = hit.point - new Vector2((m_targetDirection * m_offset).x, (m_targetDirection * m_offset).y);
-            transform.DOMove(pos, m_chargeTime).SetEase(m_chargeEase);
+            m_tweener = transform.DOShakePosition(0.5f, 0.2f);
+            StartCoroutine(IE_Charge(pos, m_tweener));
         }
 
         Invoke(nameof(EndAct), m_chargeTime + 1f);
@@ -346,6 +367,12 @@ public class DefensiveBoss : MonsterBase
         yield return new WaitForSeconds(_time);
 
         m_fire.SetActive(_value);
+    }
+
+    private IEnumerator IE_Charge(Vector3 _pos, Tweener _tweener)
+    {
+        yield return _tweener.WaitForCompletion();
+        transform.DOMove(_pos, m_chargeTime).SetEase(m_chargeEase);
     }
     #endregion
 }
