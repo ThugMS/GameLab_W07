@@ -30,6 +30,11 @@ public class DefensiveBoss : MonsterBase
     [SerializeField] private float dis;
     [SerializeField] private AnimationCurve m_chargeEase;
     private int m_chargeLayer;
+
+    [Header("Fire")]
+    [SerializeField] GameObject m_fire;
+    [SerializeField] private float m_fireTime = 5.0f;
+
     #endregion
 
     #region PublicMethod
@@ -52,7 +57,9 @@ public class DefensiveBoss : MonsterBase
             Charge();
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            ChangeShieldPosition();
+            Fire();
+
+        
     }
 
     protected override void Move()
@@ -104,6 +111,14 @@ public class DefensiveBoss : MonsterBase
         }
     }
 
+    private void Fire()
+    {
+        ChangeShieldPosition();
+        StartCoroutine(IE_SetActiveFireByTime(true, m_shieldOpenTime));
+        StartCoroutine(IE_SetActiveFireByTime(false, m_fireTime));
+        Invoke(nameof(ChangeShieldPosition), m_fireTime);
+    }
+
     private void Charge()
     {
         GetTargetDirection();
@@ -135,6 +150,13 @@ public class DefensiveBoss : MonsterBase
 
         m_sr1.transform.DOLocalMoveX(m_sr1.transform.localPosition.x - moveSign * m_shieldOpenOffset, m_shieldOpenTime).SetEase(Ease.Linear);
         m_sr2.transform.DOLocalMoveX(m_sr2.transform.localPosition.x + moveSign * m_shieldOpenOffset, m_shieldOpenTime).SetEase(Ease.Linear);
+    }
+
+    private IEnumerator IE_SetActiveFireByTime(bool _value, float _time)
+    {
+        yield return new WaitForSeconds(_time);
+
+        m_fire.SetActive(_value);
     }
     #endregion
 }

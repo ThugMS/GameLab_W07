@@ -386,6 +386,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_fire: {fileID: 4042607956519731333}
+  m_fireTime: 5
 --- !u!1 &8031028749415017653
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,10 +557,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefensiveBossFire
       objectReference: {fileID: 0}
+    - target: {fileID: 4888109072796251549, guid: 9a366db81223dca499cad89d0d2e1531, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a366db81223dca499cad89d0d2e1531, type: 3}
 --- !u!4 &4042607956519731328 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4888109072796251544, guid: 9a366db81223dca499cad89d0d2e1531, type: 3}
+  m_PrefabInstance: {fileID: 8920566298977809688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4042607956519731333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4888109072796251549, guid: 9a366db81223dca499cad89d0d2e1531, type: 3}
   m_PrefabInstance: {fileID: 8920566298977809688}
   m_PrefabAsset: {fileID: 0}
