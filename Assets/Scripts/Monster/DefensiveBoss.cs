@@ -11,7 +11,6 @@ public class DefensiveBoss : MonsterBase
     public Transform m_shiledRotation;
     public bool m_isShieldOpen = false;
 
-
     [Header("Pattern")]
     public bool m_isAct = false;
     public bool m_canAct = true;
@@ -89,6 +88,9 @@ public class DefensiveBoss : MonsterBase
         base.Start();
 
         m_chargeLayer = LayerMask.GetMask("Wall");
+        BossHpGUI.instance.ShowGUI();
+        BossHpGUI.instance.SetMaxHp((int) m_maxHealth);
+        SetHPGUI();
     }
 
     private void Update()
@@ -141,6 +143,13 @@ public class DefensiveBoss : MonsterBase
     public void ReadyAct()
     {
         m_canAct = true;
+    }
+
+    public override void GetDamage()
+    {
+        base.GetDamage();
+
+        SetHPGUI();
     }
     #endregion
 
@@ -298,6 +307,11 @@ public class DefensiveBoss : MonsterBase
                 ReflectProjectile();
                 break;
         }
+    }
+
+    private void SetHPGUI()
+    {
+        BossHpGUI.instance.SetHp((int)m_health);
     }
 
     private IEnumerator IE_SetActiveFireByTime(bool _value, float _time)
