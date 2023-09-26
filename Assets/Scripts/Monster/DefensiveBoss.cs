@@ -17,6 +17,7 @@ public class DefensiveBoss : MonsterBase
     [SerializeField] private SpriteRenderer m_sr1;
     [SerializeField] private SpriteRenderer m_sr2;
     [SerializeField] private float m_shieldOpenOffset = 0.5f;
+    [SerializeField] private float m_shieldOpenTime = 0.2f;
 
     [Header("Move")]
     [SerializeField] private float m_moveDis;
@@ -132,8 +133,8 @@ public class DefensiveBoss : MonsterBase
 
         m_isShieldOpen = !m_isShieldOpen;
 
-        m_sr1.transform.DOLocalMoveX(m_sr1.transform.localPosition.x - moveSign * m_shieldOpenOffset, 0.2f).SetEase(Ease.Linear);
-        m_sr2.transform.DOLocalMoveX(m_sr2.transform.localPosition.x + moveSign * m_shieldOpenOffset, 0.2f).SetEase(Ease.Linear);
+        m_sr1.transform.DOLocalMoveX(m_sr1.transform.localPosition.x - moveSign * m_shieldOpenOffset, m_shieldOpenTime).SetEase(Ease.Linear);
+        m_sr2.transform.DOLocalMoveX(m_sr2.transform.localPosition.x + moveSign * m_shieldOpenOffset, m_shieldOpenTime).SetEase(Ease.Linear);
     }
     #endregion
 }
