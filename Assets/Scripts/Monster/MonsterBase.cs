@@ -44,7 +44,7 @@ public abstract class MonsterBase : MonoBehaviour
     /// <summary>
     /// 데미지를 줄 때 인자로 데미지를 넘겨서 사용
     /// </summary>
-    public void GetDamage()
+    public virtual void GetDamage()
     {
         m_health -= m_damage;
 

@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
 	}
 	public void Die()
 	{
-
+		MapSpawinTrigger.instance.SpawnPlayer();
 	}
 	#endregion
 
