@@ -173,4 +173,3 @@ public class Slime : MonsterBase
     //}
 }
     #endregion
-
