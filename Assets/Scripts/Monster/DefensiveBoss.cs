@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
+using UnityEngine.SceneManagement;
 
 public class DefensiveBoss : MonsterBase
 {
@@ -175,6 +176,13 @@ public class DefensiveBoss : MonsterBase
         SetHPGUI();
     }
     #endregion
+
+    public override void Dead()
+    {
+        base.Dead();
+
+        SceneManager.LoadScene(1);
+    }
 
     #region PrivateMethod
     /// <summary>

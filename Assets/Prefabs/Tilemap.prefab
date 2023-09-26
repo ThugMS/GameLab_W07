@@ -72,6 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spawnTransform: {fileID: 21569089}
+  m_stageNum: 2
 --- !u!1 &159745915
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spawnTransform: {fileID: 159745916}
+  m_stageNum: 1
 --- !u!1 &1363483161
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,6 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spawnTransform: {fileID: 1363483162}
+  m_stageNum: 3
 --- !u!1 &1804927749397497556
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,7 +2034,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3639788765855144816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.69, y: 0, z: 0}
+  m_LocalPosition: {x: 68.3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11609,6 +11612,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spawnPos: {x: 0, y: 0}
+  m_stageNum: 0
+  tutorialTileTwo: {fileID: 1475257355}
+  spawnPoint:
+  - {fileID: 159745916}
+  - {fileID: 21569089}
+  - {fileID: 1363483162}
 --- !u!1 &4001296251962848503
 GameObject:
   m_ObjectHideFlags: 0
@@ -13156,7 +13165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7047190881437713439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8, y: -0.6, z: 0}
+  m_LocalPosition: {x: 19.9, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13181,7 +13190,9 @@ MonoBehaviour:
   numberOfMonsters: 15
   monsterPrefab: {fileID: 226801634644380421, guid: 608dd86d5513c7d40802bc1e0677754d, type: 3}
   spawnRadius: 8
-  spawnDelay: 0
+  isCleaningForRestart: 0
+  monsterParents: {fileID: 0}
+  monsters: []
 --- !u!1 &8629656243507300285
 GameObject:
   m_ObjectHideFlags: 0

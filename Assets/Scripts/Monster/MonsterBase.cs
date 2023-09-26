@@ -52,7 +52,7 @@ public abstract class MonsterBase : MonoBehaviour
             Dead();
     }
 
-    public void Dead()
+    public virtual void Dead()
     {
         Destroy(gameObject);
     }
