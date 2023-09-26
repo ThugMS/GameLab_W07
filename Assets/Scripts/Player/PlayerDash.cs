@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerDash : MonoBehaviour
 
 	#region PrivateVariables
 	private Player main;
+	private PlayerMove move;
 	private Rigidbody2D rb;
 	private ParticleSystem dustParticle;
 	private ParticleSystem dashParticle;
@@ -18,7 +20,7 @@ public class PlayerDash : MonoBehaviour
 	[SerializeField] private float dashDuration;
 	[SerializeField] private float dashCooldown;
 
-	private bool isReady = true;
+	[SerializeField][ReadOnly] private bool isReady = true;
 	#endregion
 
 	#region PublicMethod
@@ -26,20 +28,21 @@ public class PlayerDash : MonoBehaviour
 	{
 		TryGetComponent(out rb);
 		TryGetComponent(out main);
+		TryGetComponent(out move);
 		transform.Find("Bow").TryGetComponent(out bow);
 		transform.Find("Dust Trail").TryGetComponent(out dustParticle);
 		transform.Find("Dash Trail").TryGetComponent(out dashParticle);
 	}
 	public void Dash()
 	{
-		if (isReady == false)
+		if (isReady == false || move.Direction == Vector2.zero)
 		{
 			return;
 		}
 		isReady = false;
 		//anim.SetBool("dash", true);
 		bow.SetRendererVisibility(false);
-		rb.velocity = (Utils.MousePosition - (Vector2)transform.position).normalized * dashSpeed;
+		rb.velocity = move.Direction * dashSpeed;
 		main.SetActive(false);
 		main.SetInvincibility(true);
 		dustParticle.Stop();
@@ -50,7 +53,7 @@ public class PlayerDash : MonoBehaviour
 		Invoke(nameof(DashReady), dashCooldown);
 		Invoke(nameof(DashEnd), dashDuration);
 	}
-	public void ForceDodgeEnd()
+	public void ForceQuit()
 	{
 		CancelInvoke(nameof(DashEnd));
 		DashEnd();
@@ -60,6 +63,7 @@ public class PlayerDash : MonoBehaviour
 	#region PrivateMethod
 	private void DashEnd()
 	{
+		Debug.Log("End");
 		rb.velocity = Vector2.zero;
 		main.SetActive(true);
 		main.SetInvincibility(false);

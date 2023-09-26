@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
 	#region PublicVariables
+	public Vector2 Direction { get { return direction; } }
 	#endregion
 
 	#region PrivateVariables
