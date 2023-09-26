@@ -23,7 +23,10 @@ public class Slime : MonsterBase
     [SerializeField] private float m_startDelayTime;
 
     [Header("RayCheck")]
-    public Vector3 movePos;
+    public Vector3 m_movePos;
+
+    [Header("Animation")]
+    [SerializeField] private Animator m_animator;
 
 
     #endregion
@@ -33,7 +36,8 @@ public class Slime : MonsterBase
         base.Start();
 
         m_moveLayerMask = LayerMask.GetMask("Monster", "Wall");
-        m_startDelayTime = Random.Range(0.5f, 1.0f);     
+        m_startDelayTime = Random.Range(0.5f, 1.0f);
+        TryGetComponent<Animator>(out m_animator);
     }
 
     private void Update()
@@ -56,13 +60,23 @@ public class Slime : MonsterBase
         GetTargetDirection();
         
         if(m_moveDis > (m_player.transform.position - transform.position).magnitude)
-           movePos = m_player.transform.position;
+           m_movePos = m_player.transform.position;
 
         else
-            movePos = transform.position + m_targetDirection * m_moveDis;
+            m_movePos = transform.position + m_targetDirection * m_moveDis;
 
         CheckMonster();
-        m_moveTween  = transform.DOMove(movePos, m_moveTime).SetEase(m_moveEase);
+        m_animator.SetTrigger("Move");
+        if(m_targetDirection.x < 0)
+        {
+            transform.localScale = new Vector3(-1,1,1);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        m_moveTween  = transform.DOMove(m_movePos, m_moveTime).SetEase(m_moveEase);
+        
     }
     #endregion
 
@@ -128,18 +142,18 @@ public class Slime : MonsterBase
 
             if(curCollider != null)
             {
-                Vector3 newDirection = movePos - ((this.transform.position + curCollider.transform.position) / 2);
+                Vector3 newDirection = m_movePos - ((this.transform.position + curCollider.transform.position) / 2);
                 Vector3 newMovePos = newDirection + this.transform.position;
-                movePos = newMovePos;
+                m_movePos = newMovePos;
             }
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector2(1.5f,1.5f));
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireCube(transform.position, new Vector2(1.5f,1.5f));
+    //}
 }
     #endregion
 
