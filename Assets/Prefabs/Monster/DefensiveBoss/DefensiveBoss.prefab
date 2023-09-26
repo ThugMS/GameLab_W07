@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8709021137791437226
 Transform:
   m_ObjectHideFlags: 0
@@ -432,8 +432,14 @@ MonoBehaviour:
   m_power: 0
   m_player: {fileID: 0}
   m_targetDirection: {x: 0, y: 0, z: 0}
+  instance: {fileID: 0}
   m_shiledRotation: {fileID: 8031028748983170917}
   m_isShieldOpen: 0
+  m_isAct: 0
+  m_canAct: 1
+  m_phase: 1
+  m_pattern: 0
+  m_actTerm: 5
   m_turnSpeed: 0.002
   m_shieldRotate: {fileID: 8031028748983170917}
   m_sr1: {fileID: 8031028747970662573}
@@ -493,6 +499,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_chargeTime: 0.5
   m_fire: {fileID: 4042607956519731333}
   m_fireTime: 5
   m_shadow: {fileID: 3707880657253690926, guid: 3f32b21c5bb2c134f888fc1dcccdc8c4, type: 3}
@@ -657,7 +664,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9069534322979917811}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -701,9 +708,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_arrowLayerMask: 0
   m_collider: {fileID: 0}
-  m_reflectTime: 0
+  m_isThrowProjectTile: 0
+  m_effect: {fileID: 4333493228344038403}
+  m_projectile: {fileID: 903037930949996263, guid: 90595b4ce92e89e48982c6dcad9a7638, type: 3}
+  m_reflectTime: 3
   m_deceleration: 0.95
   m_arrows: []
+  m_projs: []
+  m_throwCool: 0.3
+  m_projectileSpeed: 20
 --- !u!1001 &8920566298977809688
 PrefabInstance:
   m_ObjectHideFlags: 0
