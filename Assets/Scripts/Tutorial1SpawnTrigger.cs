@@ -6,6 +6,7 @@ public class Tutorial1SpawnTrigger : MonoBehaviour
 {
     #region PublicVariables
     public Transform m_spawnTransform;
+    public int m_stageNum;
     #endregion
 
     #region PrivateVariables
@@ -20,6 +21,7 @@ public class Tutorial1SpawnTrigger : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             MapSpawinTrigger.instance.SetSpawnPos(m_spawnTransform);
+            MapSpawinTrigger.instance.m_stageNum = m_stageNum;
         }
     }
     #endregion
