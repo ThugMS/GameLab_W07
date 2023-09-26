@@ -26,7 +26,7 @@ public class Bow : MonoBehaviour
 	{
 		Vector2 direction = (mousePosition - (Vector2)transform.position).normalized;
 		Quaternion targetRot = Quaternion.FromToRotation(Vector3.up, direction);
-		transform.rotation = Quaternion.Euler(0, 0, Mathf.LerpAngle(transform.rotation.eulerAngles.z, targetRot.eulerAngles.z, angularSpeed * Time.deltaTime));
+		transform.rotation = Quaternion.Euler(0, 0, Mathf.LerpAngle(transform.rotation.eulerAngles.z, targetRot.eulerAngles.z, angularSpeed * Time.unscaledDeltaTime));
 		sr.sortingOrder = GetSortingOrderByAngle();
 		sr.flipX = GetFlipXByAngle();
 	}

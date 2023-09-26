@@ -9,16 +9,18 @@ public class PlayerMove : MonoBehaviour
 	#endregion
 
 	#region PrivateVariables
+	private PlayerDeadEye deadEye;
 	private Animator anim;
-
 
 	private Vector2 direction;
 	[SerializeField] private float speed;
+	[SerializeField] private float deadEyeAdditive;
 	#endregion
 
 	#region PublicMethod
 	public void Initialize()
 	{
+		TryGetComponent(out deadEye);
 		transform.Find("Renderer").TryGetComponent(out anim);
 	}
 	public void Move(Vector2 _direction)
@@ -33,6 +35,10 @@ public class PlayerMove : MonoBehaviour
 	}
 	public void HandleInput()
 	{
+		if (direction != Vector2.zero)
+		{
+			deadEye.ChangeValue(deadEyeAdditive * Time.deltaTime);
+		}
 		transform.Translate(direction * speed * Time.deltaTime);
 	}
 	#endregion

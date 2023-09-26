@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
 	private PlayerDash dash;
 	private PlayerWarp warp;
 	private PlayerBulletTime bulletTime;
+	private PlayerHp hp;
+	private PlayerDeadEye deadEye;
 
 	private ParticleSystem dustTrail;
 
@@ -45,11 +47,15 @@ public class Player : MonoBehaviour
 		transform.position = _position;
 		dustTrail.Play();
 	}
-	public void Hit()
+	public void Hit(float _amount)
 	{
 		if (isInvincible == true)
 			return;
-		// Action
+		hp.ChangeValue(_amount);
+	}
+	public void Die()
+	{
+
 	}
 	#endregion
 
@@ -71,6 +77,10 @@ public class Player : MonoBehaviour
 		warp.Initialize();
 		TryGetComponent(out bulletTime);
 		bulletTime.Initialize();
+		TryGetComponent(out hp);
+		hp.Initialize();
+		TryGetComponent(out deadEye);
+		deadEye.Initialize();
 		transform.Find("Dust Trail").TryGetComponent(out dustTrail);
 	}
 	private void OnEnable()
