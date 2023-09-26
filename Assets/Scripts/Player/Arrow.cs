@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.InputSystem.Processors;
 
 public class Arrow : MonoBehaviour
 {
@@ -59,6 +60,7 @@ public class Arrow : MonoBehaviour
 			{
 				MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
 				monster.GetDamage();
+				Deactive();
 			}
 		}
 	}
