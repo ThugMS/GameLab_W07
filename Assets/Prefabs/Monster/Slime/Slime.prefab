@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 226801634644380422}
   - component: {fileID: 226801634644380423}
   - component: {fileID: 226801634644380420}
-  - component: {fileID: 759660754}
+  - component: {fileID: 2056853432}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_offset: 0
   m_maxHealth: 0
   m_health: 0
-  m_power: 0
+  m_damage: 0
   m_player: {fileID: 0}
   m_targetDirection: {x: 0, y: 0, z: 0}
   m_moveDis: 2
@@ -212,6 +212,7 @@ MonoBehaviour:
   m_canStart: 0
   m_startDelayTime: 0
   m_movePos: {x: 0, y: 0, z: 0}
+  m_isWall: 0
   m_animator: {fileID: 0}
 --- !u!50 &226801634644380423
 Rigidbody2D:
@@ -249,8 +250,8 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.55}
   serializedVersion: 2
-  m_Radius: 0.7
---- !u!95 &759660754
+  m_Radius: 0.5
+--- !u!95 &2056853432
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
