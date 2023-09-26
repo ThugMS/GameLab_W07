@@ -24,6 +24,7 @@ public class Slime : MonsterBase
 
     [Header("RayCheck")]
     public Vector3 m_movePos;
+    [SerializeField] private bool m_isWall = false;
 
     [Header("Animation")]
     [SerializeField] private Animator m_animator;
@@ -35,7 +36,7 @@ public class Slime : MonsterBase
     {
         base.Start();
 
-        m_moveLayerMask = LayerMask.GetMask("Monster", "Wall");
+        m_moveLayerMask = LayerMask.GetMask("Spike", "Wall");
         m_startDelayTime = Random.Range(0.5f, 1.0f);
         TryGetComponent<Animator>(out m_animator);
     }
@@ -66,16 +67,12 @@ public class Slime : MonsterBase
             m_movePos = transform.position + m_targetDirection * m_moveDis;
 
         CheckMonster();
+        CheckWall();
         m_animator.SetTrigger("Move");
-        if(m_targetDirection.x < 0)
-        {
-            transform.localScale = new Vector3(-1,1,1);
-        }
-        else
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-        m_moveTween  = transform.DOMove(m_movePos, m_moveTime).SetEase(m_moveEase);
+        transform.localScale = m_targetDirection.x < 0 ? new Vector3(-1,1,1) : new Vector3(1, 1, 1);
+
+        if(m_isWall==false)
+            m_moveTween  = transform.DOMove(m_movePos, m_moveTime).SetEase(m_moveEase);
         
     }
     #endregion
@@ -101,19 +98,37 @@ public class Slime : MonsterBase
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    GetTargetDirection();
+    //    float dis = (m_movePos - transform.position).magnitude;
+
+    //    RaycastHit2D hit = Physics2D.Raycast(transform.position, m_targetDirection, dis, LayerMask.GetMask("Wall"));
+    //    Debug.DrawRay(transform.position, m_targetDirection, Color.green);
+    //    Debug.Log("is wall1");
+    //    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Wall"))
+    //    {
+    //        m_canMove = false;
+    //        m_moveTween.Kill();
+    //    }
+
+    //}
+
+    private void CheckWall()
     {
         GetTargetDirection();
-        float dis = (m_player.transform.position - transform.position).magnitude;
+        float dis = (m_movePos - transform.position).magnitude;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, m_targetDirection, dis, m_moveLayerMask);
         Debug.DrawRay(transform.position, m_targetDirection, Color.green);
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (hit.transform != null)
         {
-            m_moveTween.Kill();
+            m_isWall = true;
         }
-
+        else
+        {
+            m_isWall = false;
+        }
     }
 
     private void CheckMonster()
