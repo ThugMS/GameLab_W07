@@ -25,6 +25,7 @@ public class PlayerWarp : MonoBehaviour
 	private bool isCalled = false;
 	[SerializeField][ReadOnly] private bool isReady = true;
 	private Vector2 offset = new Vector2(0.7f, 0.2f);
+	private bool readyToWarp = false;
 	#endregion
 
 	#region PublicMethod
@@ -40,17 +41,16 @@ public class PlayerWarp : MonoBehaviour
 	}
 	public void OnActionPerformed()
 	{
-		if (isReady == false)
+		if (isReady == false || warpFeather.activeSelf == false)
 			return;
 
-		if(warpFeather.activeSelf == true)
+		if(readyToWarp == true)
 		{
 			Warp();
 		}
 		else
 		{
 			isCalled = true;
-			warpFeather.SetActive(true);
 		}
 	}
 	public void OnActionCanceled()
@@ -84,7 +84,6 @@ public class PlayerWarp : MonoBehaviour
 	#region PrivateMethod
 	private void Charging()
 	{
-		warpFeather.transform.position = (Vector2)main.transform.position + offset;
 		chargingCurrentDistance = Mathf.Clamp(chargingCurrentDistance + chargingSpeed * Time.deltaTime, 0, chargingMaxDistance);
 		Vector2 targetDirection = (Utils.MousePosition - (Vector2)transform.position).normalized;
 		lr.SetPosition(0, targetDirection * chargingInitDistance);
@@ -101,8 +100,10 @@ public class PlayerWarp : MonoBehaviour
 	}
 	private void Shot()
 	{
+		readyToWarp = true;
 		chargingCurrentDistance = chargingInitDistance;
 		Vector3 targetDirection = (Utils.MousePosition - (Vector2)transform.position).normalized;
+		warpFeather.GetComponent<WarpFeather>().SetStuck(true);
 		warpFeather.transform.position = transform.position + lr.GetPosition(1) - targetDirection * 0.5f;
 		lr.SetPosition(0, Vector2.zero);
 		lr.SetPosition(1, Vector2.zero);
@@ -113,11 +114,15 @@ public class PlayerWarp : MonoBehaviour
 		isReady = false;
 		main.SetPosition(warpFeather.transform.position);
 		warpFeather.SetActive(false);
+		readyToWarp = false;
 		Invoke(nameof(Ready), warpCooldown);
 	}
 	private void Ready()
 	{
 		isReady = true;
+		warpFeather.transform.position = (Vector2)main.transform.position + offset;
+		warpFeather.GetComponent<WarpFeather>().SetStuck(false);
+		warpFeather.SetActive(true);
 	}
 	#endregion
 }
