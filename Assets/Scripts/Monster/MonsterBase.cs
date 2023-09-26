@@ -16,7 +16,7 @@ public abstract class MonsterBase : MonoBehaviour
     [Header("Stat")]
     [SerializeField] protected float m_maxHealth;
     [SerializeField] protected float m_health;
-    [SerializeField] protected float m_power;
+    [SerializeField] protected float m_damage;
 
     [Header("Target")]
     [SerializeField] protected GameObject m_player;
@@ -42,10 +42,9 @@ public abstract class MonsterBase : MonoBehaviour
     /// <summary>
     /// 데미지를 줄 때 인자로 데미지를 넘겨서 사용
     /// </summary>
-    /// <param name="_damage"></param>
-    public void GetDamage(float _damage)
+    public void GetDamage()
     {
-        m_health -= _damage;
+        m_health -= m_damage;
 
         if (m_health <= 0)
             Dead();

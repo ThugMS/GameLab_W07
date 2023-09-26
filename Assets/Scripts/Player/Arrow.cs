@@ -49,6 +49,17 @@ public class Arrow : MonoBehaviour
 			{
 				Stop();
 			}
+
+			if(collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
+			{
+				Deactive();
+			}
+
+			if(collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
+			{
+				MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
+				monster.GetDamage();
+			}
 		}
 	}
 	private void Stop()

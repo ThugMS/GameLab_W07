@@ -10,6 +10,7 @@ public class Reflect : MonoBehaviour
     public int m_arrowLayerMask;
     public CircleCollider2D m_collider;
     public bool m_isThrowProjectTile = false;
+    public GameObject m_effect;
     #endregion
 
     #region PrivateVariables
@@ -17,6 +18,7 @@ public class Reflect : MonoBehaviour
     [SerializeField] private float m_reflectTime;
     [SerializeField] private float m_deceleration = 0.5f;
     [SerializeField] List<Collider2D> m_arrows = new List<Collider2D>();
+    [SerializeField] List<ReflectProjectile> m_projs = new List<ReflectProjectile>();
     [SerializeField] private float m_throwCool = 0.5f;
     [SerializeField] private float m_projectileSpeed = 20f;
     #endregion
@@ -31,9 +33,6 @@ public class Reflect : MonoBehaviour
     private void Update()
     {
         DecreaseSpeed();
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            InitSetting(3f);
     }
 
     public void InitSetting(float _time)
@@ -42,6 +41,7 @@ public class Reflect : MonoBehaviour
         m_collider.enabled = true;
         m_isThrowProjectTile = false;
         m_arrows = new List<Collider2D>();
+        m_effect.SetActive(true);
 
         StartCoroutine(nameof(IE_Reflect));
     }
@@ -50,7 +50,10 @@ public class Reflect : MonoBehaviour
     {
         m_collider.enabled = false;
         m_isThrowProjectTile = true;
+        m_effect.SetActive(false);
 
+        StopAndChangeArrow();
+        
         StartCoroutine(nameof(IE_ThrowProjectile));
     }
     #endregion
@@ -118,6 +121,20 @@ public class Reflect : MonoBehaviour
         }
     }
 
+    private void StopAndChangeArrow()
+    {
+        for (int i = 0; i < m_arrows.Count; i++)
+        {
+            Collider2D iter = m_arrows[i];
+
+            Arrow obj = iter.GetComponent<Arrow>();
+            obj.Deactive();
+
+            GameObject objProj = Instantiate(m_projectile, iter.transform.position, Quaternion.identity, transform);
+            m_projs.Add(objProj.GetComponent<ReflectProjectile>());
+        }
+    }
+
     private IEnumerator IE_Reflect()
     {
         yield return new WaitForSeconds(m_reflectTime);
@@ -127,15 +144,9 @@ public class Reflect : MonoBehaviour
 
     private IEnumerator IE_ThrowProjectile()
     {
-        foreach (var iter in m_arrows)
+        foreach (var iter in m_projs)
         {
-            Vector3 dir = Player.instance.transform.position - transform.position;
-            float angle = Vector2.SignedAngle(Vector3.up, dir);
-            Quaternion rotate = Quaternion.Euler(0, 0, angle);
-            GameObject obj = Instantiate(m_projectile, iter.transform.position, rotate);
-            obj.GetComponent<ReflectProjectile>().InitSetting(m_projectileSpeed);
-
-            iter.gameObject.SetActive(false);
+            iter.InitSetting(m_projectileSpeed);
 
             yield return new WaitForSeconds(m_throwCool);
         }

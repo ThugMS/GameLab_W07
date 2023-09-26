@@ -23,7 +23,11 @@ public class Slime : MonsterBase
     [SerializeField] private float m_startDelayTime;
 
     [Header("RayCheck")]
-    public Vector3 movePos;
+    public Vector3 m_movePos;
+    [SerializeField] private bool m_isWall = false;
+
+    [Header("Animation")]
+    [SerializeField] private Animator m_animator;
 
 
     #endregion
@@ -32,8 +36,9 @@ public class Slime : MonsterBase
     {
         base.Start();
 
-        m_moveLayerMask = LayerMask.GetMask("Monster", "Wall");
-        m_startDelayTime = Random.Range(0.5f, 1.0f);     
+        m_moveLayerMask = LayerMask.GetMask("Spike", "Wall");
+        m_startDelayTime = Random.Range(0.5f, 1.0f);
+        TryGetComponent<Animator>(out m_animator);
     }
 
     private void Update()
@@ -56,13 +61,19 @@ public class Slime : MonsterBase
         GetTargetDirection();
         
         if(m_moveDis > (m_player.transform.position - transform.position).magnitude)
-           movePos = m_player.transform.position;
+           m_movePos = m_player.transform.position;
 
         else
-            movePos = transform.position + m_targetDirection * m_moveDis;
+            m_movePos = transform.position + m_targetDirection * m_moveDis;
 
         CheckMonster();
-        m_moveTween  = transform.DOMove(movePos, m_moveTime).SetEase(m_moveEase);
+        CheckWall();
+        m_animator.SetTrigger("Move");
+        transform.localScale = m_targetDirection.x < 0 ? new Vector3(-1,1,1) : new Vector3(1, 1, 1);
+
+        if(m_isWall==false)
+            m_moveTween  = transform.DOMove(m_movePos, m_moveTime).SetEase(m_moveEase);
+        
     }
     #endregion
 
@@ -87,19 +98,37 @@ public class Slime : MonsterBase
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    GetTargetDirection();
+    //    float dis = (m_movePos - transform.position).magnitude;
+
+    //    RaycastHit2D hit = Physics2D.Raycast(transform.position, m_targetDirection, dis, LayerMask.GetMask("Wall"));
+    //    Debug.DrawRay(transform.position, m_targetDirection, Color.green);
+    //    Debug.Log("is wall1");
+    //    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Wall"))
+    //    {
+    //        m_canMove = false;
+    //        m_moveTween.Kill();
+    //    }
+
+    //}
+
+    private void CheckWall()
     {
         GetTargetDirection();
-        float dis = (m_player.transform.position - transform.position).magnitude;
+        float dis = (m_movePos - transform.position).magnitude;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, m_targetDirection, dis, m_moveLayerMask);
         Debug.DrawRay(transform.position, m_targetDirection, Color.green);
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (hit.transform != null)
         {
-            m_moveTween.Kill();
+            m_isWall = true;
         }
-
+        else
+        {
+            m_isWall = false;
+        }
     }
 
     private void CheckMonster()
@@ -128,18 +157,18 @@ public class Slime : MonsterBase
 
             if(curCollider != null)
             {
-                Vector3 newDirection = movePos - ((this.transform.position + curCollider.transform.position) / 2);
+                Vector3 newDirection = m_movePos - ((this.transform.position + curCollider.transform.position) / 2);
                 Vector3 newMovePos = newDirection + this.transform.position;
-                movePos = newMovePos;
+                m_movePos = newMovePos;
             }
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector2(1.5f,1.5f));
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireCube(transform.position, new Vector2(1.5f,1.5f));
+    //}
 }
     #endregion
 
