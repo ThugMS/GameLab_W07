@@ -109,7 +109,7 @@ Material:
     - _FadeBurnTransition: 0.075
     - _FadeBurnWidth: 0.025
     - _FishEyeUvAmount: 0.35
-    - _FlickerAlpha: 0.3
+    - _FlickerAlpha: 0
     - _FlickerFreq: 2
     - _FlickerPercent: 0.4
     - _GhostBlend: 1
