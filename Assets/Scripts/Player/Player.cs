@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 	private PlayerHp hp;
 	private PlayerDeadEye deadEye;
 	private Body body;
+	private Bow bow;
 
 	private ParticleSystem dustTrail;
 
@@ -60,7 +61,8 @@ public class Player : MonoBehaviour
 		if (isInvincible == true)
 			return;
 		hp.ChangeValue(_amount);
-		body.BodyFlickering(invincibleTime);
+		body.StartFlickering(invincibleTime);
+		bow.StartFlickering(invincibleTime);
 		SetInvincibility(true);
 		Invoke(nameof(RemoveInvincibility), invincibleTime);
 	}
@@ -92,6 +94,7 @@ public class Player : MonoBehaviour
 		TryGetComponent(out deadEye);
 		Initialize();
 		transform.Find("Renderer").TryGetComponent(out body);
+		transform.Find("Bow").TryGetComponent(out bow);
 		transform.Find("Dust Trail").TryGetComponent(out dustTrail);
 	}
 	private void OnEnable()
