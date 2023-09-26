@@ -42,6 +42,11 @@ public class Bow : MonoBehaviour
 	{
 		sr.enabled = b;
 	}
+	public void StartFlickering(float _time)
+	{
+		sr.material.EnableKeyword("FLICKER_ON");
+		Invoke(nameof(EndFlickering), _time);
+	}
 	#endregion
 
 	#region PrivateMethod
@@ -77,6 +82,10 @@ public class Bow : MonoBehaviour
 			}
 		}
 		return null;
+	}
+	private void EndFlickering()
+	{
+		sr.material.DisableKeyword("FLICKER_ON");
 	}
 	#endregion
 }
