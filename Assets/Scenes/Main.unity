@@ -190,8 +190,9 @@ GameObject:
   m_Component:
   - component: {fileID: 159745916}
   - component: {fileID: 159745917}
+  - component: {fileID: 159745918}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159745915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.99, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -225,7 +226,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.52394676, y: 0.09979892}
+  m_Offset: {x: 6.187544, y: 0.099799156}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -236,8 +237,39 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 24.402874, y: 15.670458}
+  m_Size: {x: 26.348957, y: 15.670458}
   m_EdgeRadius: 0
+--- !u!114 &159745918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159745915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 540010db9aef90143aac4fa5c007619f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_spawnTransform: {fileID: 159745916}
+--- !u!1 &336385540 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3639788767347856662, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}
+  m_PrefabInstance: {fileID: 856977841}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &336385543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336385540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae4c9028edb67244ab4c95dd1164d684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_spawnPos: {x: 0, y: 0}
 --- !u!1 &372071436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,7 +1078,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 15529853, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}
       propertyPath: m_ColliderPaths.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 15529853, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_Collider
@@ -1822,7 +1854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3639788765855144816, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3639788765855144819, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1934,7 +1966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7047190881437713439, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}

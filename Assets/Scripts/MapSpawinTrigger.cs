@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class MapSpawinTrigger : MonoBehaviour
 {
+    public static MapSpawinTrigger instance;
+
     #region PublicVariables
-    public Transform m_spawnPointTransform;
-
-
     public Vector2 m_spawnPos;
     #endregion
 
@@ -16,21 +15,28 @@ public class MapSpawinTrigger : MonoBehaviour
     #endregion
 
     #region PublicMethod
-    private void Start()
+    private void Awake()
     {
-        m_spawnPos = new Vector2(m_spawnPointTransform.position.x, m_spawnPointTransform.position.y);
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+
+    public void SetSpawnPos(Transform _tf)
+    {
+        m_spawnPos = new Vector2(_tf.position.x, _tf.position.y);
+    }
+
+    public void SpawnPlayer()
+    {
+        Player.instance.SetPosition(m_spawnPos);
+        Player.instance.Initialize();
     }
     #endregion
 
     #region PrivateMethod
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            Player.instance.SetPosition(m_spawnPos);
-            
-        }
-    }
+
     #endregion
 }
