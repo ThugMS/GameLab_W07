@@ -388,6 +388,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_fire: {fileID: 4042607956519731333}
   m_fireTime: 5
+  m_shadow: {fileID: 3707880657253690926, guid: 3f32b21c5bb2c134f888fc1dcccdc8c4, type: 3}
+  m_returnPos: {x: 0, y: 0, z: 0}
+  m_shadowTime: 0
+  m_shadowCooldown: 0
 --- !u!1 &8031028749415017653
 GameObject:
   m_ObjectHideFlags: 0

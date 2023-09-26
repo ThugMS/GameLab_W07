@@ -35,6 +35,11 @@ public class DefensiveBoss : MonsterBase
     [SerializeField] GameObject m_fire;
     [SerializeField] private float m_fireTime = 5.0f;
 
+    [Header("Shadow")]
+    [SerializeField] private GameObject m_shadow;
+    [SerializeField] private Vector3 m_returnPos;
+    [SerializeField] private float m_shadowTime;
+    [SerializeField] private float m_shadowCooldown;
     #endregion
 
     #region PublicMethod
@@ -59,7 +64,8 @@ public class DefensiveBoss : MonsterBase
         if (Input.GetKeyDown(KeyCode.Alpha1))
             Fire();
 
-        
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            MakeShadow();
     }
 
     protected override void Move()
@@ -110,7 +116,9 @@ public class DefensiveBoss : MonsterBase
                 m_canMove = true;
         }
     }
-
+    /// <summary>
+    /// 방패를 열고 불을 쏨. 불을 쏜 후 방패를 닫음.
+    /// </summary>
     private void Fire()
     {
         ChangeShieldPosition();
@@ -118,7 +126,9 @@ public class DefensiveBoss : MonsterBase
         StartCoroutine(IE_SetActiveFireByTime(false, m_fireTime));
         Invoke(nameof(ChangeShieldPosition), m_fireTime);
     }
-
+    /// <summary>
+    /// 돌진형 기믹
+    /// </summary>
     private void Charge()
     {
         GetTargetDirection();
@@ -132,11 +142,22 @@ public class DefensiveBoss : MonsterBase
         }
     }
 
+    private void MakeShadow()
+    {
+        GameObject shadow = Instantiate(m_shadow, Player.instance.transform.position, Quaternion.identity);
+        shadow.GetComponent<Shadow>().InitSetting(m_shadowTime);
+    }
+    /// <summary>
+    /// 각도에 따라서 방패의 layer 변경
+    /// </summary>
+    /// <returns></returns>
     private int GetSortingOrderByAngle()
     {
         return m_shieldRotate.rotation.eulerAngles.z > 90 && m_shieldRotate.rotation.eulerAngles.z < 270 ? 1 : -1;
     }
-
+    /// <summary>
+    /// 방패 열고 닫는 과정
+    /// </summary>
     private void ChangeShieldPosition()
     {
         int moveSign = 1;
