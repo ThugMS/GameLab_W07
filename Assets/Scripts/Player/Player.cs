@@ -19,9 +19,11 @@ public class Player : MonoBehaviour
 	private PlayerBulletTime bulletTime;
 	private PlayerHp hp;
 	private PlayerDeadEye deadEye;
+	private Body body;
 
 	private ParticleSystem dustTrail;
 
+	[SerializeField] private float invincibleTime = 1f;
 	[SerializeField][ReadOnly] private bool canAct = true;
 	[SerializeField][ReadOnly] private bool isInvincible = false;
 	#endregion
@@ -52,11 +54,15 @@ public class Player : MonoBehaviour
 		transform.position = _position;
 		dustTrail.Play();
 	}
+	[Button]
 	public void Hit(float _amount)
 	{
 		if (isInvincible == true)
 			return;
 		hp.ChangeValue(_amount);
+		body.BodyFlickering(invincibleTime);
+		SetInvincibility(true);
+		Invoke(nameof(RemoveInvincibility), invincibleTime);
 	}
 	public void Die()
 	{
@@ -85,6 +91,7 @@ public class Player : MonoBehaviour
 		TryGetComponent(out hp);
 		TryGetComponent(out deadEye);
 		Initialize();
+		transform.Find("Renderer").TryGetComponent(out body);
 		transform.Find("Dust Trail").TryGetComponent(out dustTrail);
 	}
 	private void OnEnable()
@@ -170,6 +177,10 @@ public class Player : MonoBehaviour
 	private void OnBulletTimeCanceled(InputAction.CallbackContext _context)
 	{
 		bulletTime.OnActionCanceled();
+	}
+	private void RemoveInvincibility()
+	{
+		SetInvincibility(false);
 	}
 	#endregion
 }
