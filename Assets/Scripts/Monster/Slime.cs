@@ -117,9 +117,9 @@ public class Slime : MonsterBase
 
     private void CheckWall()
     {
-        GetTargetDirection();
+        //GetTargetDirection();
         float dis = (m_movePos - transform.position).magnitude;
-        //m_targetDirection = m_movePos - transform.position;
+        m_targetDirection = m_movePos - transform.position;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, m_targetDirection, dis, m_moveLayerMask);
         Debug.DrawRay(transform.position, m_targetDirection, Color.green);
