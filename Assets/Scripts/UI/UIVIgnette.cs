@@ -12,10 +12,6 @@ public class UIVIgnette : MonoBehaviour
 	#region PrivateVariables
 	private Volume volume;
 	private UnityEngine.Rendering.Universal.Vignette vignette;
-
-	private Sequence seq;
-
-	private float currentValue = 0f;
 	#endregion
 
 	#region PublicMethod

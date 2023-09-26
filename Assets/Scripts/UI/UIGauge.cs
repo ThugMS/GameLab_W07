@@ -15,6 +15,11 @@ public class UIGauge : MonoBehaviour
 	#endregion
 
 	#region PublicMethod
+	public void Initialize()
+	{
+		transform.Find("Text").TryGetComponent(out text);
+		transform.Find("Fill").TryGetComponent(out fill);
+	}
 	public void UpdateValue(float percentage01)
 	{
 		text.text = Mathf.Floor(percentage01 * 100).ToString() + "%";
@@ -23,10 +28,5 @@ public class UIGauge : MonoBehaviour
 	#endregion
 
 	#region PrivateMethod
-	private void Awake()
-	{
-		transform.Find("Text").TryGetComponent(out text);
-		transform.Find("Fill").TryGetComponent(out fill);
-	}
 	#endregion
 }

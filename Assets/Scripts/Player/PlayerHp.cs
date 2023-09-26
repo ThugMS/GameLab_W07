@@ -27,7 +27,7 @@ public class PlayerHp : PlayerStat
 	public override void ChangeValue(float _value)
 	{
 		base.ChangeValue(_value);
-		UpdateVignetteByHp();
+		UpdateUIByHp();
 		if(currentValue == minValue)
 		{
 			main.Die();
@@ -36,7 +36,7 @@ public class PlayerHp : PlayerStat
 	#endregion
 
 	#region PrivateMethod
-	private void UpdateVignetteByHp()
+	private void UpdateUIByHp()
 	{
 		switch(currentValue)
 		{

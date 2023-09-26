@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,10 @@ public class UIHeart : MonoBehaviour
 	#endregion
 
 	#region PublicMethod
+	public void Initialize()
+	{
+		TryGetComponent(out anim);
+	}
 	public void Live()
 	{
 		anim.SetBool("die", false);
@@ -23,9 +28,5 @@ public class UIHeart : MonoBehaviour
 	#endregion
 
 	#region PrivateMethod
-	private void Awake()
-	{
-		TryGetComponent(out anim);
-	}
 	#endregion
 }
