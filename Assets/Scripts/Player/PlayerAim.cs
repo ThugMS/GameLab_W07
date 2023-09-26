@@ -44,7 +44,7 @@ public class PlayerAim : MonoBehaviour
 	#region PrivateMethod
 	private void Fire()
 	{
-		cooldownTimer += Time.deltaTime;
+		cooldownTimer += Time.unscaledDeltaTime;
 		if (isCalled == true)
 		{
 			if(cooldownTimer > shotCooldown)

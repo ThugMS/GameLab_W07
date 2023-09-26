@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 	private PlayerAim aim;
 	private PlayerDash dash;
 	private PlayerWarp warp;
+	private PlayerBulletTime bulletTime;
 
 	private ParticleSystem dustTrail;
 
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
 	{
 		dash.ForceQuit();
 		warp.ForceQuit();
+		bulletTime.ForceQuit();
 	}
 	public void SetInvincibility(bool b)
 	{
@@ -67,6 +69,8 @@ public class Player : MonoBehaviour
 		dash.Initialize();
 		TryGetComponent(out warp);
 		warp.Initialize();
+		TryGetComponent(out bulletTime);
+		bulletTime.Initialize();
 		transform.Find("Dust Trail").TryGetComponent(out dustTrail);
 	}
 	private void OnEnable()
@@ -79,6 +83,8 @@ public class Player : MonoBehaviour
 		input.Player.Dash.performed += OnDashPerformed;
 		input.Player.Warp.performed += OnWarpPerformed;
 		input.Player.Warp.canceled += OnWarpCanceled;
+		input.Player.BulletTime.performed += OnBulletTimePerformed;
+		input.Player.BulletTime.canceled += OnBulletTimeCanceled;
 	}
 	private void OnDisable()
 	{
@@ -89,6 +95,8 @@ public class Player : MonoBehaviour
 		input.Player.Dash.performed -= OnDashPerformed;
 		input.Player.Warp.performed -= OnWarpPerformed;
 		input.Player.Warp.canceled -= OnWarpCanceled;
+		input.Player.BulletTime.performed -= OnBulletTimePerformed;
+		input.Player.BulletTime.canceled -= OnBulletTimeCanceled;
 		input.Disable();
 	}
 	private void Update()
@@ -98,6 +106,7 @@ public class Player : MonoBehaviour
 			aim.HandleInput();
 			move.HandleInput();
 			warp.HandleInput();
+			bulletTime.HandleInput();
 		}
 	}
 	private void OnMovePerformed(InputAction.CallbackContext _context)
@@ -137,6 +146,16 @@ public class Player : MonoBehaviour
 		if (canAct == false)
 			return;
 		warp.OnActionCanceled();
+	}
+	private void OnBulletTimePerformed(InputAction.CallbackContext _context)
+	{
+		if (canAct == false)
+			return;
+		bulletTime.OnActionPerformed();
+	}
+	private void OnBulletTimeCanceled(InputAction.CallbackContext _context)
+	{
+		bulletTime.OnActionCanceled();
 	}
 	#endregion
 }

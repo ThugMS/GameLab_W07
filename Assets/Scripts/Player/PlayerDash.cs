@@ -63,7 +63,6 @@ public class PlayerDash : MonoBehaviour
 	#region PrivateMethod
 	private void DashEnd()
 	{
-		Debug.Log("End");
 		rb.velocity = Vector2.zero;
 		main.SetActive(true);
 		main.SetInvincibility(false);
