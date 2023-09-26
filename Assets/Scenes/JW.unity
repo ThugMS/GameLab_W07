@@ -465,7 +465,7 @@ Material:
     - _FadeBurnTransition: 0.075
     - _FadeBurnWidth: 0.025
     - _FishEyeUvAmount: 0.35
-    - _FlickerAlpha: 0.3
+    - _FlickerAlpha: 0
     - _FlickerFreq: 2
     - _FlickerPercent: 0.4
     - _GhostBlend: 1
@@ -588,27 +588,6 @@ Material:
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!1 &687294829 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7677067290474181598, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-  m_PrefabInstance: {fileID: 7677067290834388237}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &687294833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687294829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shaderTypes: 0
-  normalStrength: 5
-  normalSmoothing: 1
-  computingNormal: 0
 --- !u!1 &1204008041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,9 +1162,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7677067290474181592, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 529f3f38b033c4c47974355b724c1b64, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
