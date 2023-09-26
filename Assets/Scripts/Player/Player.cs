@@ -111,12 +111,12 @@ public class Player : MonoBehaviour
 	}
 	private void Update()
 	{
+		bulletTime.HandleInput();
 		if (canAct == true)
 		{
 			aim.HandleInput();
 			move.HandleInput();
 			warp.HandleInput();
-			bulletTime.HandleInput();
 		}
 	}
 	private void OnMovePerformed(InputAction.CallbackContext _context)
