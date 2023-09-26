@@ -53,7 +53,6 @@ public class Arrow : MonoBehaviour
 	}
 	private void Stop()
 	{
-		Debug.Log("stop");
 		speed = 0f;
 	}
 	#endregion

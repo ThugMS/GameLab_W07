@@ -11,11 +11,15 @@ public class PlayerWarp : MonoBehaviour
 	#region PrivateVariables
 	private LineRenderer lr;
 	private Player main;
+	private PlayerDeadEye deadEye;
 	[SerializeField] private GameObject warpFeather;
+	[Header("Charging")]
 	[SerializeField] private float chargingSpeed;
 	[SerializeField] private float chargingInitDistance;
 	[SerializeField] private float chargingMaxDistance;
+	[Header("Extra")]
 	[SerializeField] private float warpCooldown;
+	[SerializeField] private float deadEyeAdditive;
 
 	private float chargingCurrentDistance;
 	private bool isCalled = false;
@@ -29,6 +33,7 @@ public class PlayerWarp : MonoBehaviour
 		isCalled = false;
 		isReady = true;
 		TryGetComponent(out main);
+		TryGetComponent(out deadEye);
 		chargingCurrentDistance = chargingInitDistance;
 		transform.Find("Line").TryGetComponent(out lr);
 		warpFeather.transform.parent = null;
@@ -95,6 +100,7 @@ public class PlayerWarp : MonoBehaviour
 	}
 	private void Warp()
 	{
+		deadEye.Add(deadEyeAdditive);
 		isReady = false;
 		main.SetPosition(warpFeather.transform.position);
 		warpFeather.SetActive(false);

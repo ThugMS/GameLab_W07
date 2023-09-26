@@ -5075,6 +5075,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7677067290173016368}
   - component: {fileID: 7677067290173016397}
+  - component: {fileID: 4465755224391071370}
+  - component: {fileID: 5987710576235150395}
   - component: {fileID: 7677067290173016370}
   - component: {fileID: 7677067290173016371}
   - component: {fileID: 7677067290173016398}
@@ -5125,6 +5127,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canAct: 1
   isInvincible: 0
+--- !u!114 &4465755224391071370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7677067290173016374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a3e441b81bfca4c9db80c88f47a105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minValue: 0
+  maxValue: 3
+  currentValue: 0
+--- !u!114 &5987710576235150395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7677067290173016374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8bfee65e3f5a2449fcbaba6be9bf5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minValue: 0
+  maxValue: 100
+  currentValue: 0
 --- !u!114 &7677067290173016370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5150,7 +5182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1f634b91063cc41bd14a2ffabb8770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
+  deadEyeAdditive: 1.6
 --- !u!114 &7677067290173016398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5184,6 +5217,7 @@ MonoBehaviour:
   chargingInitDistance: 0
   chargingMaxDistance: 30
   warpCooldown: 3
+  deadEyeAdditive: 25
   isReady: 1
 --- !u!114 &3723104682029494140
 MonoBehaviour:
@@ -5198,6 +5232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saturateSpeed: 3
+  deadEyeConsumeMult: 20
 --- !u!50 &7677067290173016399
 Rigidbody2D:
   serializedVersion: 4
