@@ -15,9 +15,16 @@ public class Slime : MonsterBase
     [SerializeField] private float m_moveDis;
     [SerializeField] private bool m_canMove = true;
     [SerializeField] private float m_moveTime = 1.0f;
+    [SerializeField] private float m_delayTime;
     [SerializeField] private float m_moveCooldown;
     [SerializeField] private AnimationCurve m_moveEase;
     [SerializeField] private Tween m_moveTween;
+    [SerializeField] private bool m_canStart = false;
+    [SerializeField] private float m_startDelayTime;
+
+    [Header("RayCheck")]
+    public Vector3 movePos;
+
 
     #endregion
     #region PublicMethod
@@ -25,18 +32,28 @@ public class Slime : MonsterBase
     {
         base.Start();
 
-        m_moveLayerMask = LayerMask.GetMask("Player", "Wall");
+        m_moveLayerMask = LayerMask.GetMask("Monster", "Wall");
+        m_startDelayTime = Random.Range(0.5f, 1.0f);     
     }
 
     private void Update()
     {
-        CheckMove();
+        if (m_canStart == true)
+        {
+            CheckMove();
+        }
+        else
+        {
+            m_startDelayTime -= Time.deltaTime;
+
+            if (m_startDelayTime <= 0)
+                m_canStart = true;
+        }
     }
 
     protected override void Move()
     {   
         GetTargetDirection();
-        Vector3 movePos;
         
         if(m_moveDis > (m_player.transform.position - transform.position).magnitude)
            movePos = m_player.transform.position;
@@ -44,6 +61,7 @@ public class Slime : MonsterBase
         else
             movePos = transform.position + m_targetDirection * m_moveDis;
 
+        CheckMonster();
         m_moveTween  = transform.DOMove(movePos, m_moveTime).SetEase(m_moveEase);
     }
     #endregion
@@ -53,11 +71,11 @@ public class Slime : MonsterBase
     /// 움직일 수 있는지 여부를 체크하고 움직일 수 있다면 움직이게 합니다.
     /// </summary>
     private void CheckMove()
-    {
+    {       
         if (m_canMove)
         {
             Move();
-            m_moveCooldown = m_moveTime;
+            m_moveCooldown = Random.Range(1f, 1.5f);
             m_canMove = false;
         }
         else
@@ -77,11 +95,51 @@ public class Slime : MonsterBase
         RaycastHit2D hit = Physics2D.Raycast(transform.position, m_targetDirection, dis, m_moveLayerMask);
         Debug.DrawRay(transform.position, m_targetDirection, Color.green);
 
-        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             m_moveTween.Kill();
         }
+
     }
 
-    #endregion
+    private void CheckMonster()
+    {
+        float closestDistance = 10f;
+        Vector3 boxCenter = transform.position; // 박스의 중심 위치
+        Vector2 boxSize = new Vector2(2, 2);
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f, LayerMask.GetMask("Monster"));
+        Collider2D curCollider = null;
+
+        if( colliders.Length >0 )
+        {
+            foreach (Collider2D collider in colliders)
+            {
+                if(collider.gameObject != this.gameObject)
+                {
+                    float distance = Vector3.Distance(transform.position, collider.transform.position);
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        curCollider = collider;
+                    }
+                }
+            }
+
+            if(curCollider != null)
+            {
+                Vector3 newDirection = movePos - ((this.transform.position + curCollider.transform.position) / 2);
+                Vector3 newMovePos = newDirection + this.transform.position;
+                movePos = newMovePos;
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector2(1.5f,1.5f));
+    }
 }
+    #endregion
+
