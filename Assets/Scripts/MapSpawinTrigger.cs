@@ -11,9 +11,12 @@ public class MapSpawinTrigger : MonoBehaviour
     #region PublicVariables
     public Vector2 m_spawnPos;
     public int m_stageNum = 0;
+    public TutorialTileTwo tutorialTileTwo;
+    public Transform[] spawnPoint;
     #endregion
 
     #region PrivateVariables
+    private GameObject boss;
     #endregion
 
     #region PublicMethod
@@ -25,6 +28,12 @@ public class MapSpawinTrigger : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        boss = DefensiveBoss.instance.gameObject;
+        boss.SetActive(false);
+    }
+
     public void SetSpawnPos(Transform _tf)
     {
         m_spawnPos = new Vector2(_tf.position.x, _tf.position.y);
@@ -32,21 +41,27 @@ public class MapSpawinTrigger : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        Player.instance.SetPosition(m_spawnPos);
-        Player.instance.Initialize();
 
         switch (m_stageNum)
         {
             case 1:
+                SetSpawnPos(spawnPoint[0]);
                 break;
 
             case 2:
+                SetSpawnPos(spawnPoint[1]);
                 break;
 
             case 3:
+                SetSpawnPos(spawnPoint[2]);
+                boss.SetActive(true);
                 DefensiveBoss.instance.InitSetting();
                 break;
         }
+
+        Player.instance.SetPosition(m_spawnPos);
+        Player.instance.Initialize();
+
     }
     #endregion
 
