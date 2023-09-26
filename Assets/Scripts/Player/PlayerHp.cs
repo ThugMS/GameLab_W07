@@ -23,7 +23,8 @@ public class PlayerHp : PlayerStat
 		vignette.Initialize();
 		GameObject.Find("Canvas/UI Heart Container").TryGetComponent(out hearts);
 		hearts.Initialize();
-	}
+        UpdateUIByHp();
+    }
 	public override void ChangeValue(float _value)
 	{
 		base.ChangeValue(_value);

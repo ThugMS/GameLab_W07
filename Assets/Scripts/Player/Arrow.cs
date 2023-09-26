@@ -33,6 +33,7 @@ public class Arrow : MonoBehaviour
 	}
 	public void Deactive()
 	{
+		CancelInvoke(nameof(Deactive));
 		gameObject.SetActive(false);
 	}
 	#endregion
