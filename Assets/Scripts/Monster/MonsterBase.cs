@@ -63,6 +63,12 @@ public abstract class MonsterBase : MonoBehaviour
     #endregion
 
     #region PrivateMethod
-    
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            Player.instance.Hit(-1);
+        }
+    }
     #endregion
 }

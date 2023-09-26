@@ -27,9 +27,6 @@ public class ReflectProjectile : MonoBehaviour
             Quaternion rotate = Quaternion.Euler(0, 0, angle);
             transform.rotation = rotate;
         }
-        
-
-        
     }
 
     public void InitSetting(float _speed)
@@ -46,9 +43,13 @@ public class ReflectProjectile : MonoBehaviour
             if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 Player.instance.Hit(-1);
+                Destroy(gameObject);
             }
 
-            Destroy(gameObject);
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+            {
+                Destroy(gameObject);
+            }
         }
     }
     #endregion
