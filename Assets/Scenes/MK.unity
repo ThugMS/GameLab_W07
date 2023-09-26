@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &49711679 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 226801634644380421, guid: 608dd86d5513c7d40802bc1e0677754d, type: 3}
-  m_PrefabInstance: {fileID: 226801635361508297}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &73125699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1147,7 +1142,7 @@ PrefabInstance:
     - target: {fileID: 1475257355, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}
       propertyPath: monsterPrefab
       value: 
-      objectReference: {fileID: 49711679}
+      objectReference: {fileID: 226801634644380421, guid: 608dd86d5513c7d40802bc1e0677754d, type: 3}
     - target: {fileID: 3639788767347856648, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}
       propertyPath: m_RootOrder
       value: 1
