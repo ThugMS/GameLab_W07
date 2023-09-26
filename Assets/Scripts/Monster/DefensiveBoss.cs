@@ -14,8 +14,10 @@ public class DefensiveBoss : MonsterBase
 
     [Header("Pattern")]
     public bool m_isAct = false;
+    public bool m_canAct = true;
     public int m_phase = 1;
     public int m_pattern;
+    public float m_actTerm = 5f;
     #endregion
 
     #region PrivateVariables
@@ -66,9 +68,10 @@ public class DefensiveBoss : MonsterBase
 
     public void SelectState()
     {
-        if (m_isAct == true)
+        if (m_canAct == false)
             return;
 
+        m_canAct = false;
         m_isAct = true;
 
         if(m_phase == 1)
@@ -129,6 +132,12 @@ public class DefensiveBoss : MonsterBase
     public void EndAct()
     {
         m_isAct = false;
+        Invoke(nameof(ReadyAct), m_actTerm);
+    }
+
+    public void ReadyAct()
+    {
+        m_canAct = true;
     }
     #endregion
 
