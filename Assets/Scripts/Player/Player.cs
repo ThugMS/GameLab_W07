@@ -185,5 +185,10 @@ public class Player : MonoBehaviour
 	{
 		SetInvincibility(false);
 	}
-	#endregion
+
+    private void OnParticleCollision(GameObject other)
+    {
+		Hit(-1);
+    }
+    #endregion
 }
