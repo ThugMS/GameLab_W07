@@ -43,10 +43,17 @@ public class Arrow : MonoBehaviour
 	}
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		// if stuck stop this.
+		if(collision != null)
+		{
+			if(collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+			{
+				Stop();
+			}
+		}
 	}
 	private void Stop()
 	{
+		Debug.Log("stop");
 		speed = 0f;
 	}
 	#endregion
