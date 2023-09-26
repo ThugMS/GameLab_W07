@@ -96,23 +96,26 @@ public class DefensiveBoss : MonsterBase
         RotateShiled();
         CheckMove();
         SelectState();
+        ChangePhase();
 
         m_sr1.sortingOrder = GetSortingOrderByAngle();
         m_sr2.sortingOrder = GetSortingOrderByAngle();
 
-        //Test
-        if (Input.GetKeyDown(KeyCode.Space))
-            Charge();
+
+
+        ////Test
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    Charge();
             
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            Fire();
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //    Fire();
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            MakeShadow();
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //    MakeShadow();
 
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            ReflectProjectile();
+        //if (Input.GetKeyDown(KeyCode.Alpha4))
+        //    ReflectProjectile();
     }
 
     protected override void Move()
@@ -248,6 +251,12 @@ public class DefensiveBoss : MonsterBase
 
         m_sr1.transform.DOLocalMoveX(m_sr1.transform.localPosition.x - moveSign * m_shieldOpenOffset, m_shieldOpenTime).SetEase(Ease.Linear);
         m_sr2.transform.DOLocalMoveX(m_sr2.transform.localPosition.x + moveSign * m_shieldOpenOffset, m_shieldOpenTime).SetEase(Ease.Linear);
+    }
+
+    private void ChangePhase()
+    {
+        if (m_health <= m_maxHealth / 2 && m_phase == 1)
+            m_phase = 2;
     }
 
     private void CheckPhase1Pattern()
