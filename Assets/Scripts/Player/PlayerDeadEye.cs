@@ -9,12 +9,14 @@ public class PlayerDeadEye : PlayerStat
 
 	#region PrivateVariables
 	private UIGauge deadEyeUIGuage;
+	private float initValue = 30f;
 	#endregion
 
 	#region PublicMethod
 	public override void Initialize()
 	{
 		GameObject.Find("Canvas/UI DeadEye Gauge").TryGetComponent(out deadEyeUIGuage);
+		currentValue = initValue;
 		deadEyeUIGuage.Initialize();
 		deadEyeUIGuage.UpdateValue(currentValue / maxValue);
 	}

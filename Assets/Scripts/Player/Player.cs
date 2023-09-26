@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
 	#endregion
 
 	#region PublicMethod
+	public void Initialize()
+	{
+		hp.Initialize();
+		deadEye.Initialize();
+	}
 	public void SetActive(bool b)
 	{
 		canAct = b;
@@ -78,9 +83,8 @@ public class Player : MonoBehaviour
 		TryGetComponent(out bulletTime);
 		bulletTime.Initialize();
 		TryGetComponent(out hp);
-		hp.Initialize();
 		TryGetComponent(out deadEye);
-		deadEye.Initialize();
+		Initialize();
 		transform.Find("Dust Trail").TryGetComponent(out dustTrail);
 	}
 	private void OnEnable()
