@@ -18,6 +18,9 @@ public class Slime : MonsterBase
     [SerializeField] private float m_moveCooldown;
     [SerializeField] private AnimationCurve m_moveEase;
     [SerializeField] private Tween m_moveTween;
+    [SerializeField] private bool m_canStart = false;
+    [SerializeField] private float m_startDelayTime;
+
 
     #endregion
     #region PublicMethod
@@ -25,12 +28,24 @@ public class Slime : MonsterBase
     {
         base.Start();
 
-        m_moveLayerMask = LayerMask.GetMask("Player", "Wall");
+        m_moveLayerMask = LayerMask.GetMask("Monster", "Wall");
+        m_startDelayTime = Random.Range(0.5f, 1.0f);
+        
     }
 
     private void Update()
     {
-        CheckMove();
+        if (m_canStart == true)
+        {
+            CheckMove();
+        }
+        else
+        {
+            m_startDelayTime -= Time.deltaTime;
+
+            if (m_startDelayTime <= 0)
+                m_canStart = true;
+        }
     }
 
     protected override void Move()
@@ -80,6 +95,10 @@ public class Slime : MonsterBase
         if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             m_moveTween.Kill();
+        }
+        else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            
         }
     }
 
