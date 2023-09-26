@@ -55,6 +55,7 @@ public class MapSpawinTrigger : MonoBehaviour
             case 3:
                 SetSpawnPos(spawnPoint[2]);
                 boss.SetActive(true);
+                DefensiveBoss.instance.gameObject.SetActive(true);
                 DefensiveBoss.instance.InitSetting();
                 break;
         }

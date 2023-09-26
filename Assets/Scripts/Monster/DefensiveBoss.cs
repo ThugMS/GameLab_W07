@@ -116,6 +116,8 @@ public class DefensiveBoss : MonsterBase
         SetHPGUI();
 
         m_spawnPos = transform.position;
+
+        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -174,6 +176,17 @@ public class DefensiveBoss : MonsterBase
         base.GetDamage();
 
         SetHPGUI();
+    }
+
+    private void OnEnable()
+    {
+        
+        BossHpGUI.instance?.ShowGUI();
+    }
+
+    private void OnDisable()
+    {
+        BossHpGUI.instance?.HideGUI();
     }
     #endregion
 
