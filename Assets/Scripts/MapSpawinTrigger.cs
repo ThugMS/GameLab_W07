@@ -28,8 +28,14 @@ public class MapSpawinTrigger : MonoBehaviour
     public void SetSpawnPos(Transform _tf)
     {
         m_spawnPos = new Vector2(_tf.position.x, _tf.position.y);
-        
-        switch(m_stageNum)
+    }
+
+    public void SpawnPlayer()
+    {
+        Player.instance.SetPosition(m_spawnPos);
+        Player.instance.Initialize();
+
+        switch (m_stageNum)
         {
             case 1:
                 break;
@@ -38,14 +44,9 @@ public class MapSpawinTrigger : MonoBehaviour
                 break;
 
             case 3:
+                DefensiveBoss.instance.InitSetting();
                 break;
         }
-    }
-
-    public void SpawnPlayer()
-    {
-        Player.instance.SetPosition(m_spawnPos);
-        Player.instance.Initialize();
     }
     #endregion
 
