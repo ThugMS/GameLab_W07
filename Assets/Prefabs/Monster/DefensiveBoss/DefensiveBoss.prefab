@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 8031028747970662571}
   - component: {fileID: 8031028747970662573}
   - component: {fileID: 8031028747970662570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shield1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8031028747970662568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 1, z: 0}
+  m_LocalPosition: {x: -0.5, y: 1.29, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 8031028749264378300}
   - component: {fileID: 8031028749264378303}
   - component: {fileID: 8031028749264378302}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DefensiveBoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,10 +429,9 @@ MonoBehaviour:
   m_offset: 1
   m_maxHealth: 100
   m_health: 100
-  m_power: 0
+  m_damage: 1
   m_player: {fileID: 0}
   m_targetDirection: {x: 0, y: 0, z: 0}
-  instance: {fileID: 0}
   m_shiledRotation: {fileID: 8031028748983170917}
   m_isShieldOpen: 0
   m_isAct: 0
@@ -519,7 +518,7 @@ GameObject:
   - component: {fileID: 8031028749415017652}
   - component: {fileID: 8031028749415017654}
   - component: {fileID: 8031028749415017655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shield2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +533,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8031028749415017653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1, z: 0}
+  m_LocalPosition: {x: 0.5, y: 1.29, z: 0}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
