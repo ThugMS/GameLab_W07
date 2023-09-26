@@ -476,7 +476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7677067290173016368, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.1
+      value: 5.48
       objectReference: {fileID: 0}
     - target: {fileID: 7677067290173016368, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -771,6 +771,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4904339348186983735, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
+      propertyPath: m_throwCool
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4904339348186983735, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
+      propertyPath: m_projectile
+      value: 
+      objectReference: {fileID: 903037930949996263, guid: 90595b4ce92e89e48982c6dcad9a7638, type: 3}
+    - target: {fileID: 4904339348186983735, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
+      propertyPath: m_reflectTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8031028749264378299, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -818,10 +830,6 @@ PrefabInstance:
     - target: {fileID: 8031028749264378301, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8031028749264378302, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
-      propertyPath: m_shadowTime
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}

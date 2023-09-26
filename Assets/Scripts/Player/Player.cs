@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,9 +15,13 @@ public class Player : MonoBehaviour
 	private PlayerMove move;
 	private PlayerAim aim;
 	private PlayerDash dash;
+	private PlayerWarp warp;
+	private PlayerBulletTime bulletTime;
 
-	private bool canAct = true;
-	private bool isInvincible = false;
+	private ParticleSystem dustTrail;
+
+	[SerializeField][ReadOnly] private bool canAct = true;
+	[SerializeField][ReadOnly] private bool isInvincible = false;
 	#endregion
 
 	#region PublicMethod
@@ -24,14 +29,27 @@ public class Player : MonoBehaviour
 	{
 		canAct = b;
 	}
+	public void ForceQuit()
+	{
+		dash.ForceQuit();
+		warp.ForceQuit();
+		bulletTime.ForceQuit();
+	}
 	public void SetInvincibility(bool b)
 	{
 		isInvincible = b;
+	}
+	public void SetPosition(Vector2 _position)
+	{
+		dustTrail.Stop();
+		transform.position = _position;
+		dustTrail.Play();
 	}
 	public void Hit()
 	{
 		if (isInvincible == true)
 			return;
+		// Action
 	}
 	#endregion
 
@@ -49,6 +67,11 @@ public class Player : MonoBehaviour
 		move.Initialize();
 		TryGetComponent(out dash);
 		dash.Initialize();
+		TryGetComponent(out warp);
+		warp.Initialize();
+		TryGetComponent(out bulletTime);
+		bulletTime.Initialize();
+		transform.Find("Dust Trail").TryGetComponent(out dustTrail);
 	}
 	private void OnEnable()
 	{
@@ -58,6 +81,10 @@ public class Player : MonoBehaviour
 		input.Player.Attack.performed += OnAttackPerformed;
 		input.Player.Attack.canceled += OnAttackCanceled;
 		input.Player.Dash.performed += OnDashPerformed;
+		input.Player.Warp.performed += OnWarpPerformed;
+		input.Player.Warp.canceled += OnWarpCanceled;
+		input.Player.BulletTime.performed += OnBulletTimePerformed;
+		input.Player.BulletTime.canceled += OnBulletTimeCanceled;
 	}
 	private void OnDisable()
 	{
@@ -66,6 +93,10 @@ public class Player : MonoBehaviour
 		input.Player.Attack.performed -= OnAttackPerformed;
 		input.Player.Attack.canceled -= OnAttackCanceled;
 		input.Player.Dash.performed -= OnDashPerformed;
+		input.Player.Warp.performed -= OnWarpPerformed;
+		input.Player.Warp.canceled -= OnWarpCanceled;
+		input.Player.BulletTime.performed -= OnBulletTimePerformed;
+		input.Player.BulletTime.canceled -= OnBulletTimeCanceled;
 		input.Disable();
 	}
 	private void Update()
@@ -74,6 +105,8 @@ public class Player : MonoBehaviour
 		{
 			aim.HandleInput();
 			move.HandleInput();
+			warp.HandleInput();
+			bulletTime.HandleInput();
 		}
 	}
 	private void OnMovePerformed(InputAction.CallbackContext _context)
@@ -101,6 +134,28 @@ public class Player : MonoBehaviour
 		if (canAct == false)
 			return;
 		dash.Dash();
+	}
+	private void OnWarpPerformed(InputAction.CallbackContext _context)
+	{
+		if (canAct == false)
+			return;
+		warp.OnActionPerformed();
+	}
+	private void OnWarpCanceled(InputAction.CallbackContext _context)
+	{
+		if (canAct == false)
+			return;
+		warp.OnActionCanceled();
+	}
+	private void OnBulletTimePerformed(InputAction.CallbackContext _context)
+	{
+		if (canAct == false)
+			return;
+		bulletTime.OnActionPerformed();
+	}
+	private void OnBulletTimeCanceled(InputAction.CallbackContext _context)
+	{
+		bulletTime.OnActionCanceled();
 	}
 	#endregion
 }
