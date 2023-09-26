@@ -52,7 +52,7 @@ public class PlayerBulletTime : MonoBehaviour
 	{
 		if(isCalled == true)
 		{
-			deadEye.Add(-deadEyeConsumeMult * Time.unscaledDeltaTime);
+			deadEye.ChangeValue(-deadEyeConsumeMult * Time.unscaledDeltaTime);
 			if(deadEye.Value <= 0)
 			{
 				ForceQuit();

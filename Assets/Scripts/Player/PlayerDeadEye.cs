@@ -14,12 +14,12 @@ public class PlayerDeadEye : PlayerStat
 	#region PublicMethod
 	public override void Initialize()
 	{
-		GameObject.Find("Canvas/UIDeadEyeGauge").TryGetComponent(out deadEyeUIGuage);
+		GameObject.Find("Canvas/UI DeadEye Gauge").TryGetComponent(out deadEyeUIGuage);
 		deadEyeUIGuage.UpdateValue(currentValue / maxValue);
 	}
-	public override void Add(float _value)
+	public override void ChangeValue(float _value)
 	{
-		base.Add(_value);
+		base.ChangeValue(_value);
 		deadEyeUIGuage.UpdateValue(currentValue / maxValue);
 	}
 	#endregion

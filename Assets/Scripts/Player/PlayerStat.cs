@@ -17,7 +17,8 @@ public abstract class PlayerStat : MonoBehaviour
 
 	#region PublicMethod
 	public abstract void Initialize();
-	public virtual void Add(float _value)
+	[Button]
+	public virtual void ChangeValue(float _value)
 	{
 		currentValue = Mathf.Clamp(currentValue + _value, minValue, maxValue);
 	}

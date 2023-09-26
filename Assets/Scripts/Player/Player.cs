@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 	{
 		if (isInvincible == true)
 			return;
-		hp.Add(_amount);
+		hp.ChangeValue(_amount);
 	}
 	public void Die()
 	{

@@ -71,6 +71,13 @@ public class PlayerWarp : MonoBehaviour
 	public void ForceQuit()
 	{
 		chargingCurrentDistance = chargingInitDistance;
+		if(isCalled == true)
+		{
+			warpFeather.SetActive(false);
+			isCalled = false;
+		}
+		lr.SetPosition(0, Vector2.zero);
+		lr.SetPosition(1, Vector2.zero);
 	}
 	#endregion
 
@@ -95,12 +102,14 @@ public class PlayerWarp : MonoBehaviour
 	private void Shot()
 	{
 		chargingCurrentDistance = chargingInitDistance;
-		warpFeather.transform.position = transform.position + lr.GetPosition(1);
+		Vector3 targetDirection = (Utils.MousePosition - (Vector2)transform.position).normalized;
+		warpFeather.transform.position = transform.position + lr.GetPosition(1) - targetDirection * 0.5f;
+		lr.SetPosition(0, Vector2.zero);
 		lr.SetPosition(1, Vector2.zero);
 	}
 	private void Warp()
 	{
-		deadEye.Add(deadEyeAdditive);
+		deadEye.ChangeValue(deadEyeAdditive);
 		isReady = false;
 		main.SetPosition(warpFeather.transform.position);
 		warpFeather.SetActive(false);
