@@ -10,12 +10,14 @@ public abstract class MonsterBase : MonoBehaviour
     public Rigidbody2D m_rigidbody;
     public Collider2D m_collider;
     public float m_offset;
+
+    public float m_maxHealth;
+    public float m_health;
     #endregion
 
     #region PrivateVariables
     [Header("Stat")]
-    [SerializeField] protected float m_maxHealth;
-    [SerializeField] protected float m_health;
+    
     [SerializeField] protected float m_damage;
 
     [Header("Target")]

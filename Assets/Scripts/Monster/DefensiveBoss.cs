@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DefensiveBoss : MonsterBase
 {
-    public DefensiveBoss instance;
+    public static DefensiveBoss instance;
 
     #region PublicVariables
     public Transform m_shiledRotation;
