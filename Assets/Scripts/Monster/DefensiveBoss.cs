@@ -40,6 +40,10 @@ public class DefensiveBoss : MonsterBase
     [SerializeField] private Vector3 m_returnPos;
     [SerializeField] private float m_shadowTime;
     [SerializeField] private float m_shadowCooldown;
+
+    [Header("Reflect")]
+    [SerializeField] private GameObject m_reflectRegion;
+    [SerializeField] private float m_reflectTime = 3f;
     #endregion
 
     #region PublicMethod

@@ -19,10 +19,14 @@ public class Arrow : MonoBehaviour
 	{
 		transform.eulerAngles = _rotation;
 		//TEMP
-		Invoke(nameof(Deactive), 5f);
+		Invoke(nameof(Deactive), 10f);
 		//TEMPEND
 	}
-	public void SetSpeed(float _speed)
+    public float GetSpeed()
+    {
+        return speed;
+    }
+    public void SetSpeed(float _speed)
 	{
 		speed = _speed;
 	}
