@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapSpawinTrigger : MonoBehaviour
@@ -9,6 +10,7 @@ public class MapSpawinTrigger : MonoBehaviour
 
     #region PublicVariables
     public Vector2 m_spawnPos;
+    public int m_stageNum = 0;
     #endregion
 
     #region PrivateVariables
@@ -26,6 +28,18 @@ public class MapSpawinTrigger : MonoBehaviour
     public void SetSpawnPos(Transform _tf)
     {
         m_spawnPos = new Vector2(_tf.position.x, _tf.position.y);
+        
+        switch(m_stageNum)
+        {
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+        }
     }
 
     public void SpawnPlayer()
