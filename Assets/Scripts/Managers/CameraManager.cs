@@ -9,6 +9,9 @@ public class CameraManager : MonoBehaviour
 	#endregion
 
 	#region PrivateVariables
+	[SerializeField] private float camSpeed;
+	[SerializeField] private float maxMouseMult;
+	[SerializeField] private float maxMouseMultUpdateDistance;
 	#endregion
 
 	#region PublicMethod
@@ -21,6 +24,18 @@ public class CameraManager : MonoBehaviour
 		{
 			instance = this;
 		}
+	}
+	private void Update()
+	{
+		FollowPlayer();
+	}
+	private void FollowPlayer()
+	{
+		Vector2 targetPosition = Player.instance.transform.position;
+		float mouseMult = Mathf.Lerp(0, maxMouseMult, Vector2.Distance(Player.instance.transform.position, Utils.MousePosition) / maxMouseMultUpdateDistance);
+		Vector2 mouseDirection = (Utils.MousePosition - (Vector2)Player.instance.transform.position).normalized;
+		targetPosition += mouseDirection * mouseMult;
+		transform.position = Vector2.Lerp(transform.position, targetPosition, camSpeed * Time.deltaTime);
 	}
 	#endregion
 }
