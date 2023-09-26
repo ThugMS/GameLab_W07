@@ -31,6 +31,7 @@ public class PlayerWarp : MonoBehaviour
 		TryGetComponent(out main);
 		chargingCurrentDistance = chargingInitDistance;
 		transform.Find("Line").TryGetComponent(out lr);
+		warpFeather.transform.parent = null;
 	}
 	public void OnActionPerformed()
 	{
