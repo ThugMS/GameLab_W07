@@ -11,10 +11,10 @@ public class PlayerBulletTime : MonoBehaviour
 
 	#region PrivateVariables
 	private RippleEffect rippleEffect;
-	[SerializeField] private Volume volume;
+	private Volume volume;
 	private UnityEngine.Rendering.Universal.ColorAdjustments colorAdjustments;
 
-	[SerializeField][ReadOnly] private float currentSaturation;
+	private float currentSaturation;
 	private const float SATURATION_IDLE = 0f;
 	private const float SATURATION_GREY = -100f;
 	[SerializeField] private float saturateSpeed = 1;
@@ -26,6 +26,7 @@ public class PlayerBulletTime : MonoBehaviour
 	public void Initialize()
 	{
 		transform.Find("Ripple Effect").TryGetComponent(out rippleEffect);
+		GameObject.Find("Global Volume").TryGetComponent(out volume);
 		volume.profile.TryGet(out colorAdjustments);
 	}
 	public void OnActionPerformed()

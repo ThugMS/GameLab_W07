@@ -30,6 +30,10 @@ public class RippleEffect : MonoBehaviour
 		Initialize();
 		EffectStart();
 	}
+	private void OnDisable()
+	{
+		sr.material.DOKill();
+	}
 	private void EffectStart()
 	{
 		sr.material.DOFloat(waveDistanceEnd, "_WaveDistanceFromCenter", duration).SetUpdate(true);
