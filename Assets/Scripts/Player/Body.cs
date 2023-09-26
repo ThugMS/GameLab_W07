@@ -43,7 +43,7 @@ public class Body : MonoBehaviour
 			sr.sprite = sprites[(int)EBodyDirection.up];
 		}
 	}
-	public void BodyFlickering(float _time)
+	public void StartFlickering(float _time)
 	{
 		sr.material.EnableKeyword("FLICKER_ON");
 		Invoke(nameof(EndFlickering), _time);
