@@ -12,7 +12,6 @@ public class Bow : MonoBehaviour
 	private Animator anim;
 	[SerializeField] private GameObject normalArrowPrefab;
 	private List<GameObject> arrowList = new List<GameObject>();
-	[SerializeField] private GameObject warpArrowPrefab;
 	[SerializeField] private float angularSpeed = 12f;
 	[SerializeField] private float shotSpeed = 10f;
 	#endregion
@@ -34,7 +33,7 @@ public class Bow : MonoBehaviour
 	public void Fire()
 	{
 		anim.SetTrigger("shot");
-		Arrow current = InstantiateNormalArrow().GetComponent<Arrow>();
+		Arrow current = InstantiateArrow().GetComponent<Arrow>();
 		current.transform.position = transform.position;
 		current.SetDirection(transform.eulerAngles);
 		current.SetSpeed(shotSpeed);
@@ -54,7 +53,7 @@ public class Bow : MonoBehaviour
 	{
 		return transform.rotation.eulerAngles.z > 180 && transform.rotation.eulerAngles.z < 360 ? true : false;
 	}
-	private GameObject InstantiateNormalArrow()
+	private GameObject InstantiateArrow()
 	{
 		GameObject current = GetSurplusArrow();
 		if (current == null)

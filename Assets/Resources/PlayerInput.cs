@@ -62,6 +62,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BulletTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ee809b2-ccd9-4074-a070-55d5b992f84f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,6 +183,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d7c28f6-39db-42ee-a36c-370124ea6b3e"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""BulletTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -247,6 +267,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Warp = m_Player.FindAction("Warp", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_BulletTime = m_Player.FindAction("BulletTime", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -312,6 +333,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Warp;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_BulletTime;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -320,6 +342,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Warp => m_Wrapper.m_Player_Warp;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @BulletTime => m_Wrapper.m_Player_BulletTime;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -341,6 +364,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @BulletTime.started += instance.OnBulletTime;
+            @BulletTime.performed += instance.OnBulletTime;
+            @BulletTime.canceled += instance.OnBulletTime;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -357,6 +383,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @BulletTime.started -= instance.OnBulletTime;
+            @BulletTime.performed -= instance.OnBulletTime;
+            @BulletTime.canceled -= instance.OnBulletTime;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -425,5 +454,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnWarp(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnBulletTime(InputAction.CallbackContext context);
     }
 }
