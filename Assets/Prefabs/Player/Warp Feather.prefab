@@ -4928,6 +4928,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8785504141618171452}
+  - component: {fileID: 51612232549578205}
   - component: {fileID: 8785504141618171453}
   m_Layer: 0
   m_Name: Warp Feather
@@ -4953,6 +4954,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &51612232549578205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785504141618171455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d9a95dfd8a0c440ac04272e4bbc082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceThreshold: 1
+  speed: 1.6
 --- !u!210 &8785504141618171453
 SortingGroup:
   m_ObjectHideFlags: 0
