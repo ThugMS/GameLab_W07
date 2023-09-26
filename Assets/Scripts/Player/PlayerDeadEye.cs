@@ -15,6 +15,7 @@ public class PlayerDeadEye : PlayerStat
 	public override void Initialize()
 	{
 		GameObject.Find("Canvas/UI DeadEye Gauge").TryGetComponent(out deadEyeUIGuage);
+		deadEyeUIGuage.Initialize();
 		deadEyeUIGuage.UpdateValue(currentValue / maxValue);
 	}
 	public override void ChangeValue(float _value)
