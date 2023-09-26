@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public abstract class MonsterBase : MonoBehaviour
 
     #region PrivateVariables
     [Header("Stat")]
+    [SerializeField] protected float m_maxHealth;
     [SerializeField] protected float m_health;
     [SerializeField] protected float m_power;
 
