@@ -10,7 +10,7 @@ public class DefensiveBoss : MonsterBase
     #region PublicVariables
     public Transform m_shiledRotation;
     public bool m_isShieldOpen = false;
-
+    public Vector3 m_spawnPos;
     [Header("Pattern")]
     public bool m_isAct = false;
     public bool m_canAct = true;
@@ -65,6 +65,21 @@ public class DefensiveBoss : MonsterBase
         }    
     }
 
+    public void InitSetting()
+    {
+        m_health = m_maxHealth;
+        SetHPGUI();
+
+        m_canAct = false;
+        Invoke(nameof(ReadyAct), 5.0f);
+        m_isAct = false;
+        m_canMove = true;
+
+        m_phase = 1;
+
+        transform.position = m_spawnPos;
+    }
+
     public void SelectState()
     {
         if (m_canAct == false)
@@ -91,11 +106,13 @@ public class DefensiveBoss : MonsterBase
         BossHpGUI.instance.ShowGUI();
         BossHpGUI.instance.SetMaxHp((int) m_maxHealth);
         SetHPGUI();
+
+        m_spawnPos = transform.position;
     }
 
     private void Update()
     {
-        RotateShiled();
+        
         CheckMove();
         SelectState();
         ChangePhase();
@@ -175,6 +192,7 @@ public class DefensiveBoss : MonsterBase
         if (m_canMove)
         {
             Move();
+            
             m_moveCooldown = m_moveTime;
             m_canMove = false;
         }
@@ -183,6 +201,7 @@ public class DefensiveBoss : MonsterBase
             if (m_isAct == true)
                 return;
 
+            RotateShiled();
             m_moveCooldown -= Time.deltaTime;
 
             if (m_moveCooldown <= 0)
