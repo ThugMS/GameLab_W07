@@ -440,7 +440,7 @@ MonoBehaviour:
   m_phase: 1
   m_pattern: 0
   m_actTerm: 5
-  m_turnSpeed: 0.01
+  m_turnSpeed: 0.05
   m_shieldRotate: {fileID: 8031028748983170917}
   m_sr1: {fileID: 8031028747970662573}
   m_sr2: {fileID: 8031028749415017654}
