@@ -30,10 +30,12 @@ public class Player : MonoBehaviour
 	#endregion
 
 	#region PublicMethod
+	[Button]
 	public void Initialize()
 	{
 		hp.Initialize();
 		deadEye.Initialize();
+		ForceQuit();
 	}
 	public void SetActive(bool b)
 	{
