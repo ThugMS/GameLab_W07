@@ -1436,6 +1436,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1650001136}
     m_Modifications:
+    - target: {fileID: 9137729107069042022, guid: 12336fd77de83f14bb8b995aad42c0e3, type: 3}
+      propertyPath: m_text
+      value: "\uBC29 \uD328 \uC7C1 \uC774"
+      objectReference: {fileID: 0}
     - target: {fileID: 9137729107592481561, guid: 12336fd77de83f14bb8b995aad42c0e3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1769,7 +1773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8031028749264378302, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
       propertyPath: m_turnSpeed
-      value: 0.01
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8031028749264378303, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
       propertyPath: m_Enabled
