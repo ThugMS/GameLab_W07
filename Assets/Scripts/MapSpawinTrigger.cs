@@ -13,6 +13,7 @@ public class MapSpawinTrigger : MonoBehaviour
     public int m_stageNum = 0;
     public TutorialTileTwo tutorialTileTwo;
     public Transform[] spawnPoint;
+    public GameObject m_bossPrefab;
     #endregion
 
     #region PrivateVariables
@@ -55,10 +56,20 @@ public class MapSpawinTrigger : MonoBehaviour
 
             case 3:
                 SetSpawnPos(spawnPoint[2]);
-                boss.SetActive(true);
+
+                Vector3 bossPos = spawnPoint[2].position + new Vector3(0, 5, 0);
+
+                Destroy(boss);
+
+                GameObject obj = Instantiate(m_bossPrefab, bossPos, Quaternion.identity);
+                obj.GetComponent<DefensiveBoss>().InitSetting();
+                boss = obj;
                 tutorialTileTwo.SpawnMonsters(10, 2);
-                DefensiveBoss.instance.gameObject.SetActive(true);
-                DefensiveBoss.instance.InitSetting();
+
+                //boss.SetActive(true);
+                //boss.GetComponent<DefensiveBoss>().InitSetting();
+                //DefensiveBoss.instance.gameObject.SetActive(true);
+                //DefensiveBoss.instance.InitSetting();
                 break;
         }
 

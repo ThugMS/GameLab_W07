@@ -434,12 +434,13 @@ MonoBehaviour:
   m_targetDirection: {x: 0, y: 0, z: 0}
   m_shiledRotation: {fileID: 8031028748983170917}
   m_isShieldOpen: 0
+  m_spawnPos: {x: 0, y: 0, z: 0}
   m_isAct: 0
   m_canAct: 1
   m_phase: 1
   m_pattern: 0
   m_actTerm: 5
-  m_turnSpeed: 0.002
+  m_turnSpeed: 0.05
   m_shieldRotate: {fileID: 8031028748983170917}
   m_sr1: {fileID: 8031028747970662573}
   m_sr2: {fileID: 8031028749415017654}
