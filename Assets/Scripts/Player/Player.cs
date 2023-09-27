@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 	private PlayerInput input;
 	private PlayerMove move;
 	private PlayerAim aim;
-	private PlayerDash dash;
+	// private PlayerDash dash;
 	private PlayerWarp warp;
 	private PlayerBulletTime bulletTime;
 	private PlayerHp hp;
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 	}
 	public void ForceQuit()
 	{
-		dash.ForceQuit();
+		// dash.ForceQuit();
 		warp.ForceQuit();
 		bulletTime.ForceQuit();
 	}
@@ -86,8 +86,8 @@ public class Player : MonoBehaviour
 		aim.Initialize();
 		TryGetComponent(out move);
 		move.Initialize();
-		TryGetComponent(out dash);
-		dash.Initialize();
+		// TryGetComponent(out dash);
+		// dash.Initialize();
 		TryGetComponent(out warp);
 		warp.Initialize();
 		TryGetComponent(out bulletTime);
@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
 		input.Player.Move.canceled += OnMoveCanceled;
 		input.Player.Attack.performed += OnAttackPerformed;
 		input.Player.Attack.canceled += OnAttackCanceled;
-		input.Player.Dash.performed += OnDashPerformed;
+		// input.Player.Dash.performed += OnDashPerformed;
 		input.Player.Warp.performed += OnWarpPerformed;
 		input.Player.Warp.canceled += OnWarpCanceled;
 		input.Player.BulletTime.performed += OnBulletTimePerformed;
@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
 		input.Player.Move.canceled -= OnMoveCanceled;
 		input.Player.Attack.performed -= OnAttackPerformed;
 		input.Player.Attack.canceled -= OnAttackCanceled;
-		input.Player.Dash.performed -= OnDashPerformed;
+		// input.Player.Dash.performed -= OnDashPerformed;
 		input.Player.Warp.performed -= OnWarpPerformed;
 		input.Player.Warp.canceled -= OnWarpCanceled;
 		input.Player.BulletTime.performed -= OnBulletTimePerformed;
@@ -155,12 +155,12 @@ public class Player : MonoBehaviour
 	{
 		aim.HoldFire();
 	}
-	private void OnDashPerformed(InputAction.CallbackContext _context)
+	/*private void OnDashPerformed(InputAction.CallbackContext _context)
 	{
 		if (canAct == false)
 			return;
 		dash.Dash();
-	}
+	}*/
 	private void OnWarpPerformed(InputAction.CallbackContext _context)
 	{
 		if (canAct == false)
