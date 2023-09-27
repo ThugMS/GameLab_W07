@@ -131,17 +131,18 @@ public class DefensiveBoss : MonsterBase
 
 
         //Test
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            Charge();
+        
+    //    if (Input.GetKeyDown(KeyCode.Alpha3))
+    //        Charge();
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            Fire();
+    //    if (Input.GetKeyDown(KeyCode.Alpha1))
+    //        Fire();
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            MakeShadow();
+    //    if (Input.GetKeyDown(KeyCode.Alpha2))
+    //        MakeShadow();
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            ReflectProjectile();
+    //    if (Input.GetKeyDown(KeyCode.Alpha4))
+    //        ReflectProjectile();
     }
 
     protected override void Move()
