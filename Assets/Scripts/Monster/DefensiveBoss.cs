@@ -2,7 +2,6 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 using UnityEngine.SceneManagement;
 
 public class DefensiveBoss : MonsterBase
@@ -84,8 +83,6 @@ public class DefensiveBoss : MonsterBase
         m_sr2.transform.localPosition = new Vector3(0.5f, 1.29f, 0);
 
         m_phase = 1;
-
-        transform.position = m_spawnPos;
     }
 
     public void SelectState()
@@ -117,7 +114,7 @@ public class DefensiveBoss : MonsterBase
 
         m_spawnPos = transform.position;
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     private void Update()
@@ -125,6 +122,7 @@ public class DefensiveBoss : MonsterBase
         
         CheckMove();
         SelectState();
+        
         ChangePhase();
 
         m_sr1.sortingOrder = GetSortingOrderByAngle();
@@ -229,6 +227,7 @@ public class DefensiveBoss : MonsterBase
                 return;
 
             RotateShiled();
+
             m_moveCooldown -= Time.deltaTime;
 
             if (m_moveCooldown <= 0)
