@@ -9,7 +9,7 @@ public class PlayerDeadEye : PlayerStat
 
 	#region PrivateVariables
 	private UIGauge deadEyeUIGuage;
-	private float initValue = 30f;
+	private float initValue = 50f;
 	#endregion
 
 	#region PublicMethod
