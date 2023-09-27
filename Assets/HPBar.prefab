@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBCF4\uC2A4"
+  m_text: "\uBC29\uD328\uC7C1\uC774"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 156af6eb2f72093438c7d2bd07194e5b, type: 2}
   m_sharedMaterial: {fileID: 1635623305970732959, guid: 156af6eb2f72093438c7d2bd07194e5b, type: 2}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 50
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
