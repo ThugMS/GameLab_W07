@@ -31,6 +31,7 @@ public class PlayerWarp : MonoBehaviour
 	#region PublicMethod
 	public void Initialize()
 	{
+		readyToWarp = false;
 		isCalled = false;
 		isReady = true;
 		TryGetComponent(out main);
@@ -71,11 +72,12 @@ public class PlayerWarp : MonoBehaviour
 	public void ForceQuit()
 	{
 		chargingCurrentDistance = chargingInitDistance;
-		if(isCalled == true)
+		if(readyToWarp == true)
 		{
-			warpFeather.SetActive(false);
-			isCalled = false;
+			readyToWarp = false;
+			warpFeather.GetComponent<WarpFeather>().SetStuck(false);
 		}
+		isCalled = false;
 		lr.SetPosition(0, Vector2.zero);
 		lr.SetPosition(1, Vector2.zero);
 	}
