@@ -8,7 +8,6 @@ public class TutorialTileTwo : MonoBehaviour
     #region PublicVariables
     #endregion
     #region PrivateVariables
-    [SerializeField] private int numberOfMonsters = 20;
     [SerializeField] private GameObject monsterPrefab;
     [SerializeField] private float spawnRadius=8f;
     [SerializeField] private bool isCleaningForRestart=false;
@@ -35,7 +34,6 @@ public class TutorialTileTwo : MonoBehaviour
         if (monsterParents.gameObject.transform.childCount == 0 && !isCleaningForRestart)
         {
             // 다음 스테이지로 이동
-            Debug.Log("lext stage");
             MapSpawinTrigger.instance.m_stageNum += 1;
             MapSpawinTrigger.instance.SpawnPlayer();
             isCleaningForRestart = true;
@@ -43,14 +41,14 @@ public class TutorialTileTwo : MonoBehaviour
     }
 
     [Button]
-    public void SpawnMonsters()
+    public void SpawnMonsters(int numberOfMonsters, int stage)
     {
         CleanMonsters();
         for (int i = 0; i<numberOfMonsters; i++)
         {
             //float angle = Random.Range(0f, 360f);
             float angle = 360f / numberOfMonsters * (i + 1);
-            Vector2 spawnPosition = Player.instance.transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * spawnRadius, Mathf.Sin(angle * Mathf.Deg2Rad) * spawnRadius, 0f);
+            Vector2 spawnPosition = MapSpawinTrigger.instance.spawnPoint[stage].position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * spawnRadius, Mathf.Sin(angle * Mathf.Deg2Rad) * spawnRadius, 0f);
 
           
             GameObject monster = Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
@@ -65,7 +63,6 @@ public class TutorialTileTwo : MonoBehaviour
     [Button]
     public void CleanMonsters()
     {
-        Debug.Log("CleanMonsters");
         isCleaningForRestart = true;
         for (int i = monsters.Count - 1; i >= 0; i--)
         {

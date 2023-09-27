@@ -49,12 +49,14 @@ public class MapSpawinTrigger : MonoBehaviour
                 break;
 
             case 2:
+                tutorialTileTwo.SpawnMonsters(20, 1);
                 SetSpawnPos(spawnPoint[1]);
                 break;
 
             case 3:
                 SetSpawnPos(spawnPoint[2]);
                 boss.SetActive(true);
+                tutorialTileTwo.SpawnMonsters(10, 2);
                 DefensiveBoss.instance.gameObject.SetActive(true);
                 DefensiveBoss.instance.InitSetting();
                 break;
