@@ -263,7 +263,7 @@ public class DefensiveBoss : MonsterBase
             StartCoroutine(IE_Charge(pos, m_tweener));
         }
 
-        Invoke(nameof(EndAct), m_chargeTime + 1f);
+        Invoke(nameof(EndAct), m_chargeTime + 3f);
     }
     /// <summary>
     /// 그림자 만드는 기믹
@@ -280,7 +280,7 @@ public class DefensiveBoss : MonsterBase
     {
         m_reflectRegion.GetComponent<Reflect>().InitSetting(m_reflectTime);
 
-        Invoke(nameof(EndAct), m_reflectTime + 1f);
+        Invoke(nameof(EndAct), m_reflectTime + 3f);
     }
 
     /// <summary>

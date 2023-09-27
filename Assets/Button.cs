@@ -40,7 +40,6 @@ public class Button : MonoBehaviour
     {
         MapSpawinTrigger.instance.m_stageNum += 1;
         MapSpawinTrigger.instance.SpawnPlayer();
-        MapSpawinTrigger.instance.tutorialTileTwo.SpawnMonsters();
     }
 
     #endregion
