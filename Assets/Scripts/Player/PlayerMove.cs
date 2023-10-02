@@ -37,9 +37,9 @@ public class PlayerMove : MonoBehaviour
 	{
 		if (direction != Vector2.zero)
 		{
-			deadEye.ChangeValue(deadEyeAdditive * Time.deltaTime);
+			deadEye.ChangeValue(deadEyeAdditive * Time.unscaledDeltaTime);
 		}
-		transform.Translate(direction * speed * Time.deltaTime);
+		transform.Translate(direction * speed * Time.unscaledDeltaTime);
 	}
 	#endregion
 

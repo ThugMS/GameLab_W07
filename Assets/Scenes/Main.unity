@@ -1485,6 +1485,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1350190254, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.12
+      objectReference: {fileID: 0}
     - target: {fileID: 7677067290106692711, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1536,10 +1540,6 @@ PrefabInstance:
     - target: {fileID: 7677067290173016374, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7677067290173016399, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: m_BodyType
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7677067290474181592, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
       propertyPath: m_Materials.Array.data[0]

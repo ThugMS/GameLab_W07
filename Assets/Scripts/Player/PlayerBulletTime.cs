@@ -14,6 +14,8 @@ public class PlayerBulletTime : MonoBehaviour
 	private RippleEffect rippleEffect;
 	private Volume volume;
 	private UnityEngine.Rendering.Universal.ColorAdjustments colorAdjustments;
+	private ParticleSystem dustParticle;
+	private ParticleSystem dashParticle;
 
 	private float currentSaturation;
 	private const float SATURATION_IDLE = 0f;
@@ -34,6 +36,8 @@ public class PlayerBulletTime : MonoBehaviour
 		transform.Find("Ripple Effect").TryGetComponent(out rippleEffect);
 		GameObject.Find("Global Volume").TryGetComponent(out volume);
 		volume.profile.TryGet(out colorAdjustments);
+		transform.Find("Dust Trail").TryGetComponent(out dustParticle);
+		transform.Find("Dash Trail").TryGetComponent(out dashParticle);
 	}
 	public void OnActionPerformed()
 	{
@@ -43,6 +47,10 @@ public class PlayerBulletTime : MonoBehaviour
 		rippleEffect.gameObject.SetActive(true);
 		isCalled = true;
 		Time.timeScale = 0.1f;
+		dustParticle.Stop();
+		int scaleX = transform.position.x - Utils.MousePosition.x > 0 ? 1 : -1;
+		dashParticle.transform.localScale = new Vector3(scaleX, 1, 1);
+		dashParticle.Play();
 	}
 	public void OnActionCanceled()
 	{
@@ -69,6 +77,8 @@ public class PlayerBulletTime : MonoBehaviour
 		currentSaturation = SATURATION_IDLE;
 		colorAdjustments.saturation.Override(currentSaturation);
 		Time.timeScale = 1f;
+		dustParticle.Play();
+		dashParticle.Stop();
 	}
 	#endregion
 
