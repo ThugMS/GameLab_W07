@@ -35,6 +35,11 @@ public class MapSpawinTrigger : MonoBehaviour
         boss.SetActive(false);
     }
 
+    private void FixedUpdate()
+    {
+        m_stageNum = 3;
+    }
+
     public void SetSpawnPos(Transform _tf)
     {
         m_spawnPos = new Vector2(_tf.position.x, _tf.position.y);
