@@ -15,6 +15,8 @@ public class ThugBossPhase1 : MonoBehaviour
     [SerializeField] private float m_circleBulletSpeed; //탄막 속도
     [SerializeField] private float m_circleBulletRotationVelocity; // 탄막 중심 회전 속도
     [SerializeField] private int m_circleBulletSpawnDirection; // 탄막 중심 회전 방향 (시계방향: 1, 시계반대방향: -1)
+    [SerializeField] private float m_circleBulletReverseDuration; // 공격 회전 방향 바꾸는 시간
+    [SerializeField] private float m_circleBulletDuration; // 공격 시간
     private bool m_isCircleBulletOn = false; // 탄막 공격 시작?
     private bool m_canCircleBulletFire = false; // 탄막 쿨타임?
     private float m_circleBulletRotation = 0; // 회전각
@@ -26,6 +28,8 @@ public class ThugBossPhase1 : MonoBehaviour
     [SerializeField] private float m_zigZagBulletSpeed; //탄막 속도
     [SerializeField] private float m_zigZagBulletRotationVelocity; // 탄막 중심 회전 속도
     [SerializeField] private int m_zigZagBulletSpawnDirection; // 탄막 중심 회전 방향 (시계방향: 1, 시계반대방향: -1)
+    [SerializeField] private float m_zigZagBulletReverseDuration; // 공격 회전 방향 바꾸는 시간
+    [SerializeField] private float m_zigZagBulletDuration; // 공격 시간
     private bool m_isZigZagBulletOn = false; // 탄막 공격 시작?
     private bool m_canZigZagBulletFire = false; // 탄막 쿨타임?
     private float m_zigZagBulletRotation = 0; // 회전각
@@ -53,9 +57,16 @@ public class ThugBossPhase1 : MonoBehaviour
             m_isZigZagBulletOn = !m_isZigZagBulletOn;
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            m_circleBulletSpawnDirection = m_circleBulletSpawnDirection == 1 ? -1 : 1;
+        }
+
+
         if (m_isCircleBulletOn)
         {
             StartCircleBullet();
+            StartCoroutine(StopCircleBullet());
         }
 
         if (m_isZigZagBulletOn)
@@ -96,6 +107,26 @@ public class ThugBossPhase1 : MonoBehaviour
         }
     }
 
+
+    // 탄막을 일정 시간 후에 멈추는 코루틴
+    private IEnumerator StopCircleBullet()
+    {
+        Debug.Log("StopCircleBullet");
+        yield return new WaitForSeconds(m_circleBulletReverseDuration);
+
+        if(m_circleBulletReverseDuration > 0)
+        {
+            m_circleBulletSpawnDirection = m_circleBulletSpawnDirection == 1 ? -1 : 1;
+            Debug.Log(m_circleBulletSpawnDirection);
+        }
+
+        yield return new WaitForSeconds(m_circleBulletDuration- m_circleBulletReverseDuration); // 일정 시간 대기
+
+        // 탄막 공격 종료
+        m_isCircleBulletOn = false;
+    }
+
+
     private void StartZigZagBullet()
     {
         m_zigZagBulletRotation += m_zigZagBulletRotationVelocity * Time.deltaTime * m_zigZagBulletSpawnDirection;
@@ -105,6 +136,8 @@ public class ThugBossPhase1 : MonoBehaviour
             FireZigZagBullet();
             m_fireCoolTimeSub = m_zigZagBulletfireCoolTime;
             m_canZigZagBulletFire = false;
+
+            StartCoroutine(StopZigZagBullet());
         }
         else
         {
@@ -126,5 +159,22 @@ public class ThugBossPhase1 : MonoBehaviour
             circleBullet.GetComponent<ThugBossBullet>().Init(m_zigZagBulletSpeed);
         }
     }
+
+    // 탄막을 일정 시간 후에 멈추는 코루틴
+    private IEnumerator StopZigZagBullet()
+    {
+        yield return new WaitForSeconds(m_zigZagBulletReverseDuration);
+        if(m_zigZagBulletReverseDuration > 0)
+        {
+            m_zigZagBulletSpawnDirection = m_zigZagBulletSpawnDirection == 1 ? -1 : 1;
+        }
+        
+
+        yield return new WaitForSeconds(m_zigZagBulletDuration - m_zigZagBulletReverseDuration); // 일정 시간 대기
+
+        // 탄막 공격 종료
+        m_isZigZagBulletOn = false;
+    }
+
     #endregion
 }
