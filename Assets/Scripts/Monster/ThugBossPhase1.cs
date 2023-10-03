@@ -13,7 +13,6 @@ public class ThugBossPhase1 : MonoBehaviour
     [SerializeField] private bool m_canFire = false; // 탄막 쿨타임?
     [SerializeField] private float m_fireCoolTime = 0.2f; // 탄막 층 생성 간격
     [SerializeField] private int m_circleBulletBranch; // 탄막 갈래
-    [SerializeField] private float m_circleBulletDelay; // 탄막 딜레이
     [SerializeField] private float m_circleBulletSpawnRadius; // 탄막 생성 반지름
     [SerializeField] private float m_bulletSpeed; //탄막 속도
     [SerializeField] private float m_bulletRotationVelocity; // 탄막 중심 회전 속도
