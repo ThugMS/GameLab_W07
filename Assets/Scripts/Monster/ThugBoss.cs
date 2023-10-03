@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThugBoss : MonsterBase
 {
+    public static ThugBoss instance;
     #region PublicVariables
     public int m_phase = 1;
     #endregion
@@ -11,7 +12,13 @@ public class ThugBoss : MonsterBase
     #endregion
     #region PublicMethod
 
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
     protected override void Move()
     {
     }
