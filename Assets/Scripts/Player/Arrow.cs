@@ -15,63 +15,81 @@ public class Arrow : MonoBehaviour
 	#region PrivateVariables
 	private SpriteRenderer sr;
 	private ParticleSystem ps;
+	private Collider2D col;
 	private Vector2 direction;
+
+	private Tweener moveTween;
+	[SerializeField] private float speed;
+	private float speedMult = 1;
+
+	private bool isStuck;
+	private bool isRecalled;
 	#endregion
 
 	#region PublicMethod
 	public void Initialize()
 	{
 		TryGetComponent(out sr);
-		transform.Find("Trail").TryGetComponent(out ps);
+		TryGetComponent(out col);
+		transform.Find("Halo").TryGetComponent(out ps);
+		moveTween = transform.DOMove(Player.instance.transform.position, speed).SetAutoKill(false).SetSpeedBased().SetUpdate(true).Pause();
+		isStuck = false;
+		isRecalled = false;
+	}
+	public void SetSpeed(float _speed)
+	{
+		speed = _speed;
 	}
 	public void SetDirection(Vector3 _rotation)
 	{
 		transform.eulerAngles = _rotation;
 	}
-    public void Shot()
+	public void Shot()
 	{
-		RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, float.MaxValue
-			, 1 << LayerMask.NameToLayer("Monster") | 1 << LayerMask.NameToLayer("Wall"))
-			.OrderBy(hit => hit.distance)
-			.ToArray();
-
-		for(int i = 0; i < hits.Length; ++i)
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, float.MaxValue
+			, 1 << LayerMask.NameToLayer("Wall"));
+		if (hit.collider != null)
 		{
-			if (hits[i].collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
-			{
-				transform.DOMove(hits[i].point, 0.1f);
-				break;
-			}
-			else
-			{
-				MonsterBase monster = hits[i].collider.gameObject.GetComponent<MonsterBase>();
-				monster.GetDamage();
-			}
+			transform.DOMove(hit.point, speed).SetSpeedBased().OnComplete(() => isStuck = true);
 		}
 	}
 	public void Recall()
 	{
-		RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, (Player.instance.transform.position - transform.position).normalized, float.MaxValue
-			, 1 << LayerMask.NameToLayer("Monster"))
-			.OrderBy(hit => hit.distance)
-			.ToArray();
-
-		for (int i = 0; i < hits.Length; ++i)
-		{
-			MonsterBase monster = hits[i].collider.gameObject.GetComponent<MonsterBase>();
-			monster.GetDamage();
-		}
-		ForceRecall();
-	}
-	public void ForceRecall()
-	{
-		sr.enabled = false;
-		transform.position = Player.instance.transform.position;
-		Invoke(nameof(DestroySelf), 2f);
+		isRecalled = true;
 	}
 	#endregion
 
 	#region PrivateMethod
+	private void Update()
+	{
+		if (isStuck == true && isRecalled == true && moveTween != null)
+		{
+			//speedMult += Time.unscaledDeltaTime * 0.4f;
+			if(transform.position != Player.instance.transform.position)
+				moveTween.ChangeEndValue(Player.instance.transform.position, speed * speedMult, true).Restart();
+			if (Vector2.Distance(transform.position, Player.instance.transform.position) < 0.2f)
+			{
+				isStuck = false;
+				moveTween.Kill();
+				moveTween = null;
+				sr.enabled = false;
+				col.enabled = false;
+				ps.gameObject.SetActive(false);
+				Invoke(nameof(DestroySelf), 2f);
+			}
+		}
+	}
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision != null)
+		{
+			if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
+			{
+				MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
+				monster.GetDamage();
+			}
+		}
+	}
 	private void DestroySelf()
 	{
 		Destroy(gameObject);
