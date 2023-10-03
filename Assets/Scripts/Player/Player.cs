@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 	private PlayerMove move;
 	private PlayerAim aim;
 	// private PlayerDash dash;
-	private PlayerWarp warp;
+	// private PlayerWarp warp;
 	private PlayerBulletTime bulletTime;
 	private PlayerHp hp;
 	private PlayerDeadEye deadEye;
@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 	public void ForceQuit()
 	{
 		// dash.ForceQuit();
-		warp.ForceQuit();
+		// warp.ForceQuit();
 		bulletTime.ForceQuit();
 	}
 	public void SetInvincibility(bool b)
@@ -88,8 +88,8 @@ public class Player : MonoBehaviour
 		move.Initialize();
 		// TryGetComponent(out dash);
 		// dash.Initialize();
-		TryGetComponent(out warp);
-		warp.Initialize();
+		// TryGetComponent(out warp);
+		// warp.Initialize();
 		TryGetComponent(out bulletTime);
 		bulletTime.Initialize();
 		TryGetComponent(out hp);
@@ -107,10 +107,11 @@ public class Player : MonoBehaviour
 		input.Player.Attack.performed += OnAttackPerformed;
 		input.Player.Attack.canceled += OnAttackCanceled;
 		// input.Player.Dash.performed += OnDashPerformed;
-		input.Player.Warp.performed += OnWarpPerformed;
-		input.Player.Warp.canceled += OnWarpCanceled;
+		// input.Player.Warp.performed += OnWarpPerformed;
+		// input.Player.Warp.canceled += OnWarpCanceled;
 		input.Player.BulletTime.performed += OnBulletTimePerformed;
 		input.Player.BulletTime.canceled += OnBulletTimeCanceled;
+		input.Player.Recall.performed += OnRecallPerformed;
 	}
 	private void OnDisable()
 	{
@@ -119,10 +120,11 @@ public class Player : MonoBehaviour
 		input.Player.Attack.performed -= OnAttackPerformed;
 		input.Player.Attack.canceled -= OnAttackCanceled;
 		// input.Player.Dash.performed -= OnDashPerformed;
-		input.Player.Warp.performed -= OnWarpPerformed;
-		input.Player.Warp.canceled -= OnWarpCanceled;
+		// input.Player.Warp.performed -= OnWarpPerformed;
+		// input.Player.Warp.canceled -= OnWarpCanceled;
 		input.Player.BulletTime.performed -= OnBulletTimePerformed;
 		input.Player.BulletTime.canceled -= OnBulletTimeCanceled;
+		input.Player.Recall.performed -= OnRecallPerformed;
 		input.Disable();
 	}
 	private void Update()
@@ -132,7 +134,7 @@ public class Player : MonoBehaviour
 		{
 			aim.HandleInput();
 			move.HandleInput();
-			warp.HandleInput();
+			// warp.HandleInput();
 		}
 	}
 	private void OnMovePerformed(InputAction.CallbackContext _context)
@@ -161,7 +163,7 @@ public class Player : MonoBehaviour
 			return;
 		dash.Dash();
 	}*/
-	private void OnWarpPerformed(InputAction.CallbackContext _context)
+	/*private void OnWarpPerformed(InputAction.CallbackContext _context)
 	{
 		if (canAct == false)
 			return;
@@ -172,7 +174,7 @@ public class Player : MonoBehaviour
 		if (canAct == false)
 			return;
 		warp.OnActionCanceled();
-	}
+	}*/
 	private void OnBulletTimePerformed(InputAction.CallbackContext _context)
 	{
 		if (canAct == false)
@@ -182,6 +184,10 @@ public class Player : MonoBehaviour
 	private void OnBulletTimeCanceled(InputAction.CallbackContext _context)
 	{
 		bulletTime.OnActionCanceled();
+	}
+	private void OnRecallPerformed(InputAction.CallbackContext _context)
+	{
+		aim.Recall();
 	}
 	private void RemoveInvincibility()
 	{
