@@ -18,11 +18,11 @@ public class Tutorial1SpawnTrigger : MonoBehaviour
     #region PrivateMethod
     private void OnTriggerStay2D(Collider2D collision)
     {
-        //if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        //{
-        //    MapSpawinTrigger.instance.SetSpawnPos(m_spawnTransform);
-        //    MapSpawinTrigger.instance.m_stageNum = m_stageNum;
-        //}
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            MapSpawinTrigger.instance.SetSpawnPos(m_spawnTransform);
+            MapSpawinTrigger.instance.m_stageNum = m_stageNum;
+        }
     }
     #endregion
 }
