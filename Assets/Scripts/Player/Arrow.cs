@@ -10,14 +10,12 @@ using UnityEngine.Rendering.Universal;
 public class Arrow : MonoBehaviour
 {
 	#region PublicVariables
-	public bool IsShot { get { return isShot; } }
 	#endregion
 
 	#region PrivateVariables
 	private SpriteRenderer sr;
 	private ParticleSystem ps;
 	private Vector2 direction;
-	private bool isShot = false;
 	#endregion
 
 	#region PublicMethod
@@ -25,8 +23,6 @@ public class Arrow : MonoBehaviour
 	{
 		TryGetComponent(out sr);
 		transform.Find("Trail").TryGetComponent(out ps);
-		sr.enabled = false;
-		isShot = false;
 	}
 	public void SetDirection(Vector3 _rotation)
 	{
@@ -34,10 +30,6 @@ public class Arrow : MonoBehaviour
 	}
     public void Shot()
 	{
-		transform.parent = null;
-
-		sr.enabled = true;
-		isShot = true;
 		RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, float.MaxValue
 			, 1 << LayerMask.NameToLayer("Monster") | 1 << LayerMask.NameToLayer("Wall"))
 			.OrderBy(hit => hit.distance)
@@ -47,8 +39,7 @@ public class Arrow : MonoBehaviour
 		{
 			if (hits[i].collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
 			{
-				transform.position = Player.instance.transform.position;
-				transform.position = hits[i].point;
+				transform.DOMove(hits[i].point, 0.1f);
 				break;
 			}
 			else
@@ -75,12 +66,15 @@ public class Arrow : MonoBehaviour
 	public void ForceRecall()
 	{
 		sr.enabled = false;
-		isShot = false;
-		transform.parent = Player.instance.transform;
-		transform.localPosition = Vector3.zero;
+		transform.position = Player.instance.transform.position;
+		Invoke(nameof(DestroySelf), 2f);
 	}
 	#endregion
 
 	#region PrivateMethod
+	private void DestroySelf()
+	{
+		Destroy(gameObject);
+	}
 	#endregion
 }

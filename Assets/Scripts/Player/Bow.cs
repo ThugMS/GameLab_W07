@@ -10,10 +10,11 @@ public class Bow : MonoBehaviour
 	#region PrivateVariables
 	private SpriteRenderer sr;
 	private Animator anim;
-	[SerializeField] private List<Arrow> arrowList = new List<Arrow>();
+	[SerializeField] private GameObject arrowPrefab;
+	private List<Arrow> arrowList = new List<Arrow>();
 	[SerializeField] private float angularSpeed = 12f;
 
-	private int arrowCount = 0;
+	[SerializeField] private int maxArrowCount = 5;
 	#endregion
 
 	#region PublicMethod
@@ -21,7 +22,6 @@ public class Bow : MonoBehaviour
 	{
 		transform.Find("Renderer").TryGetComponent(out sr);
 		transform.Find("Renderer").TryGetComponent(out anim);
-		arrowCount = arrowList.Count;
 		for(int i = 0; i < arrowList.Count; ++i)
 		{
 			arrowList[i].Initialize();
@@ -37,27 +37,25 @@ public class Bow : MonoBehaviour
 	}
 	public bool CheckForExtraArrows()
 	{
-		return arrowCount > 0;
+		return maxArrowCount > arrowList.Count;
 	}
 	public void Fire()
 	{
 		anim.SetTrigger("shot");
-		Arrow current = GetExtraArrow();
+		Arrow current = Instantiate(arrowPrefab).GetComponent<Arrow>();
+		arrowList.Add(current);
+		current.Initialize();
 		current.transform.position = transform.position;
 		current.SetDirection(transform.eulerAngles);
 		current.Shot();
-		--arrowCount;
 	}
 	public void Recall()
 	{
 		for(int i = 0; i < arrowList.Count; ++i)
 		{
-			if (arrowList[i].IsShot == true)
-			{
-				arrowList[i].Recall();
-			}
+			arrowList[i].Recall();
 		}
-		arrowCount = arrowList.Count;
+		arrowList.Clear();
 	}
 	public void SetRendererVisibility(bool b)
 	{
@@ -78,17 +76,6 @@ public class Bow : MonoBehaviour
 	private bool GetFlipXByAngle()
 	{
 		return transform.rotation.eulerAngles.z > 180 && transform.rotation.eulerAngles.z < 360 ? true : false;
-	}
-	private Arrow GetExtraArrow()
-	{
-		for(int i = 0; i < arrowList.Count; ++i)
-		{
-			if (arrowList[i].IsShot == false)
-			{
-				return arrowList[i];
-			}
-		}
-		return null;
 	}
 	private void EndFlickering()
 	{
