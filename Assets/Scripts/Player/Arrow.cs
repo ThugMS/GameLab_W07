@@ -1,9 +1,11 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.InputSystem.Processors;
+using UnityEngine.Rendering.Universal;
 
 public class Arrow : MonoBehaviour
 {
@@ -11,63 +13,68 @@ public class Arrow : MonoBehaviour
 	#endregion
 
 	#region PrivateVariables
-	private float speed;
+	private SpriteRenderer sr;
+	private ParticleSystem ps;
 	private Vector2 direction;
 	#endregion
 
 	#region PublicMethod
+	public void Initialize()
+	{
+		TryGetComponent(out sr);
+		transform.Find("Trail").TryGetComponent(out ps);
+	}
 	public void SetDirection(Vector3 _rotation)
 	{
 		transform.eulerAngles = _rotation;
-		//TEMP
-		Invoke(nameof(Deactive), 10f);
-		//TEMPEND
 	}
-    public float GetSpeed()
-    {
-        return speed;
-    }
-    public void SetSpeed(float _speed)
+    public void Shot()
 	{
-		speed = _speed;
+		RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.up, float.MaxValue
+			, 1 << LayerMask.NameToLayer("Monster") | 1 << LayerMask.NameToLayer("Wall"))
+			.OrderBy(hit => hit.distance)
+			.ToArray();
+
+		for(int i = 0; i < hits.Length; ++i)
+		{
+			if (hits[i].collider.gameObject.layer == LayerMask.NameToLayer("Wall"))
+			{
+				transform.DOMove(hits[i].point, 0.1f);
+				break;
+			}
+			else
+			{
+				MonsterBase monster = hits[i].collider.gameObject.GetComponent<MonsterBase>();
+				monster.GetDamage();
+			}
+		}
 	}
-	public void Deactive()
+	public void Recall()
 	{
-		CancelInvoke(nameof(Deactive));
-		gameObject.SetActive(false);
+		RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, (Player.instance.transform.position - transform.position).normalized, float.MaxValue
+			, 1 << LayerMask.NameToLayer("Monster"))
+			.OrderBy(hit => hit.distance)
+			.ToArray();
+
+		for (int i = 0; i < hits.Length; ++i)
+		{
+			MonsterBase monster = hits[i].collider.gameObject.GetComponent<MonsterBase>();
+			monster.GetDamage();
+		}
+		ForceRecall();
+	}
+	public void ForceRecall()
+	{
+		sr.enabled = false;
+		transform.position = Player.instance.transform.position;
+		Invoke(nameof(DestroySelf), 2f);
 	}
 	#endregion
 
 	#region PrivateMethod
-	private void Update()
+	private void DestroySelf()
 	{
-		transform.position += transform.up * speed * Time.deltaTime;
-	}
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if(collision != null)
-		{
-			if(collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
-			{
-				Stop();
-			}
-
-			if(collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
-			{
-				Deactive();
-			}
-
-			if(collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
-			{
-				MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
-				monster.GetDamage();
-				Deactive();
-			}
-		}
-	}
-	private void Stop()
-	{
-		speed = 0f;
+		Destroy(gameObject);
 	}
 	#endregion
 }

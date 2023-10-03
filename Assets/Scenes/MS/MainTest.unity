@@ -232,11 +232,14 @@ MonoBehaviour:
   m_jumpReadyTime: 1
   m_jumpShadowPrefab: {fileID: 6010086362304646885, guid: edbd76c3e6d10f047be45409a4b90019, type: 3}
   m_jumpEffect: {fileID: 937622558981467422, guid: 11f4e0fc2390b6740b4d61244f2d4a2d, type: 3}
+  m_takeDownEffect: {fileID: 286289536002011247, guid: 415201cd30c5d664393711beb9c5e50b, type: 3}
   m_jumpShadow: {fileID: 0}
   m_jumpShadowDelay: 0.7
   m_isShadow: 0
   m_jumpTime: 5
   m_jumpEase: 18
+  m_rock: {fileID: 4310142308460514268, guid: 8d9a566c432e927489f390876280b8f8, type: 3}
+  m_rockNum: 5
 --- !u!1 &250363813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,7 +2160,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

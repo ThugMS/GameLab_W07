@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.Mathematics;
 
 public class ThugBossPhase2 : MonoBehaviour
 {
@@ -13,14 +14,15 @@ public class ThugBossPhase2 : MonoBehaviour
 
     public Animator m_animator;
     #endregion
-
+   
     #region PrivateVariables
     [Header("TakeDown")]
     [SerializeField] private float m_jumpReadyTime = 1f;
     [SerializeField] private GameObject m_jumpShadowPrefab;
     [SerializeField] private GameObject m_jumpEffect;
+    [SerializeField] private GameObject m_takeDownEffect;
     [SerializeField] private GameObject m_jumpShadow;
-    [SerializeField] private float m_jumpShadowDelay = 0.2f;
+    [SerializeField] private float m_jumpShadowSpeed = 1f;
     [SerializeField] private bool m_isShadow = false;
     [SerializeField] private float m_jumpTime;
     [SerializeField] private Ease m_jumpEase;
@@ -51,13 +53,11 @@ public class ThugBossPhase2 : MonoBehaviour
     private void JumpAttack()
     {
         StartCoroutine(nameof(IE_Jump));
-
-        
     }
 
     private void MakeShadow()
     {
-        m_jumpShadow = Instantiate(m_jumpShadowPrefab, Player.instance.transform.position, Quaternion.identity);
+        m_jumpShadow = Instantiate(m_jumpShadowPrefab, transform.position, Quaternion.identity);
         m_isShadow = true;
 
         Invoke(nameof(TakeDown), m_jumpTime);
@@ -65,7 +65,11 @@ public class ThugBossPhase2 : MonoBehaviour
 
     private void TrackingShadow()
     {
-        StartCoroutine(IE_MoveShadow(Player.instance.transform.position));
+        //StartCoroutine(IE_MoveShadow(Player.instance.transform.position));
+
+        Vector3 dir = Player.instance.transform.position - m_jumpShadow.transform.position;
+
+        m_jumpShadow.transform.position += dir * m_jumpShadowSpeed * Time.deltaTime;
     }
 
     private void RemoveShadow()
@@ -79,12 +83,22 @@ public class ThugBossPhase2 : MonoBehaviour
         m_isShadow = false;
         StopAllCoroutines();
 
-        transform.DOMove(m_jumpShadow.transform.position, 0.7f);
+        StartCoroutine(nameof(IE_TakeDown));
     }
 
     private void CreateWave()
     {
+        float term = 360 / m_rockNum;
 
+        for(int i = 0; i < m_rockNum; i++)
+        {
+            float angle = 0f + term*i;
+            
+            Vector3 dir = (transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0f)) - transform.position;
+
+            GameObject rock = Instantiate(m_rock, transform.position, Quaternion.identity);
+            rock.GetComponent<Rock>().InitSetting(dir.normalized, false);
+        }
     }
 
     private IEnumerator IE_Jump()
@@ -95,16 +109,21 @@ public class ThugBossPhase2 : MonoBehaviour
         //yield return m_takeDownTweener.WaitForCompletion();
         yield return new WaitForSeconds(m_jumpReadyTime);
 
-        transform.DOMoveY(50f, 1f).SetEase(m_jumpEase);
+        transform.DOMoveY(20f, 1f).SetEase(m_jumpEase);
         Instantiate(m_jumpEffect, transform.position, Quaternion.identity);
         MakeShadow();
     }
 
-    private IEnumerator IE_MoveShadow(Vector3 _pos)
+    private IEnumerator IE_TakeDown()
     {
-        yield return new WaitForSeconds(m_jumpShadowDelay);
+        m_takeDownTweener = transform.DOMove(m_jumpShadow.transform.position, 0.7f).SetEase(Ease.InExpo);
 
-        m_jumpShadow.transform.position = _pos;
+        yield return m_takeDownTweener.WaitForCompletion();
+
+        Destroy(m_jumpShadow);
+        m_animator.Play("TakeDown");
+        Instantiate(m_takeDownEffect, transform.position, Quaternion.identity);
+        CreateWave();
     }
     #endregion
 }
