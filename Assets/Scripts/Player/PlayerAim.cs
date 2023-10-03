@@ -33,6 +33,10 @@ public class PlayerAim : MonoBehaviour
 	{
 		isCalled = false;
 	}
+	public void Recall()
+	{
+		bow.Recall();
+	}
 	public void HandleInput()
 	{
 		bow.Look(Utils.MousePosition);
@@ -50,7 +54,14 @@ public class PlayerAim : MonoBehaviour
 			if(cooldownTimer > shotCooldown)
 			{
 				cooldownTimer = 0f;
-				bow.Fire();
+				if(bow.CheckForExtraArrows())
+				{
+					bow.Fire();
+				}
+				else
+				{
+					bow.Recall();
+				}
 			}
 		}
 	}

@@ -76,8 +76,8 @@ public class Reflect : MonoBehaviour
         if (obj == null)
             return;
 
-        float speed = obj.GetSpeed();
-        obj.SetSpeed(speed * m_deceleration);
+        // float speed = obj.GetSpeed();
+        // obj.Shot(speed * m_deceleration);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -116,8 +116,8 @@ public class Reflect : MonoBehaviour
 
             Arrow obj = iter.GetComponent<Arrow>();
 
-            float speed = obj.GetSpeed();
-            obj.SetSpeed(speed * m_deceleration);
+            // float speed = obj.GetSpeed();
+            // obj.Shot(speed * m_deceleration);
         }
     }
 
@@ -128,7 +128,7 @@ public class Reflect : MonoBehaviour
             Collider2D iter = m_arrows[i];
 
             Arrow obj = iter.GetComponent<Arrow>();
-            obj.Deactive();
+            // obj.Deactive();
 
             GameObject objProj = Instantiate(m_projectile, iter.transform.position, Quaternion.identity, transform);
             m_projs.Add(objProj.GetComponent<ReflectProjectile>());

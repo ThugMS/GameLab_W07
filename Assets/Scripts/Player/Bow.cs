@@ -10,10 +10,11 @@ public class Bow : MonoBehaviour
 	#region PrivateVariables
 	private SpriteRenderer sr;
 	private Animator anim;
-	[SerializeField] private GameObject normalArrowPrefab;
-	private List<GameObject> arrowList = new List<GameObject>();
+	[SerializeField] private GameObject arrowPrefab;
+	private List<Arrow> arrowList = new List<Arrow>();
 	[SerializeField] private float angularSpeed = 12f;
-	[SerializeField] private float shotSpeed = 10f;
+
+	[SerializeField] private int maxArrowCount = 5;
 	#endregion
 
 	#region PublicMethod
@@ -21,6 +22,10 @@ public class Bow : MonoBehaviour
 	{
 		transform.Find("Renderer").TryGetComponent(out sr);
 		transform.Find("Renderer").TryGetComponent(out anim);
+		for(int i = 0; i < arrowList.Count; ++i)
+		{
+			arrowList[i].Initialize();
+		}
 	}
 	public void Look(Vector2 mousePosition)
 	{
@@ -30,13 +35,27 @@ public class Bow : MonoBehaviour
 		sr.sortingOrder = GetSortingOrderByAngle();
 		sr.flipX = GetFlipXByAngle();
 	}
+	public bool CheckForExtraArrows()
+	{
+		return maxArrowCount > arrowList.Count;
+	}
 	public void Fire()
 	{
 		anim.SetTrigger("shot");
-		Arrow current = InstantiateArrow().GetComponent<Arrow>();
+		Arrow current = Instantiate(arrowPrefab).GetComponent<Arrow>();
+		arrowList.Add(current);
+		current.Initialize();
 		current.transform.position = transform.position;
 		current.SetDirection(transform.eulerAngles);
-		current.SetSpeed(shotSpeed);
+		current.Shot();
+	}
+	public void Recall()
+	{
+		for(int i = 0; i < arrowList.Count; ++i)
+		{
+			arrowList[i].Recall();
+		}
+		arrowList.Clear();
 	}
 	public void SetRendererVisibility(bool b)
 	{
@@ -57,31 +76,6 @@ public class Bow : MonoBehaviour
 	private bool GetFlipXByAngle()
 	{
 		return transform.rotation.eulerAngles.z > 180 && transform.rotation.eulerAngles.z < 360 ? true : false;
-	}
-	private GameObject InstantiateArrow()
-	{
-		GameObject current = GetSurplusArrow();
-		if (current == null)
-		{
-			current = Instantiate(normalArrowPrefab);
-			arrowList.Add(current);
-		}
-		else
-		{
-			current.SetActive(true);
-		}
-		return current;
-	}
-	private GameObject GetSurplusArrow()
-	{
-		for(int i = 0; i < arrowList.Count; ++i)
-		{
-			if (arrowList[i].activeSelf == false)
-			{
-				return arrowList[i];
-			}
-		}
-		return null;
 	}
 	private void EndFlickering()
 	{

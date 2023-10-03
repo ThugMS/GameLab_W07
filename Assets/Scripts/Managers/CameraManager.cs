@@ -35,7 +35,7 @@ public class CameraManager : MonoBehaviour
 		float mouseMult = Mathf.Lerp(0, maxMouseMult, Vector2.Distance(Player.instance.transform.position, Utils.MousePosition) / maxMouseMultUpdateDistance);
 		Vector2 mouseDirection = (Utils.MousePosition - (Vector2)Player.instance.transform.position).normalized;
 		targetPosition += mouseDirection * mouseMult;
-		transform.position = Vector2.Lerp(transform.position, targetPosition, camSpeed * Time.deltaTime);
+		transform.position = Vector2.Lerp(transform.position, targetPosition, camSpeed * Time.unscaledDeltaTime);
 	}
 	#endregion
 }
