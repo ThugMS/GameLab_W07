@@ -10,11 +10,10 @@ public class Bow : MonoBehaviour
 	#region PrivateVariables
 	private SpriteRenderer sr;
 	private Animator anim;
-	[SerializeField] private GameObject arrowPrefab;
 	[SerializeField] private List<Arrow> arrowList = new List<Arrow>();
 	[SerializeField] private float angularSpeed = 12f;
 
-	[SerializeField] private int maxArrowCount = 5;
+	private int arrowCount = 0;
 	#endregion
 
 	#region PublicMethod
@@ -22,6 +21,7 @@ public class Bow : MonoBehaviour
 	{
 		transform.Find("Renderer").TryGetComponent(out sr);
 		transform.Find("Renderer").TryGetComponent(out anim);
+		arrowCount = arrowList.Count;
 		for(int i = 0; i < arrowList.Count; ++i)
 		{
 			arrowList[i].Initialize();
@@ -37,7 +37,7 @@ public class Bow : MonoBehaviour
 	}
 	public bool CheckForExtraArrows()
 	{
-		return maxArrowCount > arrowList.Count;
+		return arrowCount > 0;
 	}
 	public void Fire()
 	{
@@ -46,6 +46,7 @@ public class Bow : MonoBehaviour
 		current.transform.position = transform.position;
 		current.SetDirection(transform.eulerAngles);
 		current.Shot();
+		--arrowCount;
 	}
 	public void Recall()
 	{
@@ -56,7 +57,7 @@ public class Bow : MonoBehaviour
 				arrowList[i].Recall();
 			}
 		}
-		arrowList.Clear();
+		arrowCount = arrowList.Count;
 	}
 	public void SetRendererVisibility(bool b)
 	{
