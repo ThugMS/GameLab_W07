@@ -46,7 +46,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Warp"",
+                    ""name"": ""Recall"",
                     ""type"": ""Button"",
                     ""id"": ""3b793fae-b1fa-4724-aa58-92a8c78a7d0f"",
                     ""expectedControlType"": ""Button"",
@@ -169,7 +169,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Warp"",
+                    ""action"": ""Recall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -265,7 +265,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_Warp = m_Player.FindAction("Warp", throwIfNotFound: true);
+        m_Player_Recall = m_Player.FindAction("Recall", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_BulletTime = m_Player.FindAction("BulletTime", throwIfNotFound: true);
     }
@@ -331,7 +331,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_Warp;
+    private readonly InputAction m_Player_Recall;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_BulletTime;
     public struct PlayerActions
@@ -340,7 +340,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @Warp => m_Wrapper.m_Player_Warp;
+        public InputAction @Recall => m_Wrapper.m_Player_Recall;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @BulletTime => m_Wrapper.m_Player_BulletTime;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -358,9 +358,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
-            @Warp.started += instance.OnWarp;
-            @Warp.performed += instance.OnWarp;
-            @Warp.canceled += instance.OnWarp;
+            @Recall.started += instance.OnRecall;
+            @Recall.performed += instance.OnRecall;
+            @Recall.canceled += instance.OnRecall;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -377,9 +377,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
-            @Warp.started -= instance.OnWarp;
-            @Warp.performed -= instance.OnWarp;
-            @Warp.canceled -= instance.OnWarp;
+            @Recall.started -= instance.OnRecall;
+            @Recall.performed -= instance.OnRecall;
+            @Recall.canceled -= instance.OnRecall;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -452,7 +452,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnWarp(InputAction.CallbackContext context);
+        void OnRecall(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnBulletTime(InputAction.CallbackContext context);
     }

@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
 	private Vector2 direction;
 	[SerializeField] private float speed;
 	[SerializeField] private float deadEyeAdditive;
+	private float speedMult = 1f;
 	#endregion
 
 	#region PublicMethod
@@ -37,9 +38,18 @@ public class PlayerMove : MonoBehaviour
 	{
 		if (direction != Vector2.zero)
 		{
-			deadEye.ChangeValue(deadEyeAdditive * Time.unscaledDeltaTime);
+			Debug.DrawRay(transform.position, direction * 0.5f, Color.red);
+			RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 0.5f, 1 << LayerMask.NameToLayer("Wall"));
+			if(hit.collider == null)
+			{
+				deadEye.ChangeValue(deadEyeAdditive * Time.unscaledDeltaTime);
+				transform.Translate(direction * speed * speedMult * Time.unscaledDeltaTime);
+			}
 		}
-		transform.Translate(direction * speed * Time.unscaledDeltaTime);
+	}
+	public void SetSpeedMult(float _value)
+	{
+		speedMult = _value;
 	}
 	#endregion
 

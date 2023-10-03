@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Warp",
+                    "name": "Recall",
                     "type": "Button",
                     "id": "3b793fae-b1fa-4724-aa58-92a8c78a7d0f",
                     "expectedControlType": "Button",
@@ -147,7 +147,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Warp",
+                    "action": "Recall",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

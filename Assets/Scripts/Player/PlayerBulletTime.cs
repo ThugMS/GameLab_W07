@@ -11,6 +11,7 @@ public class PlayerBulletTime : MonoBehaviour
 
 	#region PrivateVariables
 	private PlayerDeadEye deadEye;
+	private PlayerMove move;
 	private RippleEffect rippleEffect;
 	private Volume volume;
 	private UnityEngine.Rendering.Universal.ColorAdjustments colorAdjustments;
@@ -22,6 +23,7 @@ public class PlayerBulletTime : MonoBehaviour
 	private const float SATURATION_GREY = -100f;
 	[SerializeField] private float saturateSpeed = 1;
 	[SerializeField] private float deadEyeConsumeMult;
+	[SerializeField] private float speedMult;
 	private float deadEyeCooldown = 1f;
 
 	private bool isCalled;
@@ -33,6 +35,7 @@ public class PlayerBulletTime : MonoBehaviour
 	{
 		isReady = true;
 		TryGetComponent(out deadEye);
+		TryGetComponent(out move);
 		transform.Find("Ripple Effect").TryGetComponent(out rippleEffect);
 		GameObject.Find("Global Volume").TryGetComponent(out volume);
 		volume.profile.TryGet(out colorAdjustments);
@@ -51,6 +54,7 @@ public class PlayerBulletTime : MonoBehaviour
 		int scaleX = transform.position.x - Utils.MousePosition.x > 0 ? 1 : -1;
 		dashParticle.transform.localScale = new Vector3(scaleX, 1, 1);
 		dashParticle.Play();
+		move.SetSpeedMult(speedMult);
 	}
 	public void OnActionCanceled()
 	{
@@ -79,6 +83,7 @@ public class PlayerBulletTime : MonoBehaviour
 		Time.timeScale = 1f;
 		dustParticle.Play();
 		dashParticle.Stop();
+		move.SetSpeedMult(1f);
 	}
 	#endregion
 

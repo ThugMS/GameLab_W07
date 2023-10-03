@@ -111,6 +111,7 @@ public class Player : MonoBehaviour
 		// input.Player.Warp.canceled += OnWarpCanceled;
 		input.Player.BulletTime.performed += OnBulletTimePerformed;
 		input.Player.BulletTime.canceled += OnBulletTimeCanceled;
+		input.Player.Recall.performed += OnRecallPerformed;
 	}
 	private void OnDisable()
 	{
@@ -123,6 +124,7 @@ public class Player : MonoBehaviour
 		// input.Player.Warp.canceled -= OnWarpCanceled;
 		input.Player.BulletTime.performed -= OnBulletTimePerformed;
 		input.Player.BulletTime.canceled -= OnBulletTimeCanceled;
+		input.Player.Recall.performed -= OnRecallPerformed;
 		input.Disable();
 	}
 	private void Update()
@@ -182,6 +184,10 @@ public class Player : MonoBehaviour
 	private void OnBulletTimeCanceled(InputAction.CallbackContext _context)
 	{
 		bulletTime.OnActionCanceled();
+	}
+	private void OnRecallPerformed(InputAction.CallbackContext _context)
+	{
+		aim.Recall();
 	}
 	private void RemoveInvincibility()
 	{
