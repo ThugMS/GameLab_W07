@@ -14,6 +14,7 @@ public class Bow : MonoBehaviour
 	private List<Arrow> arrowList = new List<Arrow>();
 	[SerializeField] private float angularSpeed = 12f;
 
+	[SerializeField] private float speed = 30f;
 	[SerializeField] private int maxArrowCount = 5;
 	#endregion
 
@@ -22,10 +23,6 @@ public class Bow : MonoBehaviour
 	{
 		transform.Find("Renderer").TryGetComponent(out sr);
 		transform.Find("Renderer").TryGetComponent(out anim);
-		for(int i = 0; i < arrowList.Count; ++i)
-		{
-			arrowList[i].Initialize();
-		}
 	}
 	public void Look(Vector2 mousePosition)
 	{
@@ -46,6 +43,7 @@ public class Bow : MonoBehaviour
 		arrowList.Add(current);
 		current.Initialize();
 		current.transform.position = transform.position;
+		current.SetSpeed(speed);
 		current.SetDirection(transform.eulerAngles);
 		current.Shot();
 	}
