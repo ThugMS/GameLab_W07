@@ -65,7 +65,8 @@ public class Arrow : MonoBehaviour
 		if (isStuck == true && isRecalled == true && moveTween != null)
 		{
 			//speedMult += Time.unscaledDeltaTime * 0.4f;
-			moveTween.ChangeEndValue(Player.instance.transform.position, speed * speedMult, true).Restart();
+			if(transform.position != Player.instance.transform.position)
+				moveTween.ChangeEndValue(Player.instance.transform.position, speed * speedMult, true).Restart();
 			if (Vector2.Distance(transform.position, Player.instance.transform.position) < 0.2f)
 			{
 				isStuck = false;
