@@ -9,9 +9,9 @@ public class ThugBossBullet : MonoBehaviour
     #region PrivateVariables
     #endregion
     #region PublicMethod
-    public void Init(float _bulletSpeed)
+    public void Init(float _bulletSpeed, Vector3 _bossPos)
     {
-        GetComponent<Rigidbody2D>().velocity = (transform.position - ThugBoss.instance.transform.position) * _bulletSpeed;
+        GetComponent<Rigidbody2D>().velocity = (transform.position - _bossPos) * _bulletSpeed;
     }
 
     #endregion

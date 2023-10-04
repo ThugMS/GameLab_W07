@@ -31,8 +31,9 @@ public class MapSpawinTrigger : MonoBehaviour
 
     private void Start()
     {
-        boss = DefensiveBoss.instance.gameObject;
-        boss.SetActive(false);
+        boss = ThugBoss.instance.gameObject;
+        //테스트 동안만 주석처리
+        //boss.SetActive(false);
     }
 
     public void SetSpawnPos(Transform _tf)
@@ -50,7 +51,7 @@ public class MapSpawinTrigger : MonoBehaviour
                 break;
 
             case 2:
-                tutorialTileTwo.SpawnMonsters(20, 1);
+                //tutorialTileTwo.SpawnMonsters(20, 1);
                 SetSpawnPos(spawnPoint[1]);
                 break;
 
@@ -62,13 +63,13 @@ public class MapSpawinTrigger : MonoBehaviour
                 Destroy(boss);
 
                 GameObject obj = Instantiate(m_bossPrefab, bossPos, Quaternion.identity);
-                obj.GetComponent<DefensiveBoss>().InitSetting();
+                obj.GetComponent<ThugBoss>().InitSetting();
                 boss = obj;
-                tutorialTileTwo.SpawnMonsters(10, 2);
+                //tutorialTileTwo.SpawnMonsters(10, 2);
 
                 //boss.SetActive(true);
-                //boss.GetComponent<DefensiveBoss>().InitSetting();
-                //DefensiveBoss.instance.gameObject.SetActive(true);
+                //boss.GetComponent<ThugBoss>().InitSetting();
+                //ThugBoss.instance.gameObject.SetActive(true);
                 //DefensiveBoss.instance.InitSetting();
                 break;
         }
