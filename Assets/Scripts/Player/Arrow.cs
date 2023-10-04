@@ -16,14 +16,16 @@ public class Arrow : MonoBehaviour
 	private SpriteRenderer sr;
 	private ParticleSystem ps;
 	private Collider2D col;
-	private Vector2 direction;
 
-	private Tweener moveTween;
+	private Vector3 destination;
+
+	private Tweener recallTween;
+	private Tweener shotTween;
 	[SerializeField] private float speed;
-	private float speedMult = 1;
 
 	private bool isStuck;
 	private bool isRecalled;
+	private bool isHitEnemy = false;
 	#endregion
 
 	#region PublicMethod
@@ -32,9 +34,10 @@ public class Arrow : MonoBehaviour
 		TryGetComponent(out sr);
 		TryGetComponent(out col);
 		transform.Find("Halo").TryGetComponent(out ps);
-		moveTween = transform.DOMove(Player.instance.transform.position, speed).SetAutoKill(false).SetSpeedBased().SetUpdate(true).Pause();
+		recallTween = transform.DOMove(Player.instance.transform.position, speed).SetAutoKill(false).SetEase(Ease.Linear).SetSpeedBased().SetUpdate(true).Pause();
 		isStuck = false;
 		isRecalled = false;
+		destination = Vector2.zero;
 	}
 	public void SetSpeed(float _speed)
 	{
@@ -50,7 +53,8 @@ public class Arrow : MonoBehaviour
 			, 1 << LayerMask.NameToLayer("Wall"));
 		if (hit.collider != null)
 		{
-			transform.DOMove(hit.point, speed).SetSpeedBased().OnComplete(() => isStuck = true);
+			destination = hit.point;
+			shotTween = transform.DOMove(destination, speed).SetEase(Ease.Linear).SetAutoKill(false).SetSpeedBased().SetUpdate(true).Play();
 		}
 	}
 	public void Recall()
@@ -62,16 +66,21 @@ public class Arrow : MonoBehaviour
 	#region PrivateMethod
 	private void Update()
 	{
-		if (isStuck == true && isRecalled == true && moveTween != null)
+		if(isStuck == false && isHitEnemy == false && destination != Vector3.zero)
 		{
-			//speedMult += Time.unscaledDeltaTime * 0.4f;
+			if(transform.position != destination)
+				shotTween.ChangeEndValue(destination, speed, true).Restart();
+			if (Vector2.Distance(transform.position, destination) < 0.1f)
+			{
+				isStuck = true;
+			}
+		}
+		if (isStuck == true && isRecalled == true && recallTween != null && isHitEnemy == false)
+		{
 			if(transform.position != Player.instance.transform.position)
-				moveTween.ChangeEndValue(Player.instance.transform.position, speed * speedMult, true).Restart();
+				recallTween.ChangeEndValue(Player.instance.transform.position, speed, true).Restart();
 			if (Vector2.Distance(transform.position, Player.instance.transform.position) < 0.2f)
 			{
-				isStuck = false;
-				moveTween.Kill();
-				moveTween = null;
 				sr.enabled = false;
 				col.enabled = false;
 				ps.gameObject.SetActive(false);
@@ -87,12 +96,48 @@ public class Arrow : MonoBehaviour
 			{
 				MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
 				monster.GetDamage();
+				StartCoroutine(nameof(TimeStuck), 0.08f);
 			}
 		}
 	}
 	private void DestroySelf()
 	{
+		recallTween.Kill();
+		shotTween.Kill();
 		Destroy(gameObject);
+	}
+
+	private IEnumerator TimeStuck(float _time)
+	{
+		StopArrow();
+		yield return new WaitForSeconds(_time);
+		MoveArrow();
+	}
+	private void MoveArrow()
+	{
+		if(isRecalled == false)
+		{
+			isHitEnemy = false;
+			shotTween.Play();
+		}
+		else
+		{
+			isHitEnemy = false;
+			recallTween.Restart();
+		}
+	}
+	private void StopArrow()
+	{
+		if (isRecalled == false)
+		{
+			isHitEnemy = true;
+			shotTween.Pause();
+		}
+		else
+		{
+			isHitEnemy = true;
+			recallTween.Pause();
+		}
 	}
 	#endregion
 }
