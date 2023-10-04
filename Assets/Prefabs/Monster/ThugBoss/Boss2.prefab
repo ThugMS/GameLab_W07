@@ -334,7 +334,7 @@ MonoBehaviour:
   bullet: {fileID: 2444988118548853835, guid: 6f05c58689aa1ee40b2b7744b8bd95ef, type: 3}
   animator: {fileID: 6554687176972864774}
   bulletParents: {fileID: 5414610783107705919, guid: 6fe0917ff9ac5f74d9d89a105e8b7c3d, type: 3}
-  m_circleBulletfireCoolTime: 0.3
+  m_circleBulletfireCoolTime: 0.25
   m_circleBulletBranch: 6
   m_circleBulletSpawnRadius: 2
   m_circleBulletSpeed: 5
@@ -799,8 +799,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -916,7 +916,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2008130395
   m_SortingLayer: 3
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: -1262615760, guid: 835a97cc278e312498d6e1a5ae70b2f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
