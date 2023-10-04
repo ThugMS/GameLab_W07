@@ -120,6 +120,13 @@ public class ThugBoss : MonsterBase
         SetHPGUI();
     }
 
+    public override void GetDamage(float _damage)
+    {
+        base.GetDamage(_damage);
+
+        SetHPGUI();
+    }
+
     #endregion
     #region PrivateMethod
     private void SetHPGUI()

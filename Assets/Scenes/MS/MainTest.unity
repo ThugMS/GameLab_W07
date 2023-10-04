@@ -2027,11 +2027,6 @@ Material:
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!212 &2091055176 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6554687176972864775, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-  m_PrefabInstance: {fileID: 6554687175976580431}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1006721840088788596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2194,12 +2189,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -526613777920259335, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: m_spriteRenderer
-      value: 
-      objectReference: {fileID: 2091055176}
-    - target: {fileID: 6554687176166542386, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: m_jumpTime
-      value: 2
+      propertyPath: m_health
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: -526613777920259335, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
+      propertyPath: m_maxHealth
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 6554687176166542387, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
       propertyPath: m_RootOrder
