@@ -70,6 +70,7 @@ public class ThugBossPhase1 : MonoBehaviour
             StartCircleBullet();
             if(m_isCircleBulletSequenceRunning == false)
             {
+                StopAllCoroutines();
                 m_isCircleBulletSequenceRunning = true;
                 StartCoroutine(CircleBulletSequence());
             }
@@ -80,6 +81,7 @@ public class ThugBossPhase1 : MonoBehaviour
             StartZigZagBullet();
             if (m_isZigZagBulletSequenceRunning == false)
             {
+                StopAllCoroutines();
                 m_isZigZagBulletSequenceRunning = true;
                 StartCoroutine(ZigZagBulletSequence());
             }
@@ -148,7 +150,6 @@ public class ThugBossPhase1 : MonoBehaviour
             m_fireCoolTimeSub = m_zigZagBulletfireCoolTime;
             m_canZigZagBulletFire = false;
 
-            StartCoroutine(ZigZagBulletSequence());
         }
         else
         {

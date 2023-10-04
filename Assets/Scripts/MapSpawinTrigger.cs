@@ -61,16 +61,11 @@ public class MapSpawinTrigger : MonoBehaviour
                 Vector3 bossPos = spawnPoint[2].position + new Vector3(0, 5, 0);
 
                 Destroy(boss);
-
+                Debug.Log("boss restart");
                 GameObject obj = Instantiate(m_bossPrefab, bossPos, Quaternion.identity);
                 obj.GetComponent<ThugBoss>().InitSetting();
                 boss = obj;
-                //tutorialTileTwo.SpawnMonsters(10, 2);
 
-                //boss.SetActive(true);
-                //boss.GetComponent<ThugBoss>().InitSetting();
-                //ThugBoss.instance.gameObject.SetActive(true);
-                //DefensiveBoss.instance.InitSetting();
                 break;
         }
 
