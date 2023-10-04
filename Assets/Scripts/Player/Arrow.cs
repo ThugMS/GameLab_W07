@@ -104,12 +104,12 @@ public class Arrow : MonoBehaviour
 				if (isRecalled == false)
 				{
 					deadEye.ChangeValue(1);
-					monster.GetDamage();
+					monster.GetDamage(1);
 				}
 				else
 				{
 					deadEye.ChangeValue(3);
-					monster.GetDamage();
+					monster.GetDamage(3);
 				}
 				StartCoroutine(nameof(TimeStuck), 0.1f);
 			}
