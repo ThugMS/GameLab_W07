@@ -13,8 +13,11 @@ public class Arrow : MonoBehaviour
 	#endregion
 
 	#region PrivateVariables
+	private PlayerDeadEye deadEye;
+
 	private SpriteRenderer sr;
-	private ParticleSystem ps;
+	private ParticleSystem psHalo;
+	private ParticleSystem psTrail;
 	private Collider2D col;
 
 	private Vector3 destination;
@@ -33,11 +36,13 @@ public class Arrow : MonoBehaviour
 	{
 		TryGetComponent(out sr);
 		TryGetComponent(out col);
-		transform.Find("Halo").TryGetComponent(out ps);
+		transform.Find("Halo").TryGetComponent(out psHalo);
+		transform.Find("Trail").TryGetComponent(out psTrail);
 		recallTween = transform.DOMove(Player.instance.transform.position, speed).SetAutoKill(false).SetEase(Ease.Linear).SetSpeedBased().SetUpdate(true).Pause();
 		isStuck = false;
 		isRecalled = false;
 		destination = Vector2.zero;
+		Player.instance.TryGetComponent(out deadEye);
 	}
 	public void SetSpeed(float _speed)
 	{
@@ -83,7 +88,8 @@ public class Arrow : MonoBehaviour
 			{
 				sr.enabled = false;
 				col.enabled = false;
-				ps.gameObject.SetActive(false);
+				psHalo.gameObject.SetActive(false);
+				psTrail.Stop();
 				Invoke(nameof(DestroySelf), 2f);
 			}
 		}
@@ -94,9 +100,17 @@ public class Arrow : MonoBehaviour
 		{
 			if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
 			{
+				if(isRecalled == false)
+				{
+					deadEye.ChangeValue(1);
+				}
+				else
+				{
+					deadEye.ChangeValue(3);
+				}
 				MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
 				monster.GetDamage();
-				StartCoroutine(nameof(TimeStuck), 0.08f);
+				StartCoroutine(nameof(TimeStuck), 0.1f);
 			}
 		}
 	}

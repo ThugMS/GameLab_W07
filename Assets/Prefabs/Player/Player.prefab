@@ -5250,7 +5250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saturateSpeed: 3
   deadEyeConsumeMult: 20
-  speedMult: 1.5
+  speedMult: 1
 --- !u!50 &7677067290173016399
 Rigidbody2D:
   serializedVersion: 4
