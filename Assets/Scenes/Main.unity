@@ -536,10 +536,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss2
       objectReference: {fileID: 0}
-    - target: {fileID: 6936719945331153721, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: bulletParents
-      value: 
-      objectReference: {fileID: 5414610783107705919, guid: 6fe0917ff9ac5f74d9d89a105e8b7c3d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
 --- !u!21 &605538981
