@@ -728,7 +728,7 @@ PrefabInstance:
     - target: {fileID: 336385543, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}
       propertyPath: m_bossPrefab
       value: 
-      objectReference: {fileID: 8031028749264378299, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
+      objectReference: {fileID: 6554687176166542388, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
     - target: {fileID: 1475257355, guid: d8bfad31fcfd3ff49b898a155c639a68, type: 3}
       propertyPath: monsterParents
       value: 
@@ -2188,10 +2188,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6554687176166542386, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6554687176166542387, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -2241,8 +2237,20 @@ PrefabInstance:
       value: Boss2
       objectReference: {fileID: 0}
     - target: {fileID: 6936719945331153721, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: m_circleBulletSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936719945331153721, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
+      propertyPath: m_zigZagBulletSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936719945331153721, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
+      propertyPath: m_circleBulletfireCoolTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936719945331153721, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
+      propertyPath: m_zigZagBulletfireCoolTime
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
