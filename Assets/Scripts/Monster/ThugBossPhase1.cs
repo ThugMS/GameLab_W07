@@ -17,7 +17,7 @@ public class ThugBossPhase1 : MonoBehaviour
     [SerializeField] private int m_circleBulletSpawnDirection; // 탄막 중심 회전 방향 (시계방향: 1, 시계반대방향: -1)
     [SerializeField] private float m_circleBulletReverseDuration; // 공격 회전 방향 바꾸는 시간
     [SerializeField] private float m_circleBulletDuration; // 공격 시간
-    private bool m_isCircleBulletOn = false; // 탄막 공격 시작?
+    public bool m_isCircleBulletOn = false; // 탄막 공격 시작?
     private bool m_canCircleBulletFire = false; // 탄막 쿨타임?
     private float m_circleBulletRotation = 0; // 회전각
     private bool m_isCircleBulletSequenceRunning = false;
@@ -31,7 +31,7 @@ public class ThugBossPhase1 : MonoBehaviour
     [SerializeField] private int m_zigZagBulletSpawnDirection; // 탄막 중심 회전 방향 (시계방향: 1, 시계반대방향: -1)
     [SerializeField] private float m_zigZagBulletReverseDuration; // 공격 회전 방향 바꾸는 시간
     [SerializeField] private float m_zigZagBulletDuration; // 공격 시간
-    private bool m_isZigZagBulletOn = false; // 탄막 공격 시작?
+    public bool m_isZigZagBulletOn = false; // 탄막 공격 시작?
     private bool m_canZigZagBulletFire = false; // 탄막 쿨타임?
     private float m_zigZagBulletRotation = 0; // 회전각
     private bool m_isZigZagBulletSequenceRunning = false;
@@ -134,6 +134,7 @@ public class ThugBossPhase1 : MonoBehaviour
         // 탄막 공격 종료
         m_isCircleBulletOn = false;
         m_isCircleBulletSequenceRunning = false;
+        ThugBoss.instance.EndAct();
     }
 
 
@@ -185,6 +186,7 @@ public class ThugBossPhase1 : MonoBehaviour
         // 탄막 공격 종료
         m_isZigZagBulletOn = false;
         m_isZigZagBulletSequenceRunning = false;
+        ThugBoss.instance.EndAct();
     }
 
     #endregion
