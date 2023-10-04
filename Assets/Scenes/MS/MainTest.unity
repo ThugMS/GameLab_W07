@@ -2271,11 +2271,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -526613777920259335, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
       propertyPath: m_health
-      value: 50
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: -526613777920259335, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
       propertyPath: m_maxHealth
-      value: 50
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 6554687176166542387, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
       propertyPath: m_RootOrder
