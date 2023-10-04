@@ -66,6 +66,12 @@ public class Arrow : MonoBehaviour
 	{
 		isRecalled = true;
 	}
+	public void DestroySelf()
+	{
+		recallTween.Kill();
+		shotTween.Kill();
+		Destroy(gameObject);
+	}
 	#endregion
 
 	#region PrivateMethod
@@ -114,12 +120,6 @@ public class Arrow : MonoBehaviour
 				StartCoroutine(nameof(TimeStuck), 0.1f);
 			}
 		}
-	}
-	private void DestroySelf()
-	{
-		recallTween.Kill();
-		shotTween.Kill();
-		Destroy(gameObject);
 	}
 
 	private IEnumerator TimeStuck(float _time)

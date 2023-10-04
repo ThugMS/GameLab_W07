@@ -50,6 +50,10 @@ public class PlayerAim : MonoBehaviour
 		body.SetSpriteDirection(Utils.MousePosition);
 		Fire();
 	}
+	public void ForceQuit()
+	{
+		bow.ForceQuit();
+	}
 	#endregion
 
 	#region PrivateMethod
