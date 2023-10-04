@@ -34,6 +34,9 @@ public class ThugBoss : MonsterBase
 
         TryGetComponent<ThugBossPhase1>(out thugBossPhase1);
         TryGetComponent<ThugBossPhase2>(out thugBossPhase2);
+        //페이즈1
+        thugBossPhase1.enabled = true;
+        thugBossPhase2.enabled = false;
 
         BossHpGUI.instance.ShowGUI();
         BossHpGUI.instance.SetMaxHp((int)m_maxHealth);
@@ -41,7 +44,11 @@ public class ThugBoss : MonsterBase
     }
     public void InitSetting()
     {
-       instance = this;
+        //페이즈1
+        thugBossPhase1.enabled = true;
+        thugBossPhase2.enabled = false;
+
+        instance = this;
 
         m_health = m_maxHealth;
         SetHPGUI();
@@ -71,17 +78,9 @@ public class ThugBoss : MonsterBase
 
         if (m_phase == 1)
         {
-            //페이즈1
-            thugBossPhase1.enabled = true;
-            thugBossPhase2.enabled = false;
+
             CheckPhase1Pattern();
 
-        }
-        else if (m_phase == 2)
-        {
-            //페이즈2
-            thugBossPhase1.enabled = false;
-            thugBossPhase2.enabled = true;
         }
     }
 
@@ -125,7 +124,13 @@ public class ThugBoss : MonsterBase
     {
         BossHpGUI.instance.SetHp((int)m_health);
         if (m_health <= m_maxHealth / 2 && m_phase == 1)
+        {
             m_phase = 2;
+            //페이즈2
+            thugBossPhase1.enabled = false;
+            thugBossPhase2.enabled = true;
+        }
+            
     }
 
     private void OnEnable()

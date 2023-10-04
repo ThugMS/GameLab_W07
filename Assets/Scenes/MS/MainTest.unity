@@ -180,37 +180,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64d565a3938b9f4408fa948237d5f1a5, type: 3}
---- !u!1 &215185787 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6554687176166542388, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-  m_PrefabInstance: {fileID: 6554687175976580431}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &215185794
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215185787}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3, y: 3}
-  m_EdgeRadius: 0
 --- !u!1 &250363813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,10 +1489,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3723104682029494140, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: speedMult
-      value: 1.6
-      objectReference: {fileID: 0}
     - target: {fileID: 7677067290106692711, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1534,7 +1499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7677067290173016368, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 66.887
+      value: 65.36
       objectReference: {fileID: 0}
     - target: {fileID: 7677067290173016368, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1576,18 +1541,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7677067290173016399, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7677067290474181592, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 952739065}
-    - target: {fileID: 7677067291739457279, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: arrowPrefab
-      value: 
-      objectReference: {fileID: 5277973483176003088, guid: 81d0331e461ad1c4f8d0d57077dec459, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
 --- !u!1 &1355212042
@@ -1725,6 +1682,10 @@ PrefabInstance:
     - target: {fileID: 8031028749264378299, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
       propertyPath: m_Name
       value: DefensiveBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031028749264378299, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8031028749264378301, guid: 0c7d98480d4758e429a4e5429948dba2, type: 3}
       propertyPath: m_RootOrder
@@ -2227,9 +2188,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -526613777920259335, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: m_damage
-      value: 1
+    - target: {fileID: 6554687176166542386, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6554687176166542387, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
       propertyPath: m_RootOrder
@@ -2280,9 +2241,8 @@ PrefabInstance:
       value: Boss2
       objectReference: {fileID: 0}
     - target: {fileID: 6936719945331153721, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 2444988118548853835, guid: 6f05c58689aa1ee40b2b7744b8bd95ef, type: 3}
-    m_RemovedComponents:
-    - {fileID: 2091055178, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}

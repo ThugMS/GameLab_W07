@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
+using static UnityEngine.GraphicsBuffer;
+using System.Security.Cryptography;
 
 public class ThugBossPhase2 : MonoBehaviour
 {
     #region PublicVariables
     [Header("Stat")]
     public bool m_isAttack = false;
-    public bool m_canMove = false;
+    public bool m_canAttack = false;
+    public bool m_isMove = false;
+    public bool m_canMove = true;
     public float m_attackDelay;
 
     public Animator m_animator;
+    public SpriteRenderer m_body;
     #endregion
    
     #region PrivateVariables
@@ -36,6 +40,11 @@ public class ThugBossPhase2 : MonoBehaviour
     [SerializeField] private GameObject m_laser;
     [SerializeField] private float m_laserSpeed;
     [SerializeField] private int m_laserNum;
+
+    [Header("Move")]
+    [SerializeField] private float m_moveDis;
+    [SerializeField] private float m_moveTime;
+    [SerializeField] private AnimationCurve m_moveEase;
     #endregion
 
     #region PublicMethod
@@ -54,10 +63,43 @@ public class ThugBossPhase2 : MonoBehaviour
             TrackingShadow();
         }
 
+        if (m_isMove == false && m_canAttack == true)
+        {
+            Attack();
+        }
+
+        else if (m_canMove == true && m_isAttack == false)
+        {
+            Move();
+        }
+    }
+
+    private void OnEnable()
+    {
+        Invoke(nameof(AttackDelay), m_attackDelay);
     }
     #endregion
 
     #region PrivateMethod
+    private void Attack()
+    {
+        m_isAttack = true;
+        m_canAttack = false;
+
+        int value = Random.Range(0, 2);
+
+        switch (value) 
+        {
+            case 0:
+                JumpAttack();
+                break;
+
+            case 1:
+                Laser();
+                break;
+        }
+    }
+
     private void JumpAttack()
     {
         StartCoroutine(nameof(IE_Jump));
@@ -99,6 +141,29 @@ public class ThugBossPhase2 : MonoBehaviour
         StartCoroutine(nameof(IE_Laser));
     }
 
+    private void Move()
+    {   
+        m_isMove = true;
+        m_canMove = false;
+
+        Vector3 target = (Player.instance.transform.position - transform.position).normalized;
+
+        Vector3 movePos;
+
+        if (m_moveDis > (Player.instance.transform.position - transform.position).magnitude)
+            movePos = Player.instance.transform.position;
+
+        else
+            movePos = transform.position + target * m_moveDis;
+
+        m_animator.Play("Move");
+
+        Debug.Log(target);
+        Debug.Log(movePos);
+        transform.DOMove(movePos, m_moveTime - 0.3f).SetEase(m_moveEase);
+        Invoke(nameof(MoveEnd), m_moveTime);
+    }
+
     private void CreateWave()
     {
         float term = 360 / m_rockNum;
@@ -110,7 +175,36 @@ public class ThugBossPhase2 : MonoBehaviour
             Vector3 dir = (transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0f)) - transform.position;
 
             GameObject rock = Instantiate(m_rock, transform.position, Quaternion.identity);
-            rock.GetComponent<Rock>().InitSetting(dir.normalized, false);
+            rock.GetComponent<Rock>().InitSetting(dir.normalized, false); 
+        }
+    }
+
+    private void MoveEnd()
+    {
+        m_isMove = false;
+        m_canMove = true;
+    }
+
+    private void AttackEnd()
+    {
+        m_isAttack = false;
+        Invoke(nameof(AttackDelay), m_attackDelay);
+    }
+
+    private void AttackDelay()
+    {
+        m_canAttack = true;
+    }
+
+    private void SetLayer()
+    {
+        if(transform.position.y > Player.instance.transform.position.y)
+        {
+            m_body.sortingLayerID = 3;
+        }
+        else
+        {
+            m_body.sortingLayerID = -3;
         }
     }
 
@@ -137,10 +231,13 @@ public class ThugBossPhase2 : MonoBehaviour
         m_animator.Play("TakeDown");
         Instantiate(m_takeDownEffect, transform.position, Quaternion.identity);
         CreateWave();
+        Invoke(nameof(AttackEnd), 1f);
     }
 
     private IEnumerator IE_Laser()
     {
+        
+
         for(int i = 0; i < m_laserNum; i++)
         {
             float angle = Random.Range(0, 360);
@@ -148,6 +245,7 @@ public class ThugBossPhase2 : MonoBehaviour
 
             yield return new WaitForSeconds(m_laserSpeed);
         }
+        AttackEnd();
     }
     #endregion
 }
