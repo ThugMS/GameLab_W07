@@ -8,6 +8,7 @@ public class Rock : MonoBehaviour
 {
     #region PublicVariables
     public bool m_isDivide = false;
+    public GameObject m_divideRock;
     #endregion
 
     #region PrivateVariables
@@ -58,7 +59,7 @@ public class Rock : MonoBehaviour
             var quater = Quaternion.Euler(0, 0, angle * i);
             Vector3 v = quater * dir;
 
-            GameObject rock = Instantiate(gameObject, transform.position, Quaternion.identity);
+            GameObject rock = Instantiate(m_divideRock, transform.position, Quaternion.identity);
             rock.GetComponent<Rock>().InitSetting(v.normalized, true);
         }
     }
