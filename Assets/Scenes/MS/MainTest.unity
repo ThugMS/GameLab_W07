@@ -2236,21 +2236,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss2
       objectReference: {fileID: 0}
-    - target: {fileID: 6936719945331153721, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: m_circleBulletSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6936719945331153721, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: m_zigZagBulletSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6936719945331153721, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: m_circleBulletfireCoolTime
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6936719945331153721, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
-      propertyPath: m_zigZagBulletfireCoolTime
-      value: 0.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
