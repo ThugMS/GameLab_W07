@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 public class PlayerBulletTime : MonoBehaviour
 {
 	#region PublicVariables
+	public bool IsCalled { get { return isCalled; } }
 	#endregion
 
 	#region PrivateVariables

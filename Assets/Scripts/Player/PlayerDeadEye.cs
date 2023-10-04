@@ -8,6 +8,7 @@ public class PlayerDeadEye : PlayerStat
 	#endregion
 
 	#region PrivateVariables
+	private PlayerBulletTime bulletTime;
 	private UIGauge deadEyeUIGuage;
 	private float initValue = 50f;
 	#endregion
@@ -19,10 +20,21 @@ public class PlayerDeadEye : PlayerStat
 		currentValue = initValue;
 		deadEyeUIGuage.Initialize();
 		deadEyeUIGuage.UpdateValue(currentValue / maxValue);
+		TryGetComponent(out bulletTime);
 	}
 	public override void ChangeValue(float _value)
 	{
-		base.ChangeValue(_value);
+		if(_value > 0)
+		{
+			if(bulletTime.IsCalled == false)
+			{
+				base.ChangeValue(_value);
+			}
+		}
+		else
+		{
+			base.ChangeValue(_value);
+		}
 		deadEyeUIGuage.UpdateValue(currentValue / maxValue);
 	}
 	#endregion

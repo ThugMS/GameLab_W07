@@ -12,13 +12,15 @@ public class ThugBoss : MonsterBase
     public bool m_canAct = true;
     public int m_phase = 1;
     public int m_pattern;
-    public float m_actTerm = 5f;
+    public float m_actTerm = 3f;
     #endregion
     #region PrivateVariables
     private ThugBossPhase1 thugBossPhase1;
     private ThugBossPhase2 thugBossPhase2;
 
     #endregion
+
+
     #region PublicMethod
 
     private void Awake()
@@ -157,6 +159,19 @@ public class ThugBoss : MonsterBase
         base.Dead();
 
         SceneManager.LoadScene(1);
+    }
+
+    public void CleanBUllet()
+    {
+        Transform[] children = transform.GetComponentsInChildren<Transform>();
+
+        foreach (Transform child in children)
+        {
+            if (child != null && child != transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
     #endregion
 }
