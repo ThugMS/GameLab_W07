@@ -31,9 +31,9 @@ public class ThugBoss : MonsterBase
 
     protected override void Start()
     {
+        //test
+        InitSetting();
 
-        TryGetComponent<ThugBossPhase1>(out thugBossPhase1);
-        TryGetComponent<ThugBossPhase2>(out thugBossPhase2);
         //페이즈1
         thugBossPhase1.enabled = true;
         thugBossPhase2.enabled = false;
@@ -44,6 +44,8 @@ public class ThugBoss : MonsterBase
     }
     public void InitSetting()
     {
+        TryGetComponent<ThugBossPhase1>(out thugBossPhase1);
+        TryGetComponent<ThugBossPhase2>(out thugBossPhase2);
         //페이즈1
         thugBossPhase1.enabled = true;
         thugBossPhase2.enabled = false;
@@ -126,6 +128,7 @@ public class ThugBoss : MonsterBase
         if (m_health <= m_maxHealth / 2 && m_phase == 1)
         {
             m_phase = 2;
+            thugBossPhase1.StopAllCoroutines();
             //페이즈2
             thugBossPhase1.enabled = false;
             thugBossPhase2.enabled = true;
