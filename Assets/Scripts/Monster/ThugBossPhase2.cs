@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using static UnityEngine.GraphicsBuffer;
 
 
 public class ThugBossPhase2 : MonoBehaviour
@@ -9,10 +10,13 @@ public class ThugBossPhase2 : MonoBehaviour
     #region PublicVariables
     [Header("Stat")]
     public bool m_isAttack = false;
-    public bool m_canMove = false;
+    public bool m_canAttack = false;
+    public bool m_isMove = false;
+    public bool m_canMove = true;
     public float m_attackDelay;
 
     public Animator m_animator;
+    public SpriteRenderer m_body;
     #endregion
    
     #region PrivateVariables
@@ -36,6 +40,11 @@ public class ThugBossPhase2 : MonoBehaviour
     [SerializeField] private GameObject m_laser;
     [SerializeField] private float m_laserSpeed;
     [SerializeField] private int m_laserNum;
+
+    [Header("Move")]
+    [SerializeField] private float m_moveDis;
+    [SerializeField] private float m_moveTime;
+    [SerializeField] private AnimationCurve m_moveEase;
     #endregion
 
     #region PublicMethod
@@ -54,6 +63,17 @@ public class ThugBossPhase2 : MonoBehaviour
             TrackingShadow();
         }
 
+        if (m_isMove == false && m_canAttack == true)
+        {
+
+        }
+
+        else if (m_canMove == true && m_isAttack == false)
+        {
+            Move();
+        }
+
+        
     }
     #endregion
 
@@ -99,6 +119,29 @@ public class ThugBossPhase2 : MonoBehaviour
         StartCoroutine(nameof(IE_Laser));
     }
 
+    private void Move()
+    {   
+        m_isMove = true;
+        m_canMove = false;
+
+        Vector3 target = (Player.instance.transform.position - transform.position).normalized;
+
+        Vector3 movePos;
+
+        if (m_moveDis > (Player.instance.transform.position - transform.position).magnitude)
+            movePos = Player.instance.transform.position;
+
+        else
+            movePos = transform.position + target * m_moveDis;
+
+        m_animator.Play("Move");
+
+        Debug.Log(target);
+        Debug.Log(movePos);
+        transform.DOMove(movePos, m_moveTime - 0.3f).SetEase(m_moveEase);
+        Invoke(nameof(MoveEnd), m_moveTime);
+    }
+
     private void CreateWave()
     {
         float term = 360 / m_rockNum;
@@ -110,7 +153,25 @@ public class ThugBossPhase2 : MonoBehaviour
             Vector3 dir = (transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0f)) - transform.position;
 
             GameObject rock = Instantiate(m_rock, transform.position, Quaternion.identity);
-            rock.GetComponent<Rock>().InitSetting(dir.normalized, false);
+            rock.GetComponent<Rock>().InitSetting(dir.normalized, false); 
+        }
+    }
+
+    private void MoveEnd()
+    {
+        m_isMove = false;
+        m_canMove = true;
+    }
+
+    private void SetLayer()
+    {
+        if(transform.position.y > Player.instance.transform.position.y)
+        {
+            m_body.sortingLayerID = 3;
+        }
+        else
+        {
+            m_body.sortingLayerID = -3;
         }
     }
 
