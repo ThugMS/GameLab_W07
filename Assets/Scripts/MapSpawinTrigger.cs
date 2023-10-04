@@ -51,7 +51,7 @@ public class MapSpawinTrigger : MonoBehaviour
                 break;
 
             case 2:
-                tutorialTileTwo.SpawnMonsters(20, 1);
+                //tutorialTileTwo.SpawnMonsters(20, 1);
                 SetSpawnPos(spawnPoint[1]);
                 break;
 
@@ -65,7 +65,7 @@ public class MapSpawinTrigger : MonoBehaviour
                 GameObject obj = Instantiate(m_bossPrefab, bossPos, Quaternion.identity);
                 obj.GetComponent<ThugBoss>().InitSetting();
                 boss = obj;
-                tutorialTileTwo.SpawnMonsters(10, 2);
+                //tutorialTileTwo.SpawnMonsters(10, 2);
 
                 //boss.SetActive(true);
                 //boss.GetComponent<ThugBoss>().InitSetting();
