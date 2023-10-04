@@ -234,12 +234,15 @@ MonoBehaviour:
   m_jumpEffect: {fileID: 937622558981467422, guid: 11f4e0fc2390b6740b4d61244f2d4a2d, type: 3}
   m_takeDownEffect: {fileID: 286289536002011247, guid: 415201cd30c5d664393711beb9c5e50b, type: 3}
   m_jumpShadow: {fileID: 0}
-  m_jumpShadowDelay: 0.7
+  m_jumpShadowSpeed: 1
   m_isShadow: 0
   m_jumpTime: 5
   m_jumpEase: 18
   m_rock: {fileID: 4310142308460514268, guid: 8d9a566c432e927489f390876280b8f8, type: 3}
   m_rockNum: 5
+  m_laser: {fileID: 431809881074885161, guid: 8b2ead3aa2461c74584491e5811ed2dc, type: 3}
+  m_laserSpeed: 1
+  m_laserNum: 10
 --- !u!1 &250363813
 GameObject:
   m_ObjectHideFlags: 0
