@@ -156,11 +156,11 @@ public class ThugBoss : MonsterBase
 
     public void CleanBUllet()
     {
-        Transform[] children = transform.GetComponentsInChildren<Transform>();
+        Transform[] children = thugBossPhase1.bulletParents.transform.GetComponentsInChildren<Transform>();
 
         foreach (Transform child in children)
         {
-            if (child != null && child != transform)
+            if (child != null && child != thugBossPhase1.bulletParents.transform)
             {
                 Destroy(child.gameObject);
             }
