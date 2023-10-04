@@ -334,7 +334,7 @@ MonoBehaviour:
   bullet: {fileID: 2444988118548853835, guid: 6f05c58689aa1ee40b2b7744b8bd95ef, type: 3}
   animator: {fileID: 6554687176972864774}
   bulletParents: {fileID: 5414610783107705919, guid: 6fe0917ff9ac5f74d9d89a105e8b7c3d, type: 3}
-  m_circleBulletfireCoolTime: 0.2
+  m_circleBulletfireCoolTime: 0.3
   m_circleBulletBranch: 6
   m_circleBulletSpawnRadius: 2
   m_circleBulletSpeed: 5
@@ -343,11 +343,11 @@ MonoBehaviour:
   m_circleBulletReverseDuration: 6
   m_circleBulletDuration: 12
   m_isCircleBulletOn: 0
-  m_zigZagBulletfireCoolTime: 0.8
+  m_zigZagBulletfireCoolTime: 0.6
   m_zigZagBulletBranch: 28
   m_zigZagBulletSpawnRadius: 2
   m_zigZagBulletSpeed: 5
-  m_zigZagBulletRotationVelocity: 30
+  m_zigZagBulletRotationVelocity: 50
   m_zigZagBulletSpawnDirection: -1
   m_zigZagBulletReverseDuration: 0
   m_zigZagBulletDuration: 8
