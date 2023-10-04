@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using static UnityEngine.GraphicsBuffer;
-
+using System.Security.Cryptography;
 
 public class ThugBossPhase2 : MonoBehaviour
 {
@@ -65,19 +65,41 @@ public class ThugBossPhase2 : MonoBehaviour
 
         if (m_isMove == false && m_canAttack == true)
         {
-
+            Attack();
         }
 
         else if (m_canMove == true && m_isAttack == false)
         {
             Move();
         }
+    }
 
-        
+    private void OnEnable()
+    {
+        Invoke(nameof(AttackDelay), m_attackDelay);
     }
     #endregion
 
     #region PrivateMethod
+    private void Attack()
+    {
+        m_isAttack = true;
+        m_canAttack = false;
+
+        int value = Random.Range(0, 2);
+
+        switch (value) 
+        {
+            case 0:
+                JumpAttack();
+                break;
+
+            case 1:
+                Laser();
+                break;
+        }
+    }
+
     private void JumpAttack()
     {
         StartCoroutine(nameof(IE_Jump));
@@ -163,6 +185,17 @@ public class ThugBossPhase2 : MonoBehaviour
         m_canMove = true;
     }
 
+    private void AttackEnd()
+    {
+        m_isAttack = false;
+        Invoke(nameof(AttackDelay), m_attackDelay);
+    }
+
+    private void AttackDelay()
+    {
+        m_canAttack = true;
+    }
+
     private void SetLayer()
     {
         if(transform.position.y > Player.instance.transform.position.y)
@@ -198,10 +231,13 @@ public class ThugBossPhase2 : MonoBehaviour
         m_animator.Play("TakeDown");
         Instantiate(m_takeDownEffect, transform.position, Quaternion.identity);
         CreateWave();
+        Invoke(nameof(AttackEnd), 1f);
     }
 
     private IEnumerator IE_Laser()
     {
+        
+
         for(int i = 0; i < m_laserNum; i++)
         {
             float angle = Random.Range(0, 360);
@@ -209,6 +245,7 @@ public class ThugBossPhase2 : MonoBehaviour
 
             yield return new WaitForSeconds(m_laserSpeed);
         }
+        AttackEnd();
     }
     #endregion
 }
