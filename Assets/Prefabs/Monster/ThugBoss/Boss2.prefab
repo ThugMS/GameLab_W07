@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 2367659542312484635}
   - component: {fileID: 9145230211159625003}
   - component: {fileID: 1282736184256444830}
+  - component: {fileID: 5546680066675930630}
   m_Layer: 0
   m_Name: Shackle
   m_TagString: Untagged
@@ -190,6 +191,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5546680066675930630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3629530106602305969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821081c1bf8f42e49bae4abd90ca2a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6554687176166542388
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,6 +379,9 @@ MonoBehaviour:
   m_pattern: 0
   m_actTerm: 5
   animator: {fileID: 6554687176972864774}
+  m_bodyAni: {fileID: 6554687176972864774}
+  m_shackleLeftAni: {fileID: 1282736184256444830}
+  m_shackleRightAni: {fileID: 4164316206081920361}
 --- !u!50 &215185790
 Rigidbody2D:
   serializedVersion: 4
@@ -424,6 +440,7 @@ GameObject:
   - component: {fileID: 6554687176972864776}
   - component: {fileID: 6554687176972864775}
   - component: {fileID: 6554687176972864774}
+  - component: {fileID: 8777849405977408590}
   m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
@@ -521,6 +538,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8777849405977408590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6554687176972864777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9bbedc806134ea4c801a73d69247dc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_shackle: {fileID: 2641280951433261809}
+  m_lock: {fileID: 8397220571932954249}
 --- !u!1 &7133395714837544671
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +563,7 @@ GameObject:
   - component: {fileID: 1475934470494288741}
   - component: {fileID: 6104454462194857266}
   - component: {fileID: 4164316206081920361}
+  - component: {fileID: 1741231237762893127}
   m_Layer: 0
   m_Name: Shackle (1)
   m_TagString: Untagged
@@ -616,7 +648,7 @@ Animator:
   m_GameObject: {fileID: 7133395714837544671}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 57990bcfb48e3ae4b84ce90b854a64e7, type: 2}
+  m_Controller: {fileID: 9100000, guid: cc891bdba9f094948a0f9aaf32f7a382, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -627,6 +659,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1741231237762893127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133395714837544671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821081c1bf8f42e49bae4abd90ca2a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8397220571932954249
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +743,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2008130395
   m_SortingLayer: 3
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1262615760, guid: 835a97cc278e312498d6e1a5ae70b2f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

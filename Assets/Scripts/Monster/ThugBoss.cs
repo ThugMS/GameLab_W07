@@ -19,6 +19,10 @@ public class ThugBoss : MonsterBase
     private ThugBossPhase1 thugBossPhase1;
     private ThugBossPhase2 thugBossPhase2;
 
+    [Header("Animation")]
+    [SerializeField] private Animator m_bodyAni;
+    [SerializeField] private Animator m_shackleLeftAni;
+    [SerializeField] private Animator m_shackleRightAni;
     #endregion
 
 
@@ -84,7 +88,7 @@ public class ThugBoss : MonsterBase
         if (m_phase == 1)
         {
             animator.Play("ShotReady");
-            Invoke("CheckPhase1Pattern",1);
+            Invoke(nameof(CheckPhase1Pattern),1);
 
         }
     }
@@ -141,9 +145,23 @@ public class ThugBoss : MonsterBase
             thugBossPhase1.StopAllCoroutines();
             //페이즈2
             thugBossPhase1.enabled = false;
-            thugBossPhase2.enabled = true;
+            ShowUnlockShackleAnimation();
+            Invoke(nameof(StartPhase2), 1f);
+            
         }
             
+    }
+
+    private void ShowUnlockShackleAnimation()
+    {
+        m_bodyAni.Play("UnlockShackle");
+        m_shackleLeftAni.Play("Shackle");
+        m_shackleRightAni.Play("Shackle");
+    }
+
+    private void StartPhase2()
+    {
+        thugBossPhase2.enabled = true;
     }
 
     private void OnEnable()
@@ -162,7 +180,7 @@ public class ThugBoss : MonsterBase
         SceneManager.LoadScene(1);
     }
 
-    public void CleanBUllet()
+    public void CleanBullet()
     {
         Transform[] children = thugBossPhase1.bulletParents.transform.GetComponentsInChildren<Transform>();
 
