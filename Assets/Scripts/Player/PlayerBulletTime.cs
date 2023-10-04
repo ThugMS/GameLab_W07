@@ -24,6 +24,7 @@ public class PlayerBulletTime : MonoBehaviour
 	[SerializeField] private float saturateSpeed = 1;
 	[SerializeField] private float deadEyeConsumeMult;
 	[SerializeField] private float speedMult;
+	[SerializeField] private float timeSpeed = 0.3f;
 	private float deadEyeCooldown = 1f;
 
 	private bool isCalled;
@@ -49,7 +50,7 @@ public class PlayerBulletTime : MonoBehaviour
 		isReady = false;
 		rippleEffect.gameObject.SetActive(true);
 		isCalled = true;
-		Time.timeScale = 0.1f;
+		Time.timeScale = timeSpeed;
 		dustParticle.Stop();
 		int scaleX = transform.position.x - Utils.MousePosition.x > 0 ? 1 : -1;
 		dashParticle.transform.localScale = new Vector3(scaleX, 1, 1);

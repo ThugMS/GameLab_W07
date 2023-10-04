@@ -127,19 +127,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 2444988118548853835, guid: 6f05c58689aa1ee40b2b7744b8bd95ef, type: 3}
-  m_circleBulletfireCoolTime: 0.15
+  m_circleBulletfireCoolTime: 0.2
   m_circleBulletBranch: 6
   m_circleBulletSpawnRadius: 2
-  m_circleBulletSpeed: 3
+  m_circleBulletSpeed: 5
   m_circleBulletRotationVelocity: 30
   m_circleBulletSpawnDirection: 1
   m_circleBulletReverseDuration: 6
   m_circleBulletDuration: 12
   m_isCircleBulletOn: 0
-  m_zigZagBulletfireCoolTime: 0.6
+  m_zigZagBulletfireCoolTime: 0.8
   m_zigZagBulletBranch: 28
   m_zigZagBulletSpawnRadius: 2
-  m_zigZagBulletSpeed: 3
+  m_zigZagBulletSpeed: 5
   m_zigZagBulletRotationVelocity: 30
   m_zigZagBulletSpawnDirection: -1
   m_zigZagBulletReverseDuration: 0

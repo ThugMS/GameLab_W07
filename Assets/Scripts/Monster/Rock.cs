@@ -29,7 +29,7 @@ public class Rock : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Move();
     }
