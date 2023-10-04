@@ -5382,7 +5382,7 @@ MonoBehaviour:
   saturateSpeed: 3
   deadEyeConsumeMult: 20
   speedMult: 1
-  timeSpeed: 0.3
+  timeSpeed: 0.2
   deadEyeCooldown: 0.2
   initDeadEyePrice: 10
 --- !u!50 &7677067290173016399
