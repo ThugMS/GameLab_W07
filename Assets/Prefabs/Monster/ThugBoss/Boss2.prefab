@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6936719945331153721}
   - component: {fileID: -526613777920259335}
   - component: {fileID: 215185790}
+  - component: {fileID: 215185794}
   m_Layer: 7
   m_Name: Boss2
   m_TagString: Untagged
@@ -78,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c3f2f91b942ee4990ab38632bba331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
+  bullet: {fileID: 2444988118548853835, guid: 6f05c58689aa1ee40b2b7744b8bd95ef, type: 3}
   m_circleBulletfireCoolTime: 0.15
   m_circleBulletBranch: 6
   m_circleBulletSpawnRadius: 2
@@ -108,11 +109,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 215185790}
-  m_collider: {fileID: 2091055178}
+  m_collider: {fileID: 0}
   m_offset: 0
   m_maxHealth: 100
   m_health: 100
-  m_damage: 0
+  m_damage: 1
   m_player: {fileID: 0}
   m_targetDirection: {x: 0, y: 0, z: 0}
   m_phase: 1
@@ -137,6 +138,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &215185794
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6554687176166542388}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3}
+  m_EdgeRadius: 0
 --- !u!1 &6554687176972864777
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +175,6 @@ GameObject:
   - component: {fileID: 6554687176972864776}
   - component: {fileID: 6554687176972864775}
   - component: {fileID: 6554687176972864774}
-  - component: {fileID: 2091055178}
   m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
@@ -244,29 +270,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &2091055178
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6554687176972864777}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
