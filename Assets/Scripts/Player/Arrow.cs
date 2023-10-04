@@ -100,16 +100,17 @@ public class Arrow : MonoBehaviour
 		{
 			if (collision.gameObject.layer == LayerMask.NameToLayer("Monster"))
 			{
-				if(isRecalled == false)
+				MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
+				if (isRecalled == false)
 				{
 					deadEye.ChangeValue(1);
+					monster.GetDamage();
 				}
 				else
 				{
 					deadEye.ChangeValue(3);
+					monster.GetDamage();
 				}
-				MonsterBase monster = collision.gameObject.GetComponent<MonsterBase>();
-				monster.GetDamage();
 				StartCoroutine(nameof(TimeStuck), 0.1f);
 			}
 		}

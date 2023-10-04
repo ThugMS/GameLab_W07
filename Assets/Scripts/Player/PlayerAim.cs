@@ -27,7 +27,14 @@ public class PlayerAim : MonoBehaviour
 	}
 	public void OpenFire()
 	{
-		isCalled = true;
+		if (bow.CheckForExtraArrows() == false)
+		{
+			bow.Recall();
+		}
+		else
+		{
+			isCalled = true;
+		}
 	}
 	public void HoldFire()
 	{
@@ -57,10 +64,6 @@ public class PlayerAim : MonoBehaviour
 				if(bow.CheckForExtraArrows())
 				{
 					bow.Fire();
-				}
-				else
-				{
-					bow.Recall();
 				}
 			}
 		}
