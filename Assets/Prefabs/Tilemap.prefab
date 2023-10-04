@@ -229,6 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5331181031208724659}
   - component: {fileID: 1452609795231408990}
+  - component: {fileID: 941532126}
   m_Layer: 10
   m_Name: Collider
   m_TagString: Untagged
@@ -277,6 +278,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.79, y: 9.51}
   m_EdgeRadius: 0
+--- !u!114 &941532126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804927749397497556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f24fde041e95e24980b3c7c974d128c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2008932852876678735
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,7 +845,7 @@ TilemapCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008932852876678735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -879,23 +892,9 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 2543208490901179027}
-    m_ColliderPaths:
-    - - X: 20000000
-        Y: 50000000
-      - X: -20000000
-        Y: 50000000
-      - X: -20000000
-        Y: -50000000
-      - X: 20000000
-        Y: -50000000
+  m_ColliderPaths: []
   m_CompositePaths:
-    m_Paths:
-    - - {x: 1.9999708, y: -5}
-      - {x: 1.9999708, y: 5}
-      - {x: -2, y: 4.999971}
-      - {x: -1.9999708, y: -5}
+    m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!1 &3639788765549569834
@@ -11618,6 +11617,7 @@ MonoBehaviour:
   - {fileID: 159745916}
   - {fileID: 21569089}
   - {fileID: 1363483162}
+  m_bossPrefab: {fileID: 6554687176166542388, guid: 79b10dcce939f124ba1163be36f9cc5e, type: 3}
 --- !u!1 &4001296251962848503
 GameObject:
   m_ObjectHideFlags: 0
@@ -13187,7 +13187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94147477315a65d4eab965db8eb73998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfMonsters: 15
   monsterPrefab: {fileID: 226801634644380421, guid: 608dd86d5513c7d40802bc1e0677754d, type: 3}
   spawnRadius: 8
   isCleaningForRestart: 0

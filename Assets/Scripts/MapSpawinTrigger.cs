@@ -59,7 +59,7 @@ public class MapSpawinTrigger : MonoBehaviour
                 SetSpawnPos(spawnPoint[2]);
 
                 Vector3 bossPos = spawnPoint[2].position + new Vector3(0, 5, 0);
-
+                boss.GetComponent<ThugBoss>().CleanBUllet();
                 Destroy(boss);
                 Debug.Log("boss restart");
                 GameObject obj = Instantiate(m_bossPrefab, bossPos, Quaternion.identity);
