@@ -5383,6 +5383,8 @@ MonoBehaviour:
   deadEyeConsumeMult: 20
   speedMult: 1
   timeSpeed: 0.3
+  deadEyeCooldown: 0.2
+  initDeadEyePrice: 10
 --- !u!50 &7677067290173016399
 Rigidbody2D:
   serializedVersion: 4
