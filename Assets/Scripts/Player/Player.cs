@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
 		// dash.ForceQuit();
 		// warp.ForceQuit();
 		bulletTime.ForceQuit();
-		aim.Recall();
+		aim.ForceQuit();
 	}
 	public void SetInvincibility(bool b)
 	{
