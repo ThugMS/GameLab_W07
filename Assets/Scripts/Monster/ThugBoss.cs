@@ -13,6 +13,7 @@ public class ThugBoss : MonsterBase
     public int m_phase = 1;
     public int m_pattern;
     public float m_actTerm = 3f;
+    public Animator animator;
     #endregion
     #region PrivateVariables
     private ThugBossPhase1 thugBossPhase1;
@@ -57,7 +58,7 @@ public class ThugBoss : MonsterBase
         m_health = m_maxHealth;
         SetHPGUI();
         m_canAct = false;
-        Invoke(nameof(ReadyAct), 5.0f);
+        Invoke(nameof(ReadyAct), 4.0f);
         m_isAct = false;
         m_phase = 1;
     }
@@ -82,8 +83,8 @@ public class ThugBoss : MonsterBase
 
         if (m_phase == 1)
         {
-
-            CheckPhase1Pattern();
+            animator.Play("ShotReady");
+            Invoke("CheckPhase1Pattern",1);
 
         }
     }
@@ -91,14 +92,14 @@ public class ThugBoss : MonsterBase
     private void CheckPhase1Pattern()
     {
         m_pattern = Random.Range(0, 2);
-
+        
         switch (m_pattern)
         {
+            
             case 0:
                 thugBossPhase1.m_isCircleBulletOn = true;
                 break;
             case 1:
-
                 thugBossPhase1.m_isZigZagBulletOn = true;
                 break;
         }
