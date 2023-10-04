@@ -27,6 +27,7 @@ public class PlayerBulletTime : MonoBehaviour
 	[SerializeField] private float speedMult;
 	[SerializeField] private float timeSpeed = 0.3f;
 	[SerializeField] private float deadEyeCooldown = 0f;
+	[SerializeField] private float initDeadEyePrice;
 
 	private bool isCalled;
 	private bool isReady;
@@ -47,7 +48,15 @@ public class PlayerBulletTime : MonoBehaviour
 	public void OnActionPerformed()
 	{
 		if (isReady == false)
+		{
 			return;
+		}
+		if(deadEye.Value < initDeadEyePrice)
+		{
+			UIPopupMessage.instance.PrintText("게이지가 충분하지 않습니다!");
+			return;
+		}
+		deadEye.ChangeValue(-initDeadEyePrice);
 		isReady = false;
 		rippleEffect.gameObject.SetActive(true);
 		isCalled = true;
