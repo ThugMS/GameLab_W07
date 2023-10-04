@@ -93,7 +93,7 @@ public class Bow : MonoBehaviour
 	{
 		if(isReadyToShot == false)
 		{
-			recallDelayTimer += Time.deltaTime;
+			recallDelayTimer += Time.unscaledDeltaTime;
 			recallGauge.UpdateValue(recallDelayTimer / recallPostDelay);
 			if (recallDelayTimer > recallPostDelay)
 			{
