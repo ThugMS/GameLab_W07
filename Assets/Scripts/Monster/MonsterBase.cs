@@ -13,6 +13,7 @@ public abstract class MonsterBase : MonoBehaviour
 
     public float m_maxHealth;
     public float m_health;
+    public SpriteRenderer m_spriteRenderer;
     #endregion
 
     #region PrivateVariables
@@ -23,6 +24,8 @@ public abstract class MonsterBase : MonoBehaviour
     [Header("Target")]
     [SerializeField] protected GameObject m_player;
     [SerializeField] protected Vector3 m_targetDirection;
+
+    private Color m_hitColor = new Color(255f / 255f, 129f / 255f, 133f / 255f);
     #endregion
 
     #region PublicMethod
@@ -47,6 +50,7 @@ public abstract class MonsterBase : MonoBehaviour
     public virtual void GetDamage()
     {
         m_health -= m_damage;
+        ShowHitEffect();
 
         if (m_health <= 0)
             Dead();
@@ -55,6 +59,7 @@ public abstract class MonsterBase : MonoBehaviour
     public virtual void GetDamage(float _damage)
     {
         m_health -= _damage;
+        ShowHitEffect();
 
         if (m_health <= 0)
             Dead();
@@ -65,6 +70,17 @@ public abstract class MonsterBase : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void ShowHitEffect()
+    {
+        m_spriteRenderer.color = m_hitColor;
+
+        Invoke(nameof(ReturnColor), 0.05f);
+    }
+
+    public void ReturnColor()
+    {
+        m_spriteRenderer.color = Color.white;
+    }
     #endregion
 
     #region PublicMethod
