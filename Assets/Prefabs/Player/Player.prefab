@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.12
       minScalar: 0.4
       maxCurve:
         serializedVersion: 2
@@ -5250,7 +5250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saturateSpeed: 3
   deadEyeConsumeMult: 20
-  speedMult: 1.6
+  speedMult: 1.5
 --- !u!50 &7677067290173016399
 Rigidbody2D:
   serializedVersion: 4
@@ -5458,7 +5458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowPrefab: {fileID: 5277973483176003088, guid: 81d0331e461ad1c4f8d0d57077dec459, type: 3}
   angularSpeed: 12
-  speed: 30
+  speed: 50
   maxArrowCount: 5
 --- !u!1 &7677067291935407875
 GameObject:

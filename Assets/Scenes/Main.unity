@@ -1485,14 +1485,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1350190254, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3723104682029494140, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: speedMult
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7677067290106692711, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1549,34 +1541,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 952739065}
-    - target: {fileID: 7677067291739457279, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: arrowPrefab
-      value: 
-      objectReference: {fileID: 5277973483176003088, guid: 81d0331e461ad1c4f8d0d57077dec459, type: 3}
-    - target: {fileID: 7677067291739457279, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: arrowList.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7677067291739457279, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: arrowList.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7677067291739457279, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: arrowList.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7677067291739457279, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: arrowList.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7677067291739457279, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: arrowList.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7677067291739457279, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
-      propertyPath: arrowList.Array.data[4]
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80a6887e324f28d44952212c2bdbb8e5, type: 3}
 --- !u!1 &1355212042
