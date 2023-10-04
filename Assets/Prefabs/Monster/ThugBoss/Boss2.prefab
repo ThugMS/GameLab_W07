@@ -44,15 +44,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6554687176166542388}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0394c9adcc1dde41b450726b9d3b585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_isAttack: 0
-  m_canMove: 0
-  m_attackDelay: 0
+  m_canAttack: 0
+  m_isMove: 0
+  m_canMove: 1
+  m_attackDelay: 5
   m_animator: {fileID: 6554687176972864774}
+  m_body: {fileID: 6554687176972864775}
   m_jumpReadyTime: 1
   m_jumpShadowPrefab: {fileID: 6010086362304646885, guid: edbd76c3e6d10f047be45409a4b90019, type: 3}
   m_jumpEffect: {fileID: 937622558981467422, guid: 11f4e0fc2390b6740b4d61244f2d4a2d, type: 3}
@@ -67,6 +70,50 @@ MonoBehaviour:
   m_laser: {fileID: 431809881074885161, guid: 8b2ead3aa2461c74584491e5811ed2dc, type: 3}
   m_laserSpeed: 1
   m_laserNum: 10
+  m_moveDis: 5
+  m_moveTime: 1.5
+  m_moveEase:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.15021665
+      outSlope: 0.15021665
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.23119101
+      value: 0.03472874
+      inSlope: 0.9404237
+      outSlope: 0.9404237
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7634901
+      value: 0.95594186
+      inSlope: 0.95845765
+      outSlope: 0.95845765
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.18628456
+      outSlope: 0.18628456
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &6936719945331153721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,6 +135,7 @@ MonoBehaviour:
   m_circleBulletSpawnDirection: 1
   m_circleBulletReverseDuration: 6
   m_circleBulletDuration: 12
+  m_isCircleBulletOn: 0
   m_zigZagBulletfireCoolTime: 0.6
   m_zigZagBulletBranch: 28
   m_zigZagBulletSpawnRadius: 2
@@ -96,6 +144,7 @@ MonoBehaviour:
   m_zigZagBulletSpawnDirection: -1
   m_zigZagBulletReverseDuration: 0
   m_zigZagBulletDuration: 8
+  m_isZigZagBulletOn: 0
 --- !u!114 &-526613777920259335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,14 +158,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 215185790}
-  m_collider: {fileID: 0}
+  m_collider: {fileID: 215185794}
   m_offset: 0
   m_maxHealth: 100
   m_health: 100
   m_damage: 1
   m_player: {fileID: 0}
   m_targetDirection: {x: 0, y: 0, z: 0}
+  m_isAct: 0
+  m_canAct: 1
   m_phase: 1
+  m_pattern: 0
+  m_actTerm: 5
 --- !u!50 &215185790
 Rigidbody2D:
   serializedVersion: 4
@@ -125,7 +178,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6554687176166542388}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -235,9 +288,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 2008130395
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
