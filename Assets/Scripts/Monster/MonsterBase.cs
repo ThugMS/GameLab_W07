@@ -52,6 +52,14 @@ public abstract class MonsterBase : MonoBehaviour
             Dead();
     }
 
+    public virtual void GetDamage(float _damage)
+    {
+        m_health -= _damage;
+
+        if (m_health <= 0)
+            Dead();
+    }
+
     public virtual void Dead()
     {
         Destroy(gameObject);
