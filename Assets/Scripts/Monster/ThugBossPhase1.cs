@@ -114,7 +114,7 @@ public class ThugBossPhase1 : MonoBehaviour
             Vector2 spawnPosition = transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * m_circleBulletSpawnRadius, Mathf.Sin(angle * Mathf.Deg2Rad) * m_circleBulletSpawnRadius, 0f);
 
             GameObject circleBullet = Instantiate(bullet, spawnPosition, Quaternion.identity);
-            circleBullet.GetComponent<ThugBossBullet>().Init(m_circleBulletSpeed);
+            circleBullet.GetComponent<ThugBossBullet>().Init(m_circleBulletSpeed, transform.position);
         }
     }
 
@@ -167,7 +167,7 @@ public class ThugBossPhase1 : MonoBehaviour
             Vector2 spawnPosition = transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad) * m_zigZagBulletSpawnRadius, Mathf.Sin(angle * Mathf.Deg2Rad) * m_zigZagBulletSpawnRadius, 0f);
 
             GameObject circleBullet = Instantiate(bullet, spawnPosition, Quaternion.identity);
-            circleBullet.GetComponent<ThugBossBullet>().Init(m_zigZagBulletSpeed);
+            circleBullet.GetComponent<ThugBossBullet>().Init(m_zigZagBulletSpeed, transform.position);
         }
     }
 

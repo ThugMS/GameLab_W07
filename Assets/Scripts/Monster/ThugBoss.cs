@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ThugBoss : MonsterBase
 {
@@ -30,7 +31,7 @@ public class ThugBoss : MonsterBase
 
     protected override void Start()
     {
-        
+
         TryGetComponent<ThugBossPhase1>(out thugBossPhase1);
         TryGetComponent<ThugBossPhase2>(out thugBossPhase2);
 
@@ -40,6 +41,8 @@ public class ThugBoss : MonsterBase
     }
     public void InitSetting()
     {
+       instance = this;
+
         m_health = m_maxHealth;
         SetHPGUI();
         m_canAct = false;
@@ -133,6 +136,12 @@ public class ThugBoss : MonsterBase
     private void OnDisable()
     {
         BossHpGUI.instance?.HideGUI();
+    }
+    public override void Dead()
+    {
+        base.Dead();
+
+        SceneManager.LoadScene(1);
     }
     #endregion
 }
