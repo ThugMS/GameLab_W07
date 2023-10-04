@@ -26,7 +26,7 @@ public class PlayerBulletTime : MonoBehaviour
 	[SerializeField] private float deadEyeConsumeMult;
 	[SerializeField] private float speedMult;
 	[SerializeField] private float timeSpeed = 0.3f;
-	private float deadEyeCooldown = 1f;
+	[SerializeField] private float deadEyeCooldown = 0f;
 
 	private bool isCalled;
 	private bool isReady;
