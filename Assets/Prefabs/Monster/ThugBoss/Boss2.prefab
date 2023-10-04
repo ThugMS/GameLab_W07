@@ -63,7 +63,7 @@ MonoBehaviour:
   m_jumpShadow: {fileID: 0}
   m_jumpShadowSpeed: 1
   m_isShadow: 0
-  m_jumpTime: 5
+  m_jumpTime: 2
   m_jumpEase: 18
   m_rock: {fileID: 4310142308460514268, guid: 8d9a566c432e927489f390876280b8f8, type: 3}
   m_rockNum: 5
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_offset: 0
   m_maxHealth: 100
   m_health: 100
+  m_spriteRenderer: {fileID: 6554687176972864775}
   m_damage: 1
   m_player: {fileID: 0}
   m_targetDirection: {x: 0, y: 0, z: 0}
