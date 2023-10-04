@@ -6,6 +6,7 @@ public class ThugBossPhase1 : MonoBehaviour
 {
     #region PublicVariables
     public GameObject bullet;
+    public Animator animator;
     [HideInInspector]public GameObject bulletParents;
     #endregion
     #region PrivateVariables
@@ -97,6 +98,7 @@ public class ThugBossPhase1 : MonoBehaviour
 
         if (m_canCircleBulletFire)
         {
+            animator.Play("ShotCircle");
             FireCircleBullet();
             m_fireCoolTimeSub = m_circleBulletfireCoolTime;
             m_canCircleBulletFire = false;
@@ -112,6 +114,7 @@ public class ThugBossPhase1 : MonoBehaviour
 
     private void FireCircleBullet()
     {
+        
         for (int i = 0; i < m_circleBulletBranch; i++)
         {
             float angle = 360f / m_circleBulletBranch * (i + 1) + m_circleBulletRotation;
@@ -149,6 +152,7 @@ public class ThugBossPhase1 : MonoBehaviour
 
         if (m_canZigZagBulletFire)
         {
+            animator.Play("ShotCircle");
             FireZigZagBullet();
             m_fireCoolTimeSub = m_zigZagBulletfireCoolTime;
             m_canZigZagBulletFire = false;

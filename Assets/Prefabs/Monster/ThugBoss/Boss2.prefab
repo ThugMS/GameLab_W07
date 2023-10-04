@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 2444988118548853835, guid: 6f05c58689aa1ee40b2b7744b8bd95ef, type: 3}
+  animator: {fileID: 6554687176972864774}
   bulletParents: {fileID: 5414610783107705919, guid: 6fe0917ff9ac5f74d9d89a105e8b7c3d, type: 3}
   m_circleBulletfireCoolTime: 0.2
   m_circleBulletBranch: 6
@@ -343,6 +344,7 @@ MonoBehaviour:
   m_phase: 1
   m_pattern: 0
   m_actTerm: 5
+  animator: {fileID: 6554687176972864774}
 --- !u!50 &215185790
 Rigidbody2D:
   serializedVersion: 4
