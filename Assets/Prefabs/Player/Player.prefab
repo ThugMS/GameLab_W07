@@ -5250,7 +5250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saturateSpeed: 3
   deadEyeConsumeMult: 20
-  speedMult: 0
+  speedMult: 1.6
 --- !u!50 &7677067290173016399
 Rigidbody2D:
   serializedVersion: 4
@@ -5456,8 +5456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9ea18590e142543bfd30df1ba6032d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalArrowPrefab: {fileID: 5277973483176003088, guid: 81d0331e461ad1c4f8d0d57077dec459, type: 3}
+  arrowPrefab: {fileID: 5277973483176003088, guid: 81d0331e461ad1c4f8d0d57077dec459, type: 3}
   angularSpeed: 12
+  speed: 30
+  maxArrowCount: 5
 --- !u!1 &7677067291935407875
 GameObject:
   m_ObjectHideFlags: 0
