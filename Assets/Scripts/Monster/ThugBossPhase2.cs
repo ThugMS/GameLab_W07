@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using Unity.Mathematics;
+
 
 public class ThugBossPhase2 : MonoBehaviour
 {
@@ -31,6 +31,11 @@ public class ThugBossPhase2 : MonoBehaviour
     [Header("Wave")]
     [SerializeField] private GameObject m_rock;
     [SerializeField] private float m_rockNum;
+
+    [Header("Laser")]
+    [SerializeField] private GameObject m_laser;
+    [SerializeField] private float m_laserSpeed;
+    [SerializeField] private int m_laserNum;
     #endregion
 
     #region PublicMethod
@@ -39,6 +44,9 @@ public class ThugBossPhase2 : MonoBehaviour
         //Test start
         if (Input.GetKeyDown(KeyCode.F1))
             JumpAttack();
+
+        if (Input.GetKeyDown(KeyCode.F2))
+            Laser();
         //Test end
 
         if(m_isShadow == true)
@@ -86,6 +94,11 @@ public class ThugBossPhase2 : MonoBehaviour
         StartCoroutine(nameof(IE_TakeDown));
     }
 
+    private void Laser()
+    {
+        StartCoroutine(nameof(IE_Laser));
+    }
+
     private void CreateWave()
     {
         float term = 360 / m_rockNum;
@@ -124,6 +137,17 @@ public class ThugBossPhase2 : MonoBehaviour
         m_animator.Play("TakeDown");
         Instantiate(m_takeDownEffect, transform.position, Quaternion.identity);
         CreateWave();
+    }
+
+    private IEnumerator IE_Laser()
+    {
+        for(int i = 0; i < m_laserNum; i++)
+        {
+            float angle = Random.Range(0, 360);
+            Instantiate(m_laser, Player.instance.transform.position, Quaternion.Euler(0, 0, angle));
+
+            yield return new WaitForSeconds(m_laserSpeed);
+        }
     }
     #endregion
 }
