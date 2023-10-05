@@ -15,6 +15,7 @@ public class ThugBossPhase2 : MonoBehaviour
     public bool m_canMove = true;
     public float m_attackDelay;
 
+    public GameObject m_bulletParents;
     public Animator m_animator;
     public SpriteRenderer m_body;
     #endregion
@@ -48,6 +49,11 @@ public class ThugBossPhase2 : MonoBehaviour
     #endregion
 
     #region PublicMethod
+    private void Start()
+    {
+        m_bulletParents = GameObject.Find("Bullets");
+
+    }
     private void Update()
     {
         //Test start
@@ -174,7 +180,7 @@ public class ThugBossPhase2 : MonoBehaviour
             
             Vector3 dir = (transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0f)) - transform.position;
 
-            GameObject rock = Instantiate(m_rock, transform.position, Quaternion.identity);
+            GameObject rock = Instantiate(m_rock, transform.position, Quaternion.identity, m_bulletParents.transform);
             rock.GetComponent<Rock>().InitSetting(dir.normalized, false); 
         }
     }
