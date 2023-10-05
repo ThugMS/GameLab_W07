@@ -7,6 +7,7 @@ public class EffectManager : MonoBehaviour
 {
 	#region PublicVariables
 	public static EffectManager instance;
+	public Texture2D cursurIcon;
 	#endregion
 
 	#region PrivateVariables
@@ -28,5 +29,11 @@ public class EffectManager : MonoBehaviour
 			instance = this;
 		}
 	}
-	#endregion
+
+    private void Start()
+    {
+		Cursor.SetCursor(cursurIcon, new Vector2(cursurIcon.width /2, cursurIcon.height / 2), CursorMode.Auto);
+		
+    }
+    #endregion
 }
