@@ -2264,6 +2264,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Effect Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 4038404044195511545, guid: ac9e40535632d4f4bac5be1f1707ec1b, type: 3}
+      propertyPath: cursurIcon
+      value: 
+      objectReference: {fileID: 2800000, guid: b1df7edadab444843879111fc7ec3391, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac9e40535632d4f4bac5be1f1707ec1b, type: 3}
 --- !u!1001 &6554687175976580431
